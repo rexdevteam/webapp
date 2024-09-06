@@ -1,0 +1,14 @@
+**/__pycache__/
+.venv/
+tests/
+env/
+wsl_env/
+migrations/
+migrations_/
+migrations__/
+migrations-s/
+migrations_l/
+migrations_p/
+**/dummy/
+.env
+backup_file.backup
