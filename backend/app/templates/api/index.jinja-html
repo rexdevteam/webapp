@@ -1,0 +1,21 @@
+{% extends 'api/base/base.jinja-html' %}
+{% block title %}Estate Management API - {{ super() }}{% endblock %}
+
+{% block content %}
+
+<div class="h-full flex flexCenter">
+    <div class="card api-box">
+        <div class="logo fitImg">
+            <img src="{{ url_for('static', filename='img/api.jpeg') }}" alt="API Logo">
+        </div>
+        <h1 class="title"> Estate Management Backend </h1>
+        
+
+        <div class="buttons-box">
+            <a class="btn pill" href="{{ url_for('swagger_ui.show') }}" target="_blank"> View Docs </a>
+            <a class="btn ghost-pill" href="https://visitme24.com/"> View Website </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'mail/base/base.html' %}
+{% block title %} Forgot Password {% endblock %}
+
+
+{% block content %}
+        <p style="font-weight: bold; font-family: 'Inter', 'sans-serif'; font-size: 20px; font-weight: 700;">
+            Hello {% if user.name %} {{ user.name }} {% else %} there {% endif %},
+        </p>
+
+        <div style="width: 95%; font-family: 'Inter', 'sans-serif'; margin-bottom: 40px; font-size: 16px; font-weight: 400; color: #B1B1B1;">
+            <p style="width: 90%; color: #B1B1B1;">
+                We are pleased to welcome you as a 
+                
+                {% for role_name in user.role_names %}
+                    {{ role_name }}
+                {% endfor %}
+
+                {% if user.venue_id %} at {{ user.assigned_venue["name"] }}. {% else %} to our platform. {% endif %}
+            </p>
+
+            <p style="width: 90%; color: #B1B1B1;">
+                Your password is 
+                <b style="font-weight: bold; font-family: 'Inter', 'sans-serif'; font-size: 17px; font-weight: 700; color: #FFFFFF;">
+                    "{{ password }}"
+                </b>
+            </p>
+
+            <p style="width: 90%; color: #B1B1B1;">
+                Please do not share this with anyone.
+            </p>
+        </div>
+
+        <a href="{{ login_url }}?email={{user.email}}&pwd={{password}} " style="cursor: pointer;background-color: #EB5017; text-decoration: none; text-align: center; font-size: 16px; font-weight: 600; width: 290px; height: 49px; padding: 14px 72px 14px 72px; border-radius: 9px; color: #fff;">
+            Login
+        </a>
+
+        <div class="spacer" style="line-height:20px;height:20px;mso-line-height-rule:exactly;">&nbsp;</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "admin/model/list.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="icon" href="{{ url_for('static', filename='img/icon.ico') }}?b8692cf0c185c854" type="image/x-icon" sizes="112x94">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/res_styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block head_css %}
+    {{ super() }}
+{% endblock %}
+
+{% block brand %}
+    <img src="{{ url_for('static', filename='img/icon.ico') }}" alt="Logo">
+    {{ super() }}
+{% endblock %}
+
+{% block body %}
+    {{ super() }}
+{% endblock %}

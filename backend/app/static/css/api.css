@@ -1,0 +1,24 @@
+.api-box {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+@media screen and (min-width: 600px) {
+    .api-box {
+        max-width: 500px;
+    }
+}
+
+.api-box .logo {
+    margin: 0 auto 25px;
+    width: 180px;
+    height: 180px;
+    box-shadow: var(--box-shadow);
+    border-radius: 50%;
+    border: 1px solid var(--outline);
+}
+.api-box .logo img {
+    width: 100%;
+    border-radius: 50%;
+}

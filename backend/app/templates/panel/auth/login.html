@@ -1,0 +1,33 @@
+{% extends 'api/base/base.jinja-html' %}
+{% block title %}VisitMe Admin Login - {{ super() }}{% endblock %}
+{% block styles_script %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="h-full flex flexCenter">
+    <div class="form-wrapper">
+        <form method="post" class="form card" id="login-form" enctype="multipart/form-data">
+            <div class="card-body">
+                {{ form.csrf_token }}
+                <h3 class="form-heading">Login</h3>
+                <div class="form-group">
+                    <label for="emailUsername">Email or Phone</label>
+                    {{ form.email_phone(class_ = 'form-control', placeholder='example@mail.com', autofocus = true) }}
+                </div>
+
+                <div class="form-group">
+                    <label for="pwd">Password</label>
+                    <div class="form-group">
+                        {{ form.pwd(class_ = 'form-control', placeholder='password', autofocus = true) }}
+                    </div>
+                </div>
+
+                <button type="submit" value="Login" class="btn pill"> Login </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
