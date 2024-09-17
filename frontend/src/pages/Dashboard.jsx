@@ -3,10 +3,10 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Container, Typography, Button } from "@mui/material";
 
-const Home = () => (
+const Dashboard = () => (
 	<Container>
 		<Helmet>
-			<title>Home - My App</title>
+			<title>Dashboard - My App</title>
 		</Helmet>
 
 		<Typography variant="h4" gutterBottom>
@@ -19,4 +19,4 @@ const Home = () => (
 	</Container>
 );
 
-export default Home;
+export default Dashboard;
