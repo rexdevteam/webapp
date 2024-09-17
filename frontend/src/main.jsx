@@ -3,15 +3,19 @@ import { createRoot } from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import App from "./App.jsx";
+import "./assets/css/zeddy_styles.css";
 
+
+// Function to get CSS variable value
+const getCssVariable = (variable) => getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
 
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: "#1976d2",
+			main: getCssVariable("--theme-clr"),
 		},
 		secondary: {
-			main: "#dc004e",
+			main: getCssVariable("--theme-clr-trans"),
 		},
 	},
 });
