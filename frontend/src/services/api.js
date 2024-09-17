@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const API = axios.create({
-	baseURL: "https://api.example.com",
+	baseURL: "https://api.example.com/api",
 });
 
 export const fetchData = async () => {
