@@ -1,14 +1,15 @@
 import React from 'react'
 
-const PageHead = ({ title, altText = "" }) => {
+const PageHead = ({ title, headBtn = "" }) => {
 	return (
 		<>
 			<div className="wrapper-head flex">
 				<h1> {title} </h1>
-				<a href="" className="btn rounded">
-					{" "}
-					Create New Trip{" "}
-				</a>
+				{headBtn ? (
+					headBtn
+				) : (
+					<></>
+				)}
 			</div>
 		</>
 	);

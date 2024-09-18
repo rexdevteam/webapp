@@ -1,54 +1,54 @@
 // src/pages/Home.js
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { Container, Typography, Button } from "@mui/material";
 import "./dashboard.css"
 
-const Dashboard = () => (
-	<>
-		<Helmet>
-			<title>Dashboard - My App</title>
-		</Helmet>
+import PageHead from "../../components/page/PageHead";
+import LinkBtn from "../../components/ui/LinkBtn";
 
-		<div className="wrapper-head flex">
-			<h1> Dashboard </h1>
-			<a href="" className="btn rounded">
-				{" "}
-				Create New Trip{" "}
-			</a>
-		</div>
+const Dashboard = () => {
+	const linkBtn = <LinkBtn txt={"Create New Trip"} link="/trip/new" />;
 
-		<div className="metrics grid">
-			<div className="card metrics-card">
-				<div className="title flex">
-					<div className="label">Trips</div>
-					<span></span>
+	return (
+		<div id="dashboard">
+			<Helmet>
+				<title>Dashboard - My App</title>
+			</Helmet>
+
+			<PageHead title={"Dashboard"} headBtn={linkBtn} />
+
+			<div className="metrics grid">
+				<div className="card metrics-card">
+					<div className="title flex">
+						<div className="label">Trips</div>
+						<span></span>
+					</div>
+					<div className="stat">100</div>
 				</div>
-				<div className="stat">100</div>
-			</div>
-			<div className="card metrics-card">
-				<div className="title flex">
-					<div className="label">Trips</div>
-					<span></span>
+				<div className="card metrics-card">
+					<div className="title flex">
+						<div className="label">Trips</div>
+						<span></span>
+					</div>
+					<div className="stat">100</div>
 				</div>
-				<div className="stat">100</div>
-			</div>
-			<div className="card metrics-card">
-				<div className="title flex">
-					<div className="label">Trips</div>
-					<span></span>
+				<div className="card metrics-card">
+					<div className="title flex">
+						<div className="label">Trips</div>
+						<span></span>
+					</div>
+					<div className="stat">100</div>
 				</div>
-				<div className="stat">100</div>
-			</div>
-			<div className="card metrics-card">
-				<div className="title flex">
-					<div className="label">Trips</div>
-					<span></span>
+				<div className="card metrics-card">
+					<div className="title flex">
+						<div className="label">Trips</div>
+						<span></span>
+					</div>
+					<div className="stat">100</div>
 				</div>
-				<div className="stat">100</div>
 			</div>
 		</div>
-	</>
-);
+	);
+}
 
 export default Dashboard;

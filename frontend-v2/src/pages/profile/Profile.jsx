@@ -1,17 +1,21 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import { Container, Typography, Button } from "@mui/material";
 
-const Profile = () => (
-	<Container>
-		<Helmet>
-			<title>Profile - My App</title>
-		</Helmet>
+import PageHead from "../../components/page/PageHead";
+import LinkBtn from "../../components/ui/LinkBtn";
 
-		<Typography variant="h4" gutterBottom>
-			Profile Page
-		</Typography>
-	</Container>
-);
+const Profile = () => {
+	const linkBtn = <LinkBtn txt={"Edit Profile"} link="/profile/edit" />;
+
+	return (
+		<div id="profile">
+			<Helmet>
+				<title>Profile - Expense Voyage</title>
+			</Helmet>
+
+			<PageHead title={"profile"} headBtn={linkBtn} />
+		</div>
+	);
+}
 
 export default Profile;

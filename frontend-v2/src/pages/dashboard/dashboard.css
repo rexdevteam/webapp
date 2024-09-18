@@ -1,9 +1,9 @@
 
-.wrapper-head h1 {
+#dashboard h1 {
     margin-bottom: 0px;
     color: #fff;
 }
-.wrapper-head .btn {
+#dashboard .btn {
     background-color: var(--box-bg-clr-solid);
     color: #624BFF;
 }
