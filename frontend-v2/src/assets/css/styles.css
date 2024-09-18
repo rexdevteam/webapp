@@ -1,0 +1,163 @@
+body {
+    --sidebar-width: 270px
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: -100%;
+    z-index: 99;
+    background-color: #212B36;
+    --side-txt-color: #919EAB;
+    --side-title-color: #fff;
+    color: var(--side-txt-color);
+    transition: var(--transition);
+}
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--outline);
+}
+.sidebar-brand {
+    color: #fff;
+}
+.sidebar-brand h1 {
+    font-size: 24px;
+    margin: 0;
+}
+.sidebar-nav {
+    padding: 10px;
+}
+.side-content {
+    list-style: none;
+}
+.side-content .nav-title,
+.side-content .nav-item  {
+    list-style: none;
+}
+.side-content .nav-title {
+    font-size: 80%;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: height .15s, margin .15s;
+    color: var(--side-title-color);
+    margin: 40px 0px 10px;
+    padding: 0px 10px;
+}
+.side-content .nav-item {
+    margin: 0px 0px 5px;
+}
+
+.side-content .nav-item a {
+    list-style: none;
+    border-radius: 10px;
+    padding: 10px;
+    display: block;
+    color: var(--side-txt-color);
+}
+.side-content .nav-item a:hover {
+    background-color: #60646470;
+}
+
+main {
+    margin: 0px 0px 0px 0px;
+}
+.wrapper {
+    padding: 0px var(--site-pad);
+}
+
+.header {
+    width: 100%;
+    height: 60px;
+    box-shadow: var(--box-shadow);
+    background-color: #fff;
+}
+
+.header-utils form {
+    height: 100%;
+    width: 300px;
+}
+.search-wrap {
+    height: 100%;
+    padding: 9px 0px;
+    align-content: flex-start;
+}
+.search-wrap input {
+    height: 100%;
+    width: 80%;
+}
+.search-wrap input:focus {
+    width: 100%;
+}
+button.search-btn {
+    position: absolute;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    right: 0;
+    opacity: 0;
+}
+
+.header-icons {
+    height: 100%;
+    min-width: 150px;
+    align-self: flex-end;
+    margin-left: auto;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+    padding: 9px 0px;
+}
+
+.header-icons [class*="-ico"] {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--outline);
+    cursor: pointer;
+}
+.notif-ico {
+    position: relative;
+    border: 1px solid transparent !important;
+}
+.notif-ico img {
+    transform: scale(0.8);
+}
+.notif-ico .count {
+    z-index: 9;
+    border-radius: 50%;
+    background-color: red;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    right: 0;
+    transform: scale(0.8);
+    top: -4px;
+}
+
+.wrapper-head {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0px;
+    gap: 10px;
+}
+.wrapper-head h1 {
+    margin-bottom: 0px;
+}
+
+@media screen and (min-width: 1024px) {
+    main {
+        margin: 0px 0px 0px var(--sidebar-width);
+        z-index: 0;
+    }
+    .sidebar {
+        left: 0;
+    }
+}

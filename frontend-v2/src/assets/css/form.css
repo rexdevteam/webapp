@@ -1,0 +1,87 @@
+.form-wrapper{
+    min-width: 400px;
+    margin: 0em auto;
+}
+
+.form-heading {
+    font-size: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin: 0px 0px 20px 0px;
+}
+.form-group label {
+    display: block;
+    font-size: 15px;
+    font-family: var(--font-four);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.form .btn {
+    width: 100%;
+    height: 40px;
+}
+.form-gap {
+    gap: 15px 30px;
+}
+
+.form-group .inlineInput {
+    position: relative;
+    width: 100%;
+    display: inline-flex;
+    gap: 10px;
+}
+
+.form .form-heading,
+.form .checkbox {
+    margin: 0px 0px 20px 0px;
+}
+
+.form .checkbox {
+    font-weight: normal;
+}
+
+.form-control {
+    position: relative;
+    height: 40px;
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 15px;
+    outline: none;
+    border: 2px solid var(--outline);
+    border-radius: var(--round-conners);
+    font-family: var(--font-four);
+    color: var(--body-txt-clr);
+    background-color: var(--box-bg-clr);
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    outline: none;
+    border: 2px solid var(--theme-clr);
+    color: var(--body-txt-clr);
+}
+
+.form input[type="text"],
+.form input[type="password"] {
+    margin-bottom: -1px;
+}
+
+.form input.first-input {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.form input.last-input {
+    margin-bottom: 10px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+
+@media screen and (max-width: 650px) {
+    .form-wrapper {
+        min-width: 100%;
+    }
+}
