@@ -194,11 +194,17 @@ def create_default_super_admin(clear: bool = False) -> None:
                 username=current_app.config['DEFAULT_SUPER_ADMIN_USERNAME'],
                 email='admin@mail.com'
             )
+            admin_user_profile = Profile(app_user=admin_user, firstname=current_app.config['DEFAULT_SUPER_ADMIN_USERNAME'])
             admin_user.set_password(current_app.config['DEFAULT_SUPER_ADMIN_PASSWORD'])
             admin_user.roles.append(admin_role)
             admin_user.roles.append(super_admin_role)
             
             db.session.add(admin_user)
+            db.session.add_all([
+                admin_user,
+                admin_user_profile
+            ])
+            
             db.session.commit()
             console_log(data="Admin user created with default credentials")
         else:
