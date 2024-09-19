@@ -159,7 +159,7 @@ class AuthController:
                 'user_data':user_data
             }
             
-            api_response = success_response(f"Welcome back {user.profile.name}", 200, extra_data)
+            api_response = success_response(f"Welcome back {user.profile.firstname}", 200, extra_data)
         
         except UnsupportedMediaType as e:
             log_exception("An UnsupportedMediaType exception occurred", e)
