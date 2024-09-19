@@ -58,9 +58,9 @@ const Login = () => {
 				{({ isSubmitting }) => (
 					<Form>
 						<div className="form-group">
-							<label htmlFor="email_phone">Email</label>
+							<label htmlFor="email">Email</label>
 							<Field
-								name="email_phone"
+								name="email"
 								type="email"
 								label="Email"
 								margin="normal"
