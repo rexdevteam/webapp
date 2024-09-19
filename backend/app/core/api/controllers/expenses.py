@@ -1,0 +1,2 @@
+class ExpensesController:
+    pass
