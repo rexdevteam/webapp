@@ -98,14 +98,17 @@ class AppUser(db.Model, UserMixin):
         db.session.commit()
     
     def to_dict(self, include_venue=True, resident_venue_info=False) -> dict:
+        profile_data = {}
+        if self.profile:
+            profile_data = self.profile.to_dict()
+            profile_data.pop("id")
+        
         return {
             "id": self.id,
-            "name": self.name,
             "email": self.email,
-            "phone": self.phone,
-            "password_change_required": self.password_change_required,
             "date_joined": to_gmt1_or_none(self.date_joined),
             "roles": self.role_names,
+            **profile_data # Merge profile information into the output dictionary
         }
 
 
