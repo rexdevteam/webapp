@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import AuthProvider from "./context/AuthContext";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Profile from "./pages/profile/Profile";
-import Expenses from "./pages/expenses/Expenses.Jsx";
+import Expenses from "./pages/expenses/Expenses";
 import Trips from "./pages/trips/Trips";
 import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp";
