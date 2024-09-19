@@ -78,6 +78,17 @@ main {
     background-color: #fff;
 }
 
+.prof-img{
+    height: 45px;
+    height: 45px;
+    margin-top: -4px;
+    clip-path: circle();
+}
+
+.harmbuger-btn{
+    display: none;
+}
+
 .header-utils form {
     height: 100%;
     width: 300px;
@@ -151,6 +162,10 @@ button.search-btn {
 .wrapper-head h1 {
     margin-bottom: 0px;
     text-transform: capitalize;
+}
+input[type="radio"] {
+    width: 20px;
+    height: auto;
 }
 
 @media screen and (min-width: 1024px) {

@@ -2,7 +2,7 @@
 import React from "react";
 import { AppBar, Toolbar, Typography } from "@mui/material";
 import bell from "../../assets/img/bell.svg"
-import profile from "../../assets/img/profile.png"
+import profile from "../../assets/img/download.png"
 
 const Header = () => {
 	return (
@@ -34,7 +34,7 @@ const Header = () => {
                         </div>
                         <div className="profile-ico">
                             <div className="profile-img fitImg">
-                                <img src={profile} alt="profile image" />
+                                <img className="prof-img"  src={profile} alt="profile image" />
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,26 @@
 import {
+  CssVarsProvider,
+  Experimental_CssVarsProvider,
+  ThemeProvider,
+  adaptV4Theme,
+  createMuiStrictModeTheme,
+  createStyles,
+  deprecatedExtendTheme,
+  experimental_sx,
+  getInitColorSchemeScript,
+  getUnit,
+  makeStyles,
+  responsiveFontSizes,
+  toUnitless,
+  useColorScheme,
+  useThemeProps,
+  withStyles,
+  withTheme
+} from "./chunk-EBBRP4B2.js";
+import {
+  require_react_dom
+} from "./chunk-JMVEG3FK.js";
+import {
   GlobalStyles_default,
   SvgIcon_default,
   capitalize_default,
@@ -25,25 +47,6 @@ import {
   useForkRef_default,
   useId_default
 } from "./chunk-7CBZUARJ.js";
-import {
-  CssVarsProvider,
-  Experimental_CssVarsProvider,
-  ThemeProvider,
-  adaptV4Theme,
-  createMuiStrictModeTheme,
-  createStyles,
-  deprecatedExtendTheme,
-  experimental_sx,
-  getInitColorSchemeScript,
-  getUnit,
-  makeStyles,
-  responsiveFontSizes,
-  toUnitless,
-  useColorScheme,
-  useThemeProps,
-  withStyles,
-  withTheme
-} from "./chunk-EBBRP4B2.js";
 import {
   ClassNameGenerator_default,
   HTMLElementType,
@@ -140,9 +143,6 @@ import {
   useTimeout,
   visuallyHidden_default
 } from "./chunk-ERXGITDL.js";
-import {
-  require_react_dom
-} from "./chunk-JMVEG3FK.js";
 import {
   require_react
 } from "./chunk-TWJRYSII.js";

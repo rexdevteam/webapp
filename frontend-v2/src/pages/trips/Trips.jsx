@@ -29,11 +29,14 @@ const Trips = () => {
 	}, []);
 
 	const columns = [
-		{ field: "id", headerName: "ID" },
-		{ field: "destination", headerName: "Destination" },
-		{ field: "date", headerName: "Date" },
-		{ field: "amount", headerName: "Amount" },
-	];
+    { field: "id", headerName: "ID" },
+    { field: "destination", headerName: "Destination" },
+    { field: "date", headerName: "Flight  Date " },
+    { field: "datetoteturn", headerName: "Date of return" },
+    { field: "amount", headerName: "Amount" },
+    { field: "amount", headerName: "edit" },
+    { field: "amount", headerName: "intineries" },
+  ];
 
 	if (loading) return <CircularProgress />;
 	if (error) return <Typography color="error">{error}</Typography>;

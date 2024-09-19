@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LinkBtn = ({ txt, link = "" }) => {
+const LinkBtn = ({ txt, link = "/" }) => {
     return (
 		<>
 			<a href={link} className="btn rounded">
@@ -10,4 +10,4 @@ const LinkBtn = ({ txt, link = "" }) => {
 	);
 }
 
-export default LinkBtn
+export default LinkBtn;

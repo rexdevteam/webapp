@@ -1,0 +1,61 @@
+#Addtrip .wrapper-head{
+    color: white;
+}
+
+.form-control{
+    width: 60%;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    padding: 12px;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: var(--box-shadow);
+}
+
+
+
+.form-control::before{
+content: "";
+    position: fixed;
+    top: -130px;
+    left: 0;
+    height: 400px;
+    width: 100%;
+    background-color: #624BFF;
+    z-index: -1;
+
+}
+
+.fligh-date{
+    display: flex;
+    gap: 20px;
+}
+
+.form-sec{
+  width: 95%;  
+  display: block;
+  margin:auto ;
+}
+
+.int{
+    width: 550px;
+    position: relative;
+}
+
+.ints{
+   width: 270px; 
+}
+
+.bx-land{
+    position: absolute;
+    font-size:  23px;
+    top: 24.5px;
+    color: rgb(112, 112, 112);
+    left: 15px;
+    z-index: 999;
+}
+
+.err{
+   color: red;
+}

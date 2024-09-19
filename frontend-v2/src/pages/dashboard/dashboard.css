@@ -10,11 +10,15 @@
 .metrics {
     gap: 20px 30px;
     position: relative;
+   
 }
+
+
+
 .metrics::before {
     content: "";
     position: fixed;
-    top: -150px;
+    top: -120px;
     left: 0;
     height: 400px;
     width: 100%;
@@ -22,13 +26,69 @@
     z-index: -1;
 }
 .metrics-card {
-    min-height: 157px;
+    min-height: 200px;
     background-color: var(--box-bg-clr-solid) !important;
 }
 .metrics-card .label,
 .metrics-card .stat {
     font-weight: bold;
+    font-size: 35px;
 }
 .metrics-card .stat {
     font-size: 40px;
+}
+
+.bx-plane {
+    color: green;
+    font-size: 110px;
+    position: absolute;
+    top: 38px;
+    right: 10px;
+}
+
+
+
+.bx-dolls {
+    color: purple;
+font-size: 110px;
+    position: absolute;
+    top: 38px;
+    right: 10px;
+}
+
+
+
+.bx-down {
+    color: orange;
+    font-size: 110px;
+        position: absolute;
+        top: 38px;
+        right: 10px;
+}
+
+.stat{
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+.dash-table{
+margin-top: 20px;
+}
+
+.dash-fieldset{
+    border-radius: 12px;
+    padding-top:10px; 
+    box-shadow: var(--shadow-small);
+    border: none;
+}
+.dash-head{
+    color: black;
+    margin-left: 10px;
+
+}
+
+.dash-head-cont{
+    background-color: white;
+    padding: 6px;
 }

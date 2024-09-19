@@ -46,12 +46,7 @@ const Menuitems = [
 		icon: Person,
 		href: "/profile",
 	},
-	{
-		id: uniqueId(),
-		title: "Settings",
-		icon: ExitToApp,
-		href: "/settings",
-	},
+
 	{
 		navlabel: true,
 		subheader: "Auth",
@@ -62,6 +57,7 @@ const Menuitems = [
 		icon: ExitToApp,
 		href: "/signout",
 	},
+
 ];
 
 export default Menuitems;
