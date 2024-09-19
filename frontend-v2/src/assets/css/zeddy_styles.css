@@ -38,6 +38,10 @@
     --txt-shadow: 2px 2px 8px #000;
     --transition: all ease-in-out 0.3s;
 
+    --info: #2196f3;
+    --error: #f44336;
+    --success: #4caf50;
+    --warning: #ff9800;
     --theme-clr: #624BFF;
     --theme-clr-trans: #624BFF91;
     --outline: #8585857d;
@@ -283,6 +287,11 @@ p {
 .plainBtn:hover {
     border: 1px solid var(--theme-clr);
 }
+.btn:disabled {
+    pointer-events: none;
+    border: 1px solid transparent;
+    background-color: var(--theme-clr-trans);
+}
 @media screen and (min-width: 1440px) {
     .btn {
         padding: 10px 18px;
@@ -378,4 +387,80 @@ input.pill {
 input[class*="-rounded"],
 input.rounded {
     --input-radius: calc(var(--round-conners) - 7px);
+}
+
+
+/* Alert styles */
+.alert-box {
+    box-sizing: border-box;
+    display: flex;
+    max-height: 100%;
+    position: fixed;
+    z-index: 1400;
+    height: auto;
+    width: auto;
+    transition: top 300ms ease 0ms, right 300ms ease 0ms, bottom 300ms ease 0ms, left 300ms ease 0ms, max-width 300ms ease 0ms;
+    pointer-events: none;
+    max-width: calc(100% - 40px);
+
+    top: 40px;
+    flex-direction: column;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+.alert {
+    opacity: 0;
+    margin: 0px auto;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: #fff;
+    background: var(--error);
+    font-family: (--font-four);
+    transform: translateY(-150%);
+    transition: var(--transition);
+    -webkit-transition: var(--transition);
+    border-radius: var(--round-conners);
+}
+.alert.visible {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    margin: 0px 0px 10px 0px;
+    padding: 0px 17px;
+}
+.alert.error {
+    background: var(--error);
+}
+.alert.success {
+    background: var(--success);
+}
+.alert.info {
+    background: var(--info);
+}
+.alert.warning {
+    background: var(--warning);
+}
+.alert .alertTxt {
+    float: left;
+    width: 90%;
+    height: 100%;
+    padding: 15px 0;
+    line-height: 20px;
+    font-family: var(--font-four);
+    transition: var(--transition);
+}
+.alert a.close {
+    font-size: 30px;
+    cursor: pointer;
+    width: 10%;
+    height: 100%;
+    float: left;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: 30px;
+    color: #fff;
 }

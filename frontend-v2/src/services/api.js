@@ -3,7 +3,7 @@ import axios from "axios";
 import { mockTrips } from "./data.js";
 
 const API = axios.create({
-	baseURL: "https://api.example.com",
+	baseURL: "https://expense-voyage-api.onrender.com/api",
 });
 
 export const fetchData = async (endpoint) => {

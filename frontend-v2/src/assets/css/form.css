@@ -15,6 +15,13 @@
 .form-group {
     margin: 0px 0px 20px 0px;
 }
+.err-msg {
+    font-size: 13px;
+    color: var(--error);
+    margin: 8px 5px;
+    font-weight: bold;
+}
+
 .form-wrapper .form-group label {
     display: block;
     font-size: 15px;

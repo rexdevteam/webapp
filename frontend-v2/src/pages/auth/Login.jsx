@@ -8,24 +8,31 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import AuthForm from "./AuthForm";
 import { loginSchema } from "./validationSchemas";
 import { AuthContext } from "../../context/AuthContext";
+import { useAlert } from "../../context/AlertContext";
 
 const Login = () => {
 	const { login } = useContext(AuthContext);
 	const navigate = useNavigate();
+	const { setAlert, persistAlert } = useAlert();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handleSubmit = async (values, { setSubmitting }) => {
+		setIsLoading(true);
 		try {
 			const response = await axios.post(
-				"https://api.example.com/login",
+				"https://expense-voyage-api.onrender.com/api/login",
 				values
 			);
 			const { access_token, user_data } = response.data.data;
 
 			login(user_data, access_token);
+			persistAlert(response.data?.message, "success");
 			navigate("/");
 		} catch (err) {
+			setAlert(err.response?.data?.message || "Login failed", 'error');
 			console.error("Login failed", err);
 		} finally {
+			setIsLoading(false);
 			setSubmitting(false);
 		}
 	};
@@ -51,14 +58,19 @@ const Login = () => {
 				{({ isSubmitting }) => (
 					<Form>
 						<div className="form-group">
-							<label htmlFor="email">Email</label>
+							<label htmlFor="email_phone">Email</label>
 							<Field
-								name="email"
+								name="email_phone"
 								type="email"
 								label="Email"
 								margin="normal"
 								className="rounded"
 								placeholder="example@mail.com"
+							/>
+							<ErrorMessage
+								name="email"
+								component="div"
+								className="err-msg"
 							/>
 						</div>
 						<div className="form-group">
@@ -70,10 +82,19 @@ const Login = () => {
 								margin="normal"
 								className="rounded"
 							/>
+							<ErrorMessage
+								name="password"
+								component="div"
+								className="err-msg"
+							/>
 						</div>
 
-						<button type="submit" className="btn rounded">
-							{"Login"}
+						<button
+							type="submit"
+							className="btn rounded"
+							disabled={isSubmitting || isLoading}
+						>
+							{isSubmitting || isLoading ? "Loading..." : "Login"}
 						</button>
 					</Form>
 				)}
