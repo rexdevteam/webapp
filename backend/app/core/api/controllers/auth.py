@@ -151,9 +151,6 @@ class AuthController:
             if not user.check_password(pwd):
                 return error_response('Password is incorrect', 401)
             
-            if not user.signed_in:
-                user.update(signed_in=True)
-            
             access_token = create_access_token(identity={"user_id": user.id}, expires_delta=timedelta(minutes=2880), additional_claims={'type': 'access'})
             user_data = user.to_dict()
             
