@@ -121,26 +121,26 @@ class AuthController:
         
         try:
             data = request.get_json()
-            email_phone = data.get('email_phone')
+            email = data.get('email')
             pwd = data.get('password')
             
-            if not email_phone:
-                return error_response("email_phone is empty", 400)
+            if not email:
+                return error_response("email is empty", 400)
             
             if not pwd or pwd is None:
                 return error_response("password not provided", 400)
             
-            # check if email_phone is an email. And convert to lowercase if it's an email
+            # check if email is an email. And convert to lowercase if it's an email
             try:
-                email_info = validate_email(email_phone, check_deliverability=False)
-                email_phone = email_info.normalized
-                console_log("email_phone", email_phone)
+                email_info = validate_email(email, check_deliverability=False)
+                email = email_info.normalized.lower()
+                console_log("email", email)
             except EmailNotValidError as e:
-                email_phone = email_phone
+                email = email
             
             
             # get user from db with the email/username.
-            user = get_app_user(email_phone)
+            user = get_app_user(email)
             
             if not user:
                 return error_response('Email/username is incorrect or doesn\'t exist', 401)
