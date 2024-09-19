@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 
 export const AuthContext = createContext();
 
@@ -9,12 +9,18 @@ const AuthProvider = ({ children }) => {
 		token: null,
 	});
 
+	const [loading, setLoading] = useState(true);
+	const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
 	useEffect(() => {
 		const token = localStorage.getItem("token");
 		const user = JSON.parse(localStorage.getItem("user"));
 		if (token && user) {
 			setAuth({ isAuthenticated: true, user, token });
 		}
+		setLoading(false);
+
+		console.log(token, user)
 	}, []);
 
 	const login = (userData, token) => {
@@ -30,10 +36,11 @@ const AuthProvider = ({ children }) => {
 	};
 
 	return (
-		<AuthContext.Provider value={{ auth, login, logout }}>
+		<AuthContext.Provider value={{ auth, loading, user, login, logout }}>
 			{children}
 		</AuthContext.Provider>
 	);
 };
 
+export const useAuth = () => useContext(AuthContext);
 export default AuthProvider;

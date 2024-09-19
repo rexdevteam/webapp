@@ -5,16 +5,18 @@ import { useNavigate, Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 
-import AuthForm from "./AuthForm";
 import { loginSchema } from "./validationSchemas";
 import { AuthContext } from "../../context/AuthContext";
 import { useAlert } from "../../context/AlertContext";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
-	const { login } = useContext(AuthContext);
+	const { login, auth } = useAuth();
 	const navigate = useNavigate();
 	const { setAlert, persistAlert } = useAlert();
 	const [isLoading, setIsLoading] = useState(false);
+
+	console.log(auth.isAuthenticated);
 
 	const handleSubmit = async (values, { setSubmitting }) => {
 		setIsLoading(true);
@@ -24,6 +26,8 @@ const Login = () => {
 				values
 			);
 			const { access_token, user_data } = response.data.data;
+
+			console.log(access_token);
 
 			login(user_data, access_token);
 			persistAlert(response.data?.message, "success");
