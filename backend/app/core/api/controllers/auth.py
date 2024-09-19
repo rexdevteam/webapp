@@ -148,7 +148,7 @@ class AuthController:
             if not user.password_hash:
                 return error_response("This user doesn't have a password yet", 400)
             
-            if not user.verify_password(pwd):
+            if not user.check_password(pwd):
                 return error_response('Password is incorrect', 401)
             
             if not user.signed_in:
