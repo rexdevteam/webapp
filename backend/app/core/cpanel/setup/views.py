@@ -48,12 +48,12 @@ class SuperAdminModelView(ModelView):
 
 class UserView(SuperAdminModelView):
     can_delete = True
-    form_columns = ["name", "email", "phone", "remark", "address_room_no", "roles"]
-    column_list = ["name", "email", "phone", "remark", "signed_in", "address_room_no", "roles", "date_joined"]
+    form_columns = ["username", "email", "roles"]
+    column_list = ["username", "email", "roles", "date_joined"]
     
     # make columns searchable
-    column_searchable_list = ['name', 'email']
-    column_filters = ["name", "email", "phone"]
+    column_searchable_list = ['username', 'email']
+    column_filters = ["username", "email"]
     
     # inline editing
-    column_editable_list = ["phone"]
+    column_editable_list = ["username"]

@@ -8,15 +8,20 @@ import Profile from "./pages/profile/Profile";
 import Expenses from "./pages/expenses/Expenses.Jsx";
 import Trips from "./pages/trips/Trips";
 import Login from "./pages/auth/Login";
+import SignUp from "./pages/auth/SignUp";
+
 import AuthenticatedRoute from "./components/auth/AuthenticatedRoute";
+import UnprotectedRoute from "./components/auth/UnprotectedRoute";
+import AuthLayout from "./components/primary/AuthLayout";
 
 const App = () => (
 	<AuthProvider>
 		<Router>
 			<Routes>
-				<Route path="/login" element={<Login />} />
-				<Route path="/" element={ <Navigate to="/dashboard" /> } />
+				<Route path="/login" element={ <AuthLayout> <Login /> </AuthLayout> } />
+				<Route path="/signup" element={ <AuthLayout> <SignUp /> </AuthLayout> } />
 
+				<Route path="/" element={ <Navigate to="/dashboard" /> } />
 				<Route path="/dashboard" element={ <AuthenticatedRoute element={<Dashboard />} /> } />
 				<Route path="/profile" element={  <AuthenticatedRoute element={<Profile />} />  } />
 				

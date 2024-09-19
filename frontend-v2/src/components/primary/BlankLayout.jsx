@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
-const BlankLayout = () => {
+const BlankLayout = ({ children }) => {
 	return (
 		<div>
-			<main>
-				<div className="wrapper">{children}</div>
+			<main style={{margin:"0px"}}>
+				<div className="wrapper">
+					{children}
+				</div>
 			</main>
 		</div>
 	);

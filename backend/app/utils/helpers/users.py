@@ -13,7 +13,7 @@ These functions assist with tasks such as:
 from flask_jwt_extended import get_jwt_identity
 
 from ...extensions import db
-from ...models import AppUser, RoleNames, Role, Venue
+from ...models import AppUser, RoleNames, Role
 from .loggers import console_log
 
 def get_current_user() -> AppUser:
@@ -114,15 +114,3 @@ def get_app_user(email_phone: str) -> AppUser:
 
 def get_users_by_role(role_name: RoleNames):
     return AppUser.query.join(AppUser.roles).filter(Role.name == role_name).all()
-
-def assign_venue_to_user(venue: Venue, user: AppUser, commit=True):
-
-    if venue and user:
-        user.venue = venue
-        
-        if commit:
-            db.session.commit()
-        
-        return True
-    
-    return False

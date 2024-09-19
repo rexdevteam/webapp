@@ -44,7 +44,7 @@ class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
 
 class TestingConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:zeddy@localhost:5432/estate_mgt"
+    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:zeddy@localhost:5432/expense_voyage"
 
 
 # Map config based on environment

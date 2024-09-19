@@ -38,8 +38,8 @@
     --txt-shadow: 2px 2px 8px #000;
     --transition: all ease-in-out 0.3s;
 
-    --theme-clr: #624BFF;
-    --theme-clr-trans: #624BFF91;
+    --theme-clr: #0069c5;
+    --theme-clr-trans: #0069c591;
     --outline: #8585857d;
     --overlay-clr: #00000096;
     --sidebar-outline: #636568;
@@ -268,7 +268,7 @@ p {
 }
 .btn[class*="-rounded"],
 .btn.rounded {
-    --btn-radius: calc(var(--round-conners) - 7px);
+    --btn-radius: calc(var(--round-conners) - 11px);
 }
 .btn[class*="ghost-"],
 .plainBtn {
@@ -351,7 +351,6 @@ p {
 }
 
 input {
-    --input-radius: 0px;
     position: relative;
     height: 40px;
     width: 100%;
@@ -359,7 +358,7 @@ input {
     font-size: 14px;
     outline: none;
     border: 1px solid var(--outline);
-    border-radius: var(--input-radius);
+    border-radius: var(--round-conners);
     font-family: var(--font-four);
     color: var(--body-txt-clr);
     background-color: var(--box-bg-clr);
@@ -369,13 +368,4 @@ input:focus {
     outline: none;
     border: 1px solid var(--theme-clr);
     color: var(--body-txt-clr);
-}
-input[class*="-pill"],
-input.pill {
-    --input-radius: 10em;
-}
-
-input[class*="-rounded"],
-input.rounded {
-    --input-radius: calc(var(--round-conners) - 7px);
 }

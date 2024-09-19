@@ -1,0 +1,34 @@
+
+.wrapper-head h1 {
+    margin-bottom: 0px;
+    color: #fff;
+}
+.wrapper-head .btn {
+    background-color: var(--box-bg-clr-solid);
+    color: #624BFF;
+}
+.metrics {
+    gap: 20px 30px;
+    position: relative;
+}
+.metrics::before {
+    content: "";
+    position: fixed;
+    top: -150px;
+    left: 0;
+    height: 400px;
+    width: 100%;
+    background-color: #624BFF;
+    z-index: -1;
+}
+.metrics-card {
+    min-height: 157px;
+    background: var(--box-bg-clr-solid);
+}
+.metrics-card .label,
+.metrics-card .stat {
+    font-weight: bold;
+}
+.metrics-card .stat {
+    font-size: 40px;
+}

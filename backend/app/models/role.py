@@ -10,7 +10,6 @@ class RoleNames(Enum):
     JUNIOR_ADMIN = "Junior Admin"
     ADMIN = "Admin"
     CUSTOMER = "Customer"
-    PATIENT = "Patient"
 
 # Association table for the many-to-many relationship
 user_roles = db.Table("user_roles",

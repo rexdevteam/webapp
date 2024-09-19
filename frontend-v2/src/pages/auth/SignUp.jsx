@@ -4,19 +4,18 @@ import { Helmet } from "react-helmet-async";
 import { useNavigate, Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-
 import AuthForm from "./AuthForm";
-import { loginSchema } from "./validationSchemas";
+import { signupSchema } from "./validationSchemas";
 import { AuthContext } from "../../context/AuthContext";
 
-const Login = () => {
-	const { login } = useContext(AuthContext);
+const SignUp = () => {
+    const { login } = useContext(AuthContext);
 	const navigate = useNavigate();
 
-	const handleSubmit = async (values, { setSubmitting }) => {
+    const handleSubmit = async (values, { setSubmitting }) => {
 		try {
 			const response = await axios.post(
-				"https://api.example.com/login",
+				"https://api.example.com/signup",
 				values
 			);
 			const { access_token, user_data } = response.data.data;
@@ -30,10 +29,10 @@ const Login = () => {
 		}
 	};
 
-	return (
+    return (
 		<>
 			<Helmet>
-				<title>Login - Expense Voyage</title>
+				<title>Sign Up - Expense Voyage</title>
 			</Helmet>
 
 			<div className="form-head">
@@ -45,7 +44,7 @@ const Login = () => {
 
 			<Formik
 				initialValues={{ email: "", password: "" }}
-				validationSchema={loginSchema}
+				validationSchema={signupSchema}
 				onSubmit={handleSubmit}
 			>
 				{({ isSubmitting }) => (
@@ -72,8 +71,18 @@ const Login = () => {
 							/>
 						</div>
 
+						<div className="form-group">
+							<label htmlFor="password">Confirm Password</label>
+							<Field
+								name="confirmPassword"
+								type="password"
+								label="Confirm Password"
+								margin="normal"
+							/>
+						</div>
+
 						<button type="submit" className="btn rounded">
-							{"Login"}
+							{"Sign Up"}
 						</button>
 					</Form>
 				)}
@@ -81,15 +90,11 @@ const Login = () => {
 
 			<div className="form-footer flex flex-space-between">
 				<span className="links">
-					<Link to="/signup"> Create An Account </Link>
-				</span>
-
-				<span className="links">
-					<Link to="/forgot-password"> Forgot Password </Link>
+					<Link to="/login">Already member? Login</Link>
 				</span>
 			</div>
 		</>
 	);
-};
+}
 
-export default Login;
+export default SignUp

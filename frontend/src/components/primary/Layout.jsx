@@ -1,4 +1,3 @@
-// src/components/Layout.jsx
 import React, { useState } from "react";
 import {
 	AppBar,
@@ -10,11 +9,10 @@ import {
 	useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-
 import Sidebar from "./Sidebar";
 
 const Layout = ({ children }) => {
-	const [sidebarOpen, setSidebarOpen] = useState(false);
+	const [sidebarOpen, setSidebarOpen] = useState(true);
 	const theme = useTheme();
 	const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -27,23 +25,33 @@ const Layout = ({ children }) => {
 			<CssBaseline />
 			<AppBar position="fixed">
 				<Toolbar>
-					<IconButton
-						edge="start"
-						color="inherit"
-						aria-label="menu"
-						onClick={handleSidebarToggle}
-					>
-						<MenuIcon />
-					</IconButton>
+					{isMobile && (
+						<IconButton
+							edge="start"
+							color="inherit"
+							aria-label="menu"
+							onClick={handleSidebarToggle}
+						>
+							<MenuIcon />
+						</IconButton>
+					)}
 					<Typography variant="h6">My Dashboard</Typography>
 				</Toolbar>
 			</AppBar>
-			
-            <Sidebar open={sidebarOpen} onClose={handleSidebarToggle} />
-			
-            <main style={{ marginTop: 64, padding: 16 }}>
-                {children}
-            </main>
+			<Sidebar
+				variant={isMobile ? "temporary" : "permanent"}
+				open={isMobile ? sidebarOpen : true}
+				onClose={handleSidebarToggle}
+			/>
+			<main
+				style={{
+					marginTop: 64,
+					padding: 16,
+					marginLeft: isMobile ? 0 : 240,
+				}}
+			>
+				{children}
+			</main>
 		</div>
 	);
 };

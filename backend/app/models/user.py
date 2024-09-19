@@ -6,7 +6,6 @@ as well as methods for password hashing and verification.
 
 @author Emmanuel Olowu
 @link: https://github.com/zeddyemy
-@package: Estate Management
 '''
 
 from flask import current_app
@@ -27,17 +26,16 @@ from config import Config
 class AppUser(db.Model, UserMixin):
     
     id = db.Column(db.Integer(), primary_key=True)
-    email = db.Column(db.String(255), nullable=True, unique=True)
-    name = db.Column(db.String(50), nullable=True)
-    phone = db.Column(db.String(120), nullable=True)
+    email = db.Column(db.String(255), nullable=False, unique=True)
+    username = db.Column(db.String(255), nullable=True, unique=True)
     password_hash = db.Column(db.String(255), nullable=True)
-    signed_in = db.Column(db.Boolean, default=False)
-    password_change_required = db.Column(db.Boolean, default=True)
     date_joined = db.Column(db.DateTime(timezone=True), default=DateTimeUtils.aware_utcnow)
     two_fa_secret = db.Column(db.String(255), nullable=True)
     
     # Relationships
+    profile = db.relationship("Profile", back_populates="app_user", uselist=False, cascade="all, delete-orphan")
     roles = db.relationship('Role', secondary='user_roles', backref=db.backref('app_users', lazy='dynamic'), cascade="save-update, merge", single_parent=True)
+    
     
     def __str__(self) -> str:
         return self.name.capitalize()
@@ -109,7 +107,54 @@ class AppUser(db.Model, UserMixin):
             "date_joined": to_gmt1_or_none(self.date_joined),
             "roles": self.role_names,
         }
+
+
+class Profile(db.Model):
+    __tablename__ = "profile"
     
+    id = db.Column(db.Integer(), primary_key=True)
+    firstname = db.Column(db.String(200), nullable=True)
+    lastname = db.Column(db.String(200), nullable=True)
+    gender = db.Column(db.String(50), nullable=True)
+    phone = db.Column(db.String(120), nullable=True)
+    country = db.Column(db.String(120), nullable=True)
+    
+    app_user_id = db.Column(db.Integer, db.ForeignKey("app_user.id", ondelete="CASCADE"), nullable=False,)
+    profile_picture_id = db.Column(db.Integer(), db.ForeignKey("media.id"), nullable=True)
+    
+    app_user = db.relationship("AppUser", back_populates="profile")
+    profile_picture = db.relationship("Media", backref="profile_picture")
+    
+    def __repr__(self):
+        return f"<profile ID: {self.id}, name: {self.firstname}>"
+    
+    def update(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+        db.session.commit()
+    
+    @property
+    def profile_pic(self):
+        if self.profile_picture_id:
+            theImage = Media.query.get(self.profile_picture_id)
+            if theImage:
+                return theImage.get_path()
+            else:
+                return ""
+        else:
+            return ""
+        
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "firstname": self.firstname,
+            "lastname": self.lastname,
+            "full_name": f"{self.firstname} {self.lastname}",
+            "gender": self.gender,
+            "phone": self.phone,
+            "profile_picture": self.profile_pic
+        }
+
 
 
 def create_default_super_admin(clear: bool = False) -> None:
@@ -143,9 +188,8 @@ def create_default_super_admin(clear: bool = False) -> None:
         
         if not admin:
             admin_user = AppUser(
-                name=current_app.config['DEFAULT_SUPER_ADMIN_USERNAME'],
-                email='admin@mail.com',
-                password_change_required=True
+                username=current_app.config['DEFAULT_SUPER_ADMIN_USERNAME'],
+                email='admin@mail.com'
             )
             admin_user.set_password(current_app.config['DEFAULT_SUPER_ADMIN_PASSWORD'])
             admin_user.roles.append(admin_role)

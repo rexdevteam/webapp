@@ -5,12 +5,9 @@ import Layout from "../primary/Layout";
 
 const AuthenticatedRoute = ({ element, ...rest }) => (
 		<>
-			{...rest}
-			element={
-				<PrivateRoute>
-					<Layout>{element}</Layout>
-				</PrivateRoute>
-			}
+			<PrivateRoute>
+				<Layout>{element}</Layout>
+			</PrivateRoute>
 		</>
 );
 
