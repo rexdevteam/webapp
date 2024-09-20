@@ -4,11 +4,11 @@ from io import BytesIO
 from flask import make_response, Response
 from typing import List, Dict, Any
 
-from ...models import AppUser, Visitor, Venue
+from ...models import AppUser, Trip, Itinerary
 
 
 
-def export_to_excel(data: List[AppUser | Visitor | Venue], filename: str, visitor_type: str = None) -> Response:
+def export_to_excel(data: List[AppUser | Trip | Itinerary], filename: str, visitor_type: str = None) -> Response:
     """
     Convert data from any SQLAlchemy model to an Excel file and return as a Flask response.
     """

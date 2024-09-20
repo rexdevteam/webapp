@@ -83,10 +83,10 @@ class Itinerary(db.Model):
     amount = db.Column(db.Numeric(10, 2), nullable=False)
     
     trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'), nullable=False)
-    trip = db.relationship('AppUser', backref=db.backref('itineraries', lazy='dynamic'))
+    trip = db.relationship('Trip', backref=db.backref('itineraries', lazy='dynamic'))
     
     category_id = db.Column(db.Integer, db.ForeignKey('itinerary_category.id'), nullable=False)
-    itinerary_category = db.relationship('AppItineraryCategoryUser', backref=db.backref('itineraries', lazy='dynamic'))
+    itinerary_category = db.relationship('ItineraryCategory', backref=db.backref('itineraries', lazy='dynamic'))
     
     def update(self, commit: bool = True, **kwargs) -> None:
         for key, value in kwargs.items():
