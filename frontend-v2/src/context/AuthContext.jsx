@@ -5,38 +5,50 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
 	const [auth, setAuth] = useState({
 		isAuthenticated: false,
-		user: null,
-		token: null,
+		user_profile: null,
+		access_token: null,
 	});
 
 	const [loading, setLoading] = useState(true);
-	const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+	const [user_profile, setUserProfile] = useState(null); // Initialize as null
+	const [access_token, setToken] = useState(null); // Initialize as null
 
 	useEffect(() => {
-		const token = localStorage.getItem("token");
-		const user = JSON.parse(localStorage.getItem("user"));
-		if (token && user) {
-			setAuth({ isAuthenticated: true, user, token });
+		const access_token = localStorage.getItem("access_token");
+		const user_profile = JSON.parse(localStorage.getItem("user_profile"));
+		if (access_token && user_profile) {
+			setAuth({ isAuthenticated: true, user_profile, access_token });
+			setUserProfile(user_profile);
+			setToken(access_token);
+		} else {
+			setAuth({ isAuthenticated: false, user_profile: null, access_token: null });
 		}
+
 		setLoading(false);
 
-		console.log(token, user)
+		console.log(user_profile);
 	}, []);
 
-	const login = (userData, token) => {
-		localStorage.setItem("token", token);
-		localStorage.setItem("user", JSON.stringify(userData));
-		setAuth({ isAuthenticated: true, user: userData, token });
+	const login = (userData, access_token) => {
+		localStorage.setItem("access_token", access_token);
+		localStorage.setItem("user_profile", JSON.stringify(userData));
+		setAuth({ isAuthenticated: true, user_profile: userData, access_token });
+		setUserProfile(userData);
+		setToken(access_token);
 	};
 
 	const logout = () => {
-		localStorage.removeItem("token");
-		localStorage.removeItem("user");
-		setAuth({ isAuthenticated: false, user: null, token: null });
+		localStorage.removeItem("access_token");
+		localStorage.removeItem("user_profile");
+		setAuth({ isAuthenticated: false, user_profile: null, access_token: null });
+		setUserProfile(null);
+		setToken(null);
 	};
 
 	return (
-		<AuthContext.Provider value={{ auth, loading, user, login, logout }}>
+		<AuthContext.Provider
+			value={{ auth, loading, user_profile, access_token, login, logout }}
+		>
 			{children}
 		</AuthContext.Provider>
 	);

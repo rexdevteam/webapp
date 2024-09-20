@@ -5,10 +5,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 
+import { sendApiRequest } from "../../services/api";
 import { loginSchema } from "./validationSchemas";
 import { AuthContext } from "../../context/AuthContext";
 import { useAlert } from "../../context/AlertContext";
 import { useAuth } from "../../context/AuthContext";
+
+import Btn from "../../components/ui/Btn";
 
 const Login = () => {
 	const { login, auth } = useAuth();
@@ -16,24 +19,25 @@ const Login = () => {
 	const { setAlert, persistAlert } = useAlert();
 	const [isLoading, setIsLoading] = useState(false);
 
-	console.log(auth.isAuthenticated);
-
 	const handleSubmit = async (values, { setSubmitting }) => {
 		setIsLoading(true);
 		try {
-			const response = await axios.post(
-				"https://expense-voyage-api.onrender.com/api/login",
-				values
-			);
-			const { access_token, user_data } = response.data.data;
+			const data = await sendApiRequest("/login", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(values),
+			});
+			console.log(data);
 
-			console.log(access_token);
+			const { access_token, user_data } = data.data;
 
 			login(user_data, access_token);
-			persistAlert(response.data?.message, "success");
+			persistAlert(data?.message, "success");
 			navigate("/");
 		} catch (err) {
-			setAlert(err.response?.data?.message || "Login failed", 'error');
+			setAlert(err.message || "Login failed", "error");
 			console.error("Login failed", err);
 		} finally {
 			setIsLoading(false);
@@ -93,13 +97,7 @@ const Login = () => {
 							/>
 						</div>
 
-						<button
-							type="submit"
-							className="btn rounded"
-							disabled={isSubmitting || isLoading}
-						>
-							{isSubmitting || isLoading ? "Loading..." : "Login"}
-						</button>
+						<Btn txt={"Login"} type="submit" isLoading={isSubmitting || isLoading} />
 					</Form>
 				)}
 			</Formik>

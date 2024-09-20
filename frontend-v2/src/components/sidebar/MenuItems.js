@@ -56,12 +56,6 @@ const Menuitems = [
 		navlabel: true,
 		subheader: "Auth",
 	},
-	{
-		id: uniqueId(),
-		title: "Sign Out",
-		icon: ExitToApp,
-		href: "/signout",
-	},
 ];
 
 export default Menuitems;

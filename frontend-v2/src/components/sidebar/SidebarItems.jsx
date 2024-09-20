@@ -1,11 +1,12 @@
 import React from "react";
-import Menuitems from "./MenuItems.js";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
-// import NavItem from "./NavItem";
-// import NavGroup from "./NavGroup/NavGroup";
+
+import Menuitems from "./MenuItems.js";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 const SidebarItems = () => {
+	const { logout } = useAuth();
 	const { pathname } = useLocation();
 	const pathDirect = pathname;
 
@@ -15,10 +16,7 @@ const SidebarItems = () => {
 				// {/********SubHeader**********/}
 				if (item.subheader) {
 					return (
-						<li
-							className="nav-title"
-							key={item.subheader}
-						>
+						<li className="nav-title" key={item.subheader}>
 							{item.subheader}
 						</li>
 					);
@@ -36,6 +34,13 @@ const SidebarItems = () => {
 					);
 				}
 			})}
+
+			<li className="nav-item">
+				<a className="flex" onClickCapture={logout} >
+					<span className="ico"> </span>
+					<span className="name"> {"Sign Out"} </span>
+				</a>
+			</li>
 		</>
 	);
 };

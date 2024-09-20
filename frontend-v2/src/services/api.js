@@ -1,20 +1,38 @@
 // src/services/api.js
 import axios from "axios";
-import { mockTrips } from "./data.js";
 
 const API = axios.create({
 	baseURL: "https://expense-voyage-api.onrender.com/api",
 });
 
-export const fetchData = async (endpoint) => {
-	// Temporarily return mock data
-	if (endpoint === "/trips") {
-		return new Promise((resolve) => {
-			setTimeout(() => resolve(mockTrips), 1000); // Simulate network delay
-		});
+// Function to set the authorization token
+export const setAuthToken = (token) => {
+	if (token) {
+		API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+	} else {
+		delete API.defaults.headers.common["Authorization"];
 	}
+};
 
-	// Uncomment the following lines when the API is ready
-	// const response = await API.get(endpoint);
-	// return response.data;
+export const sendApiRequest = async (endpoint, options = {}) => {
+	try {
+		let headers = options.headers
+		headers["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`;
+
+		const response = await API.request({
+			url: endpoint,
+			method: options.method || "GET",
+			headers: options.headers,
+			data: options.body,
+		});
+
+		console.log(response.data);
+
+		return response.data;
+	} catch (err) {
+		console.error("Error sending request:", err);
+
+		const errorMessage = err.response?.data?.message || err?.message || "Error reaching the server. Please try again.";;
+		throw new Error(errorMessage); // Throw the API error message
+	}
 };

@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const LinkBtn = ({ txt, link = "" }) => {
     return (
 		<>
-			<a href={link} className="btn rounded">
+			<Link to={link} className="btn rounded">
 				{txt}
-			</a>
+			</Link>
 		</>
 	);
 }

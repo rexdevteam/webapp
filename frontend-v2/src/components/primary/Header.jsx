@@ -1,10 +1,20 @@
 // src/components/Header.jsx
-import React from "react";
+import React, { useState } from "react";
 import { AppBar, Toolbar, Typography } from "@mui/material";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+
 import bell from "../../assets/img/bell.svg"
 import profile from "../../assets/img/profile.png"
+import defProfile from "../../assets/img/avatar.jpg"
+
+import { useAuth } from "../../context/AuthContext";
 
 const Header = () => {
+    const { user_profile } = useAuth();
+    const [profilePicture, setProfilePicture] = useState(
+		user_profile.profile_picture
+	);
+
 	return (
 		<div className="header">
                 <div className="container flex">
@@ -15,14 +25,23 @@ const Header = () => {
                     </div>
 
                     <div className="header-utils">
-                        <form action="">
-                            <div className="search-wrap flex flexCenter">
-                                <input type="text" name="s" id="search-field" className="search-field" value="" placeholder="What would you like to find?" />
-                                <button className="search-btn">
-                                    <i className="bx bx-search"></i>
-                                </button>
-                            </div>
-                        </form>
+                        <Formik
+                            onSubmit={() => {}}
+                        >
+                            {({ isSubmitting }) => (
+                                <div className="search-wrap flex flexCenter">
+                                    <Form>
+                                        <Field
+                                            id="search-field"
+											type="text"
+											name="s"
+											className="rounded form-control search-field"
+                                            placeholder="What would you like to find?"
+										/>
+                                    </Form>
+                                </div>
+                            )}
+                        </Formik>
                     </div>
 
                     <div className="header-icons flex">
@@ -34,7 +53,7 @@ const Header = () => {
                         </div>
                         <div className="profile-ico">
                             <div className="profile-img fitImg">
-                                <img src={profile} alt="profile image" />
+                                <img src={profilePicture || defProfile} alt="profile image" />
                             </div>
                         </div>
                     </div>
