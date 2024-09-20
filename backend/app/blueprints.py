@@ -11,6 +11,9 @@ def register_all_blueprints(app: Flask) -> None:
     from .core.web.routes import web_bp
     app.register_blueprint(web_bp)
     
+    from .core.error_handlers import errors_bp
+    app.register_blueprint(errors_bp)
+    
     # Swagger setup
     from flask_swagger_ui import get_swaggerui_blueprint
 
