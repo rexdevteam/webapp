@@ -37,14 +37,14 @@ class TripsController:
             current_trips = [trip.to_dict() for trip in trips]
             extra_data = {
                 "total": pagination.total,
-                "venues": current_trips,
+                "trips": current_trips,
                 "current_page": pagination.page,
                 "total_pages": pagination.pages,
             }
             
             api_response = success_response("Trips fetched successfully", 200, extra_data)
         except (DataError, DatabaseError) as e:
-            log_exception('Database error occurred fetching venues', e)
+            log_exception('Database error occurred fetching trips', e)
             api_response = error_response('Error connecting to the database.', 500)
         except Exception as e:
             api_response = error_response("An unexpected error occurred. Our developers are looking into this.", 500)
