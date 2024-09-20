@@ -73,7 +73,8 @@ class ProfileController:
             currency_code=currency_info.get("code", user_profile.currency_code)
             currency_symbol=currency_info.get("symbol", user_profile.currency_symbol)
             
-            save_profile_pic(current_user, profile_picture)
+            if profile_picture:
+                save_profile_pic(current_user, profile_picture)
             
             # update user details
             user_profile.update(firstname=firstname, lastname=lastname, gender=gender, phone=phone, country=country, state=state, currency_name=currency_name, currency_code=currency_code, currency_symbol=currency_symbol)
