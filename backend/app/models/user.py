@@ -121,6 +121,11 @@ class Profile(db.Model):
     gender = db.Column(db.String(50), nullable=True)
     phone = db.Column(db.String(120), nullable=True)
     country = db.Column(db.String(120), nullable=True)
+    state = db.Column(db.String(120), nullable=True)
+    
+    currency_name = db.Column(db.String(), default='Naira', nullable=True)
+    currency_code = db.Column(db.String(), default='NGN', nullable=True)
+    currency_symbol = db.Column(db.String(), default=str('₦'), nullable=True)
     
     app_user_id = db.Column(db.Integer, db.ForeignKey("app_user.id", ondelete="CASCADE"), nullable=False,)
     profile_picture_id = db.Column(db.Integer(), db.ForeignKey("media.id"), nullable=True)
@@ -155,7 +160,12 @@ class Profile(db.Model):
             "full_name": f"{self.firstname} {self.lastname}",
             "gender": self.gender,
             "phone": self.phone,
-            "profile_picture": self.profile_pic
+            "country": self.country,
+            "state": self.state,
+            "profile_picture": self.profile_pic,
+            "currency_name": self.currency_name,
+            "currency_code": self.currency_code,
+            "currency_symbol": self.currency_symbol,
         }
 
 

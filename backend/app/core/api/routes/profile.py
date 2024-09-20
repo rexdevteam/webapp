@@ -7,13 +7,13 @@ from flask_jwt_extended import jwt_required
 
 from . import api_bp
 from ....utils.decorators import roles_required
-from ..controllers.trips import TripsController
+from ..controllers import ProfileController
 
 
 @api_bp.route("/profile", methods=["GET", "PUT"])
 @roles_required("Super Admin", "Admin", "Customer")
 def profile():
     if request.method == "GET":
-        return TripsController.get_profile()
+        return ProfileController.get_profile()
     if request.method == "PUT":
-        return TripsController.edit_profile()
+        return ProfileController.edit_profile()

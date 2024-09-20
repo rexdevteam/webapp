@@ -10,12 +10,60 @@ These functions assist with tasks such as:
 @link: https://github.com/zeddyemy
 @package: Estate Management
 '''
+import os
+from enum import Enum
+from threading import Thread
+from flask import Flask, current_app
 from flask_jwt_extended import get_jwt_identity
+from werkzeug.datastructures import FileStorage
+from sqlalchemy.exc import ( DataError, DatabaseError, SQLAlchemyError )
 
 from ...extensions import db
-from ...models import AppUser, RoleNames, Role
-from .loggers import console_log
+from ...models import AppUser, RoleNames, Role, Profile
+from .media import save_media, save_media_files_to_temp
+from .loggers import console_log, log_exception
+from .basics import generate_random_string
 
+
+
+def async_save_profile_pic(app: Flask, user: AppUser, media_file_paths):
+    with app.app_context():
+        try:
+            user_profile: Profile = user.profile
+            console_log("user_profile", f"{user_profile}")
+            console_log("user_profile", f"ID: {user_profile.id} Pic path: {user_profile.profile_pic}")
+            
+            console_log("async media_file_paths", media_file_paths)
+            if media_file_paths:
+                for file_path in media_file_paths:
+                    filename = os.path.basename(file_path)
+                    console_log("filename", filename)
+                    with open(file_path, 'rb') as media_file:
+                        profile_picture = save_media(media_file, filename) # This saves image file, saves the path in db and return the Media instance
+                        profile_picture_id = profile_picture.id
+                        console_log("r profile_picture_id", profile_picture_id)
+            elif not media_file_paths and user:
+                if user_profile.profile_picture_id:
+                    profile_picture = user_profile.profile_picture
+                    profile_picture_id = profile_picture.id
+                else:
+                    profile_picture = None
+                    profile_picture_id = None
+            else:
+                profile_picture = None
+                profile_picture_id = None
+            
+            user_profile.update(profile_picture=profile_picture)
+        except Exception as e:
+            log_exception()
+            raise e
+
+def save_profile_pic(user: AppUser, media_file: FileStorage):
+    media_file_paths = save_media_files_to_temp(media_file)
+    console_log("media_file_paths", media_file_paths)
+    Thread(target=async_save_profile_pic, args=(current_app._get_current_object(), user, media_file_paths)).start()
+    
+    
 def get_current_user() -> AppUser:
     jwt_identity = get_jwt_identity()
     
@@ -25,6 +73,7 @@ def get_current_user() -> AppUser:
     current_user: AppUser = AppUser.query.get(current_user_id)
     
     return current_user
+
 
 def get_user_info(user_id: int) -> dict:
     """Gets profile details of a particular user"""
