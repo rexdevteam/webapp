@@ -17,7 +17,7 @@ const Sidebar = ({ isOpen, sidebarRef, handleSidebarToggle }) => {
 			<div className="sidebar-header">
 				<a href="" className="sidebar-brand" to="/">
 					<h1 className="brand" to="/">
-						Expense Voyage
+						ExpenseVoyage
 					</h1>
 				</a>
 			</div>

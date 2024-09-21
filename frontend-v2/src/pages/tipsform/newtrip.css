@@ -1,0 +1,290 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General styling for the form container */
+#Addtrip {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    /* Center form container */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+        margin-top: 70px;
+        }
+
+
+
+
+.accordion-button{
+    background-color: blue;
+    color: #f9f9f9;
+height: 30px;
+width: 30px;
+    clip-path: circle();
+
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 20px;
+}
+
+.form-control::before{
+    content: "";
+        position: fixed;
+        top: -120px;
+        left: 0;
+        height: 400px;
+        width: 100%;
+        background-color: #624BFF;
+        z-index: -1;
+    }
+
+
+.form-sec {
+    padding: 20px;
+    background-color: white; 
+}
+
+/* Flex container for form sections */
+.des-amm,
+.fligh-date,
+.acc-flex-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.flex-cont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.int-form {
+    margin-top: 10px;
+}
+
+.intin-tab {
+    display: flex;
+    flex-direction: column;
+gap: 10px;
+}
+
+
+.del{
+    width: 90px;
+    padding: 6px;
+    border-radius: 6px;
+    background-color: red;
+    outline: none;
+    cursor: pointer;
+    border: none;
+}
+.edit{
+    text-align: center;
+    width: 90px;
+    padding: 6px;
+        border-radius: 6px;
+    background-color: yellow;
+    outline: none;  
+    border: none;
+    cursor: pointer;
+}
+.flex-but{
+    display: flex;
+    gap: 5px;
+}
+
+.init-tag{
+    background-color: salmon;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+/* Input and Select Styling */
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    font-size: 1rem;
+}
+
+
+#itineraryName{
+width: 96%;
+
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+/* Error message styling */
+.err {
+    color: red;
+    font-size: 12px;
+}
+
+/* Submit button styling */
+
+
+.submit {
+    width: 100%;
+    border-radius: 10px;
+    --btn-clr: #fff;
+    padding: 25px;
+    font-size: 18px;
+    --btn-radius: 0px;
+    --btn-hover-clr: #f3fffd52;
+    border: 1px solid var(--theme-clr);
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+    font-weight: bold;
+    text-align: center;
+    padding: 6px 15px;
+    text-decoration: none;
+    color: var(--btn-clr);
+    background: var(--theme-clr);
+    font-family: var(--font-four);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    isolation: isolate;
+}
+
+.submit {
+    transform: scale(0.92);
+}
+
+.submit::after {
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    transform: translateX(-100%);
+    background-color: var(--btn-hover-clr);
+    transition: transform .4s ease-in, background-color .4s linear;
+    border-radius: var(--btn-radius);
+}
+
+.submit:hover {
+    border: 1px solid var(--btn-hover-clr);
+}
+
+.submit:hover::after,
+.submit:focus-visible::after {
+    transform: translateX(0);
+    transition: transform .4s ease-out, background-color .4s linear;
+}
+
+
+/* Accordion toggle button styling */
+.accordion-button {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.bx-plus{
+    font-size: 20px;
+}
+
+.bx-cont {
+    height: 30px;
+    width: 50%;
+--btn-clr: #fff;
+    padding: 25px;
+    font-size: 18px;
+    --btn-radius: 0px;
+    --btn-hover-clr: #f3fffd52;
+    border: 1px solid var(--theme-clr);
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+    font-weight: bold;
+    text-align: center;
+    padding: 6px 15px;
+    text-decoration: none;
+    color: var(--btn-clr);
+    background: var(--theme-clr);
+    font-family: var(--font-four);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    isolation: isolate; 
+}
+
+.bx-plus-p {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Responsive styling */
+@media (min-width: 768px) {
+    /* Layout changes for larger screens */
+
+    .des-amm,
+    .fligh-date,
+    .acc-flex-2 {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .des-amm div,
+    .fligh-date div,
+    .acc-flex-2 div {
+        flex: 1;
+        margin-right: 20px;
+    }
+
+    .submit {
+        width: 100%;
+        /* Reset full width on larger screens */
+        align-self: flex-end;
+    }
+
+    .form-control {
+        gap: 30px;
+    }
+}
+
+/* Further layout refinement for tablets and desktops */
+@media (min-width: 1024px) {
+    #Addtrip {
+        padding: 40px;
+    }
+
+    .des-amm div,
+    .fligh-date div,
+    .acc-flex-2 div {
+        margin-right: 30px;
+    }
+}
+
+@media (max-width: 767px) {
+    /* Mobile-specific layout changes */
+
+    #Addtrip {
+        padding: 15px;
+    }
+
+    .form-sec {
+        padding: 10px;
+    }
+
+    .submit {
+        width: 100%;
+    }
+}

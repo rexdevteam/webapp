@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const LinkBtn = ({ txt, link = "" }) => {
+const LinkBtn = ({ txt, link = "/" }) => {
     return (
 		<>
 			<Link to={link} className="btn rounded">
@@ -11,4 +11,4 @@ const LinkBtn = ({ txt, link = "" }) => {
 	);
 }
 
-export default LinkBtn
+export default LinkBtn;

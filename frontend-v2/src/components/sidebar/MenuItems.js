@@ -46,15 +46,16 @@ const Menuitems = [
 		icon: Person,
 		href: "/profile",
 	},
-	{
-		id: uniqueId(),
-		title: "Settings",
-		icon: ExitToApp,
-		href: "/settings",
-	},
+
 	{
 		navlabel: true,
 		subheader: "Auth",
+	},
+	{
+		id: uniqueId(),
+		title: "Sign Out",
+		icon: ExitToApp,
+		href: "/signout",
 	},
 ];
 
