@@ -5,6 +5,7 @@ import "./dashboard.css";
 import Table from '../../components/ui/Table'; // Custom Table component
 import PageHead from "../../components/page/PageHead";
 import LinkBtn from "../../components/ui/LinkBtn";
+import Charts from './charts/Charts';
 
 const Dashboard = () => {
 	const [tripNum, setTripNum] = useState(0);
@@ -19,7 +20,7 @@ const Dashboard = () => {
       { field: "destination", headerName: "Destination" },
       { field: "date", headerName: "Flight  Date " },
       { field: "datetoteturn", headerName: "Date of return" },
-      { field: "amount", headerName: "Amount" },
+      { field: "budget", headerName: "Budget" },
       { field: "amount", headerName: "edit" },
       { field: "amount", headerName: "intineries" },
     ];
@@ -76,7 +77,8 @@ const Dashboard = () => {
 					</div>
 			<Table columns={columns} data={data} />
 				</fieldset>
-			</div>
+			</div><br />
+			<Charts/>
 		</div> 
 	);
 };
