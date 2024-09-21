@@ -96,7 +96,7 @@ margin-top: 20px;
     padding: 6px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1222px) {
     .bx-plane {
             color: green;
             font-size: 90px;
@@ -128,4 +128,10 @@ margin-top: 20px;
             right: 10px;
         }
 
+
+
 }
+@media (max-width: 788px){
+
+
+} 

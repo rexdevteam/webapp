@@ -19,6 +19,7 @@
         width: 100%;
     display: flex;
     padding: 20px;
+    gap: 30px;
     justify-content: space-between;
     margin-top: 20px;
 
@@ -73,7 +74,7 @@ border-radius: 20px;
     box-shadow: 0 4px 6px -1px #0000001a;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1222px) {
     .Main-chart-span {
             background-color: whitesmoke;
             width: 100%;
@@ -123,3 +124,31 @@ border-radius: 20px;
                                 }
 }
 
+@media (max-width: 788px) 
+{
+    .pie-chart {
+            width: 300px;
+            display: block;
+            margin: auto;
+            position: relative;
+            left: -28px;
+            justify-content: center;
+            height: 310px;
+    
+        }
+
+
+                .full-bar-chat {
+                    width: 100%;
+                    padding: 20px;
+                    height: 700px;
+                    background-color: white;
+                    border-radius: 20px;
+                    box-shadow: 0 4px 6px -1px #0000001a;
+                }
+                .bar {
+                    margin-top: 12px;
+                    height: max-content;
+                }
+
+}
