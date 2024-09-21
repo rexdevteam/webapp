@@ -13,6 +13,9 @@ export const signupSchema = Yup.object().shape({
 	email: Yup.string()
 		.email("Invalid email address")
 		.required("Email is required"),
+	firstname: Yup.string().required("First name is required"),
+	lastname: Yup.string().required("Last name is required"),
+	country: Yup.string().required("Country is required"),
 	password: Yup.string()
 		.min(6, "Password must be at least 6 characters")
 		.required("Password is required"),
@@ -22,10 +25,14 @@ export const signupSchema = Yup.object().shape({
 });
 
 
+
 export const profileEditSchema = Yup.object().shape({
 	email: Yup.string()
 		.email("Invalid email format")
 		.required("Email is required"),
+	firstname: Yup.string().required("First name is required"),
+	lastname: Yup.string().required("Last name is required"),
+	country: Yup.string().required("Country is required"),
 	phone: Yup.string().nullable(),
 	gender: Yup.string().required("Gender is required"),
 	profile_picture: Yup.string().url("Invalid URL").nullable(),

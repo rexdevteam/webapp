@@ -16,6 +16,7 @@ import "./profile.css";
 import defProfile from "../../assets/img/avatar.jpg"
 
 const ProfileEdit = () => {
+	const navigate = useNavigate();
 	const { user_profile, access_token } = useAuth();
     const [selectedFile, setSelectedFile] = useState(null);
     const [profilePicture, setProfilePicture] = useState(
@@ -37,6 +38,8 @@ const ProfileEdit = () => {
             const formData = new FormData();
             formData.append("full_name", values.full_name);
 			formData.append("email", values.email);
+			formData.append("firstname", values.firstname);
+			formData.append("lastname", values.lastname);
 			formData.append("phone", values.phone);
 			formData.append("gender", values.gender);
 			formData.append("country", values.country);
@@ -57,6 +60,7 @@ const ProfileEdit = () => {
 
 			localStorage.setItem("user_profile", JSON.stringify(user_data));
 			persistAlert(data?.message, "success");
+			navigate("/profile");
 		} catch (error) {
 			console.error("Error updating profile:", error);
 			setAlert(error?.message, "error");
@@ -78,6 +82,8 @@ const ProfileEdit = () => {
 					<Formik
 						initialValues={{
 							email: user_profile.email,
+							firstname: user_profile.firstname,
+							lastname: user_profile.lastname,
 							phone: user_profile.phone,
 							gender: user_profile.gender,
 							country: user_profile.country,
@@ -129,6 +135,44 @@ const ProfileEdit = () => {
 										/>
 										<ErrorMessage
 											name="email"
+											component="div"
+											className="err-msg"
+										/>
+									</div>
+								</div>
+								<div className="profile-info">
+									<div className="form-group">
+										<label htmlFor="firstname">
+											First Name
+										</label>
+										<Field
+											name="firstname"
+											type="text"
+											label="First Name"
+											margin="normal"
+											className="rounded form-control"
+										/>
+										<ErrorMessage
+											name="firstname"
+											component="div"
+											className="err-msg"
+										/>
+									</div>
+								</div>
+								<div className="profile-info">
+									<div className="form-group">
+										<label htmlFor="lastname">
+											Last Name
+										</label>
+										<Field
+											name="lastname"
+											type="text"
+											label="Last Name"
+											margin="normal"
+											className="rounded form-control"
+										/>
+										<ErrorMessage
+											name="lastname"
 											component="div"
 											className="err-msg"
 										/>
