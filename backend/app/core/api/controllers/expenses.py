@@ -12,7 +12,7 @@ from ....utils.helpers.export_xl import export_to_excel
 
 class ExpensesController:
     @staticmethod
-    def get_expense():
+    def get_expenses():
         try:
             current_user = get_current_user()
             if not current_user:

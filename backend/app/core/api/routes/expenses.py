@@ -14,7 +14,7 @@ from ..controllers import ExpensesController
 @jwt_required()
 def expenses():
     if request.method == "GET":
-        return ExpensesController.get_expense()
+        return ExpensesController.get_expenses()
     elif request.method == "POST":
         return ExpensesController.add_expense()
 
