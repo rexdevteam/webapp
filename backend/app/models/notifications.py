@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from sqlalchemy.orm import backref
+from sqlalchemy import inspect, or_
 from enum import Enum
 
 from app.extensions import db
@@ -36,6 +36,22 @@ class Notification(db.Model):
 
     def __repr__(self):
         return f'<Notification id: {self.id}>, type: {self.notification_type}'
+    
+    
+    @staticmethod
+    def add_search_filters(query, search_term):
+        """
+        Adds search filters to a SQLAlchemy query.
+        """
+        if search_term:
+            search_term = f"%{search_term}%"
+            query = query.filter(
+                    or_(
+                        Notification.title.ilike(search_term),
+                        Notification.body.ilike(search_term)
+                    )
+                )
+        return query
 
     @classmethod
     def add_notification(cls, recipient_id, body, notification_type=NotificationType.NOTIFICATION, commit=True):

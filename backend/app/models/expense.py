@@ -1,4 +1,5 @@
 from app.extensions import db
+from sqlalchemy import or_
 
 from ..utils.date_time import DateTimeUtils, to_gmt1_or_none
 
@@ -14,6 +15,20 @@ class Expense(db.Model):
 
     def __repr__(self) -> str:
         return f"<Expense {self.id}, name: {self.name}>"
+    
+    @staticmethod
+    def add_search_filters(query, search_term):
+        """
+        Adds search filters to a SQLAlchemy query.
+        """
+        if search_term:
+            search_term = f"%{search_term}%"
+            query = query.filter(
+                    or_(
+                        Expense.name.ilike(search_term)
+                    )
+                )
+        return query
     
     @classmethod
     def add_expense(cls, name, amount, trip_id, **kwargs):

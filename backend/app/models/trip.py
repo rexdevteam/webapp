@@ -92,6 +92,20 @@ class Itinerary(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('itinerary_category.id'), nullable=False)
     itinerary_category = db.relationship('ItineraryCategory', backref=db.backref('itineraries', lazy='dynamic'))
     
+    @staticmethod
+    def add_search_filters(query, search_term):
+        """
+        Adds search filters to a SQLAlchemy query.
+        """
+        if search_term:
+            search_term = f"%{search_term}%"
+            query = query.filter(
+                    or_(
+                        Itinerary.name.ilike(search_term)
+                    )
+                )
+        return query
+    
     @classmethod
     def add_itinerary(cls, name, amount, trip_id, category_id, **kwargs):
         
@@ -137,6 +151,21 @@ class ItineraryCategory(db.Model):
     
     def __repr__(self):
         return f'<Cat ID: {self.id}, name: {self.name}>'
+    
+    @staticmethod
+    def add_search_filters(query, search_term):
+        """
+        Adds search filters to a SQLAlchemy query.
+        """
+        if search_term:
+            search_term = f"%{search_term}%"
+            query = query.filter(
+                    or_(
+                        ItineraryCategory.name.ilike(search_term),
+                        ItineraryCategory.description.ilike(search_term)
+                    )
+                )
+        return query
     
     def insert(self):
         db.session.add(self)

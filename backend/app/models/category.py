@@ -1,5 +1,6 @@
 from app.extensions import db
 from sqlalchemy.orm import backref
+from sqlalchemy import inspect, or_
 from datetime import datetime
 
 from ..utils.date_time import DateTimeUtils, to_gmt1_or_none
@@ -18,9 +19,24 @@ class Category(db.Model):
     
     children = db.relationship('Category', backref=backref('parent', remote_side=[id]), lazy=True)
 
-        
+    
     def __repr__(self):
         return f'<Cat ID: {self.id}, name: {self.name}, parent: {self.parent_id}>'
+    
+    @staticmethod
+    def add_search_filters(query, search_term):
+        """
+        Adds search filters to a SQLAlchemy query.
+        """
+        if search_term:
+            search_term = f"%{search_term}%"
+            query = query.filter(
+                    or_(
+                        Category.name.ilike(search_term),
+                        Category.slug.ilike(search_term)
+                    )
+                )
+        return query
     
     def insert(self):
         db.session.add(self)
