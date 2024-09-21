@@ -125,10 +125,10 @@ class ItineraryController:
                 return error_response("Itinerary not found", 404)
             
             data = request.get_json()
-            name = data.get('name', itinerary.name)
-            amount = data.get('amount', itinerary.amount)
-            trip_id = data.get('trip_id', itinerary.trip_id)
-            category_id = data.get('category_id', itinerary.category_id)
+            name = data.get('name', itinerary.name if itinerary else "")
+            amount = data.get('amount', itinerary.amount if itinerary else "")
+            trip_id = data.get('trip_id', itinerary.trip_id if itinerary else "")
+            category_id = data.get('category_id', itinerary.category_id if itinerary else "")
             
             if not name or not amount or not category_id:
                 return error_response("Invalid data", 400)

@@ -55,6 +55,10 @@ class Trip(db.Model):
         
         if commit:
             db.session.commit()
+    
+    def delete(self) -> None:
+        db.session.delete(self)
+        db.session.commit()
 
     def to_dict(self) -> dict:
         return {
@@ -109,6 +113,9 @@ class Itinerary(db.Model):
         
         if commit:
             db.session.commit()
+    def delete(self) -> None:
+        db.session.delete(self)
+        db.session.commit()
     
     def to_dict(self) -> dict:
         return {

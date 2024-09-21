@@ -15,6 +15,32 @@ class Expense(db.Model):
     def __repr__(self) -> str:
         return f"<Expense {self.id}, name: {self.name}>"
     
+    @classmethod
+    def add_expense(cls, name, amount, trip_id, **kwargs):
+        
+        itinerary = cls(name=name, amount=amount, trip_id=trip_id)
+        
+        # Set additional attributes from kwargs
+        if kwargs.items():
+            for key, value in kwargs.items():
+                setattr(itinerary, key, value)
+        
+        db.session.add(itinerary)
+        db.session.commit()
+        
+        return itinerary
+    
+    def update(self, commit: bool = True, **kwargs) -> None:
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+        
+        if commit:
+            db.session.commit()
+    
+    def delete(self) -> None:
+        db.session.delete(self)
+        db.session.commit()
+    
     def to_dict(self) -> dict:
         return {
             'id': self.id,
