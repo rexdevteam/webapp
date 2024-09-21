@@ -77,11 +77,11 @@ const App = () => (
 						element={<AuthenticatedRoute element={<Trips />} />}
 					/>
 					<Route
-						path="/trips/new"
+						path="/trips/n"
 						element={<AuthenticatedRoute element={<Newtrip />} />}
 					/>
 					<Route
-						path="/trips/n"
+						path="/trips/new"
 						element={<AuthenticatedRoute element={<NewTrip />} />}
 					/>
 				</Routes>
