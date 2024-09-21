@@ -10,12 +10,12 @@ from ..controllers import ItineraryCatController
 
 
 @api_bp.route("/itinerary-cats", methods=["GET"])
-def itineraries():
+def itinerary_cats():
     if request.method == "GET":
         return ItineraryCatController.get_itinerary_cats()
 
 
 @api_bp.route("/itinerary-cats/<itinerary_cat_id>", methods=["GET"])
-def manage_itineraries(itinerary_cat_id):
+def manage_itinerary_cats(itinerary_cat_id):
     if request.method == "Get":
         return ItineraryCatController.get_itinerary_cat(itinerary_cat_id)
