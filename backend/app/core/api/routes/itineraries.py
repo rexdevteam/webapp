@@ -20,7 +20,7 @@ def itineraries():
 
 @api_bp.route("/itineraries/<itinerary_id>", methods=["GET", "PUT", "DELETE"])
 @jwt_required()
-def manage_trips(itinerary_id):
+def manage_itineraries(itinerary_id):
     if request.method == "Get":
         return ItineraryController.get_itinerary(itinerary_id)
     if request.method == "PUT":

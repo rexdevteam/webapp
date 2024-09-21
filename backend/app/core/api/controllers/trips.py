@@ -64,8 +64,14 @@ class TripsController:
 
             destination = data.get('destination')
             amount = data.get('amount')
-            start_date = datetime.strptime(data.get('start_date'), '%Y-%m-%d').date()
-            end_date = datetime.strptime(data.get('end_date'), '%Y-%m-%d').date()
+            start_date_data = data.get('start_date', "")
+            end_date_data = data.get('end_date', "")
+            
+            if not start_date or not end_date:
+                return error_response("Start and End date must be provided", 400)
+            
+            start_date = datetime.strptime(start_date_data, '%Y-%m-%d').date()
+            end_date = datetime.strptime(end_date_data, '%Y-%m-%d').date()
             
             itineraries = data.get('itineraries', [])
             
@@ -139,11 +145,19 @@ class TripsController:
             data = request.get_json()
             destination = data.get('destination', trip.destination)
             amount = data.get('amount', trip.amount)
-            start_date = datetime.strptime(data.get('start_date'), '%Y-%m-%d').date()
-            end_date = datetime.strptime(data.get('end_date'), '%Y-%m-%d').date()
+            start_date_data = data.get('start_date', "")
+            end_date_data = data.get('end_date', "")
+            
             
             if not destination or not amount:
                 return error_response("Invalid data", 400)
+            
+            if not start_date or not end_date:
+                return error_response("Start and End date must be provided", 400)
+            
+            start_date = datetime.strptime(start_date_data, '%Y-%m-%d').date()
+            end_date = datetime.strptime(end_date_data, '%Y-%m-%d').date()
+            
             
             
             # Update estate details
