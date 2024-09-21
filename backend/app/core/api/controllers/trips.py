@@ -81,11 +81,16 @@ class TripsController:
             # Create Trip
             new_trip = Trip.add_trip(destination=destination, amount=amount, app_user_id=current_user.id, start_date=start_date, end_date=end_date)
             
+            console_log("itineraries data", itineraries)
+            
             if len(itineraries) > 0:
                 for itinerary in itineraries:
                     category_id = itinerary.get('category_id')
                     name = itinerary.get('name')
                     itinerary_amount = itinerary.get('itinerary_amount')
+                    
+                    console_log("itinerary data", itinerary)
+                    console_log("itinerary data", f"{category_id}{name}{itinerary_amount}")
                     
                     if not category_id or not name or not itinerary_amount:
                         return error_response("Invalid itinerary data", 400)
@@ -93,8 +98,8 @@ class TripsController:
                     itinerary_item = Itinerary(
                         name=name,
                         amount=itinerary_amount,
+                        category_id=category_id,
                         trip_id=new_trip.id,
-                        category_id=category_id
                     )
                     db.session.add(itinerary_item)
 
