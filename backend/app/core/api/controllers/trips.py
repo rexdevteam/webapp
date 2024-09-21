@@ -67,7 +67,7 @@ class TripsController:
             start_date_data = data.get('start_date', "")
             end_date_data = data.get('end_date', "")
             
-            if not start_date or not end_date:
+            if not start_date_data or not end_date_data:
                 return error_response("Start and End date must be provided", 400)
             
             start_date = datetime.strptime(start_date_data, '%Y-%m-%d').date()
