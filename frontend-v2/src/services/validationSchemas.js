@@ -40,7 +40,19 @@ export const profileEditSchema = Yup.object().shape({
 
 
 export const newTripSchema = Yup.object().shape({
-	destination: Yup.string()
-		.required("Destination is required"),
-	amount: Yup.number().required("Amount is required"),
+	destination: Yup.string().required("Destination is required"),
+	amount: Yup.number().required("Budget is required"),
+	start_date: Yup.date().required("Start Date is required"),
+	end_date: Yup.date().required("End Date is required")
+	.test("is-greater", "End Date must be later than Start Date", function (value) {
+			const { start_date } = this.parent;
+			return !start_date || !value || new Date(value) >= new Date(start_date);
+		}),
+	itineraries: Yup.array().of(
+		Yup.object().shape({
+			name: Yup.string().required("Name is required"),
+			category: Yup.string().required("Category is required"),
+			amount: Yup.number().required("Amount is required"),
+		})
+	),
 });
