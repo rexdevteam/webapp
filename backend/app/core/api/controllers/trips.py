@@ -87,6 +87,9 @@ class TripsController:
                     name = itinerary.get('name')
                     itinerary_amount = itinerary.get('itinerary_amount')
                     
+                    if not category_id or not name or not itinerary_amount:
+                        return error_response("Invalid itinerary data", 400)
+                    
                     itinerary_item = Itinerary(
                         name=name,
                         amount=itinerary_amount,
