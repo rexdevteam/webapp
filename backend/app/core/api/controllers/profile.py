@@ -61,6 +61,7 @@ class ProfileController:
             profile_picture = request.files.get('profile_picture', '')
             profile_picture = request.files.getlist('profile_picture') or profile_picture
             
+            console_log("gender", gender)
             
             currency_info = {}
             if country != user_profile.country:
@@ -81,16 +82,16 @@ class ProfileController:
             
             
             extra_data={'user_data': current_user.to_dict()}
-            api_response = success_response('User profile updated successfully', 200, extra_data)
+            api_response = success_response('Profile updated successfully', 200, extra_data)
             
         except (DataError, DatabaseError) as e:
             db.session.rollback()
             log_exception('Database error occurred updating user profile', e)
-            api_response = error_response('Error connecting to the database.', 500)
+            api_response = error_response('Error interacting with the database.', 500)
         except Exception as e:
             db.session.rollback()
             log_exception('An exception occurred updating user profile.', e)
-            api_response = error_response('An error occurred while updating user profile', 500)
+            api_response = error_response('An error occurred while updating profile', 500)
         finally:
             db.session.close()
         
