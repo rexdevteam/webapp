@@ -4,11 +4,9 @@ import { AppBar, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-import bell from "../../assets/img/bell.svg"
-import profile from "../../assets/img/profile.png"
 import defProfile from "../../assets/img/avatar.jpg"
-
 import { useAuth } from "../../context/AuthContext";
+import Notification from "../notification/Notification";
 
 const Header = ({ handleSidebarToggle }) => {
     const { user_profile } = useAuth();
@@ -49,12 +47,8 @@ const Header = ({ handleSidebarToggle }) => {
                     </div>
 
                     <div className="header-icons flex">
-                        <div className="notif-ico">
-                            <div className="count">5</div>
-                            <div className="fitImg">
-                                <img src={bell} alt="" />
-                            </div>
-                        </div>
+                        <Notification />
+
                         <div className="profile-ico">
                             <div className="profile-img fitImg">
                                 <img src={profilePicture || defProfile} alt="profile image" />

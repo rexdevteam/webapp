@@ -90,9 +90,11 @@ main {
     background-color: #fff;
     position: fixed;
     top: 0;
+    z-index: 99;
 }
 .header .container.flex {
     gap: 20px;
+    overflow: unset;
 }
 .hamburger-btn {
     margin: 0px;
@@ -154,12 +156,16 @@ button.search-btn {
     border: 1px solid var(--outline);
     cursor: pointer;
 }
+.notification {
+    position: relative;
+}
 .notif-ico {
     position: relative;
     border: 1px solid transparent !important;
 }
 .notif-ico img {
     transform: scale(0.8);
+    width: 100%;
 }
 .notif-ico .count {
     z-index: 9;
@@ -174,6 +180,29 @@ button.search-btn {
     transform: scale(0.8);
     top: -4px;
 }
+
+.notification-view.card {
+    position: absolute;
+    width: 420px;
+    right: 16%;
+    top: 45px;
+    z-index: 99;
+    background-color: var(--box-bg-clr-solid);
+}
+.close-notif {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-align: center;
+    transition: var(--transition);
+}
+.close-notif:hover {
+    border: 1px solid var(--outline);
+    background-color: var(--outline);
+}
+
 .profile-ico .profile-img {
     border-radius: 50%;
     width: inherit;
@@ -181,6 +210,7 @@ button.search-btn {
 }
 .profile-ico img {
     height: 100%;
+    width: 100%;
 }
 
 .wrapper-head {

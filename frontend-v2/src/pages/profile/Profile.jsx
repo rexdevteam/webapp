@@ -35,15 +35,15 @@ const Profile = () => {
 			<div className="profile-container">
 				<div className="profile-card card">
 					<div className="profile-visuals flex flexCenter col-3">
-						<div class="profile-pic fitImg">
+						<div className="profile-pic fitImg">
 							<img
 								src={user_profile.profile_picture || defProfile}
 								alt={user_profile.firstname}
 							/>
 						</div>
 
-						<div class="user-info">
-							<span class="user-name">
+						<div className="user-info">
+							<span className="user-name">
 								{user_profile.full_name}
 							</span>
 						</div>

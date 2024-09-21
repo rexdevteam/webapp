@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import { sendApiRequest } from "../../services/api";
-import { signupSchema } from "./validationSchemas";
+import { signupSchema } from "../../services/validationSchemas";
 import { AuthContext } from "../../context/AuthContext";
 import { useAlert } from "../../context/AlertContext";
 

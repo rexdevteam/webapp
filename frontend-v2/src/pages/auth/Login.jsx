@@ -6,8 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 
 import { sendApiRequest } from "../../services/api";
-import { loginSchema } from "./validationSchemas";
-import { AuthContext } from "../../context/AuthContext";
+import { loginSchema } from "../../services/validationSchemas";
 import { useAlert } from "../../context/AlertContext";
 import { useAuth } from "../../context/AuthContext";
 
