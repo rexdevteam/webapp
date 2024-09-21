@@ -18,10 +18,11 @@ from email_validator import validate_email, EmailNotValidError, ValidatedEmail
 
 
 from ....extensions import db
-from ....models import Role, RoleNames, AppUser
+from ....models import Role, RoleNames, AppUser, Profile
 from ....utils.helpers.loggers import console_log, log_exception
 from ....utils.helpers.http_response import error_response, success_response
 from ....utils.helpers.users import get_app_user
+from ....utils.helpers.geolocation import get_currency_info
 
 
 class AuthController:
@@ -36,7 +37,8 @@ class AuthController:
             email = data.get('email', '').lower()
             firstname = data.get('firstname', '')
             lastname = data.get('lastname', '')
-            username = data.get('username', '')
+            gender = data.get('gender', '')
+            country = data.get('country', '')
             password = data.get('password', '')
             
             if not email:
@@ -44,16 +46,23 @@ class AuthController:
             
             try:
                 email_info = validate_email(email, check_deliverability=True)
-                email = email_info.normalized
+                email = email_info.normalized.lower()
             except EmailNotValidError as e:
                 return error_response(str(e), 400)
 
             if AppUser.query.filter_by(email=email).first():
                 return error_response('Email already taken', 409)
             
-            if AppUser.query.filter_by(username=username).first():
-                return error_response('Username already taken', 409)
-
+            
+            currency_info = get_currency_info(country)
+                
+            if not currency_info:
+                return error_response("Could not get your country's currency", 500)
+            
+            currency_name=currency_info.get("name")
+            currency_code=currency_info.get("code")
+            currency_symbol=currency_info.get("symbol")
+            
             
             # Generate a random six-digit number
             # verification_code = generate_random_number()
@@ -67,10 +76,11 @@ class AuthController:
             
             
             # Check if any field is empty
-            if not all([firstname, lastname, username, password]):
+            if not all([firstname, lastname, country, password]):
                 return {"error": "A required field is not provided."}, 400
             
-            new_user = AppUser(name=firstname, email=email, username=username, password=password)
+            new_user = AppUser(email=email, password=password)
+            new_user_profile = Profile(app_user=new_user, firstname=firstname, lastname=lastname, gender=gender, country=country, currency_name=currency_name, currency_code=currency_code, currency_symbol=currency_symbol)
             
             role = Role.query.filter_by(name=RoleNames.CUSTOMER).first()
             
@@ -78,7 +88,8 @@ class AuthController:
                 new_user.roles.append(role)
             
             db.session.add_all([
-                new_user
+                new_user,
+                new_user_profile
             ])
             
             db.session.commit()
@@ -93,7 +104,7 @@ class AuthController:
                 'access_token':access_token
             }
             
-            api_response = success_response('Verification code sent successfully', 200, extra_data)
+            api_response = success_response('Sign up successful.', 200, extra_data)
         except IntegrityError as e:
             db.session.rollback()
             log_exception('Integrity Error:', e)

@@ -176,7 +176,8 @@ button.search-btn {
 }
 .profile-ico .profile-img {
     border-radius: 50%;
-    width: 100%;
+    width: inherit;
+    height: inherit;
 }
 .profile-ico img {
     height: 100%;

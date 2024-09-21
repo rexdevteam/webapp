@@ -9,6 +9,8 @@ import LoadingPage from "../../components/ui/LoadingPage";
 import ProfileInfo from "./ProfileInfo";
 import "./profile.css"
 
+import defProfile from "../../assets/img/avatar.jpg";
+
 const Profile = () => {
 	const { user_profile, loading } = useAuth(); 
 	console.log(user_profile);
@@ -34,7 +36,10 @@ const Profile = () => {
 				<div className="profile-card card">
 					<div className="profile-visuals flex flexCenter col-3">
 						<div class="profile-pic fitImg">
-							<img src="/static/img/avatar.png" alt="Admin" />
+							<img
+								src={user_profile.profile_picture || defProfile}
+								alt={user_profile.firstname}
+							/>
 						</div>
 
 						<div class="user-info">
@@ -47,9 +52,18 @@ const Profile = () => {
 					<div className="profile-details col-9">
 						<ProfileInfo label="Email" value={user_profile.email} />
 						<ProfileInfo label="Phone" value={user_profile.phone} />
-						<ProfileInfo label="Gender" value={user_profile.gender} />
-						<ProfileInfo label="Date Joined" value={formatDate(user_profile.date_joined)} />
-						<ProfileInfo label="Roles" value={user_profile.roles.join(", ")} />
+						<ProfileInfo
+							label="Gender"
+							value={user_profile.gender}
+						/>
+						<ProfileInfo
+							label="Date Joined"
+							value={formatDate(user_profile.date_joined)}
+						/>
+						<ProfileInfo
+							label="Roles"
+							value={user_profile.roles.join(", ")}
+						/>
 					</div>
 				</div>
 			</div>

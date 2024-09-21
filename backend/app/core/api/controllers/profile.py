@@ -15,7 +15,7 @@ from ....utils.helpers.users import  get_current_user, is_email_exist, save_prof
 from ....utils.helpers.export_xl import export_to_excel
 from ....utils.emailing.pwd import send_password_email
 from ....utils.helpers.media import save_media
-from ....utils.helpers.geologicals import get_currency_info
+from ....utils.helpers.geolocation import get_currency_info
 
 
 class ProfileController:

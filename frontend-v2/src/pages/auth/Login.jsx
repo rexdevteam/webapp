@@ -72,7 +72,7 @@ const Login = () => {
 								type="email"
 								label="Email"
 								margin="normal"
-								className="rounded"
+								className="rounded form-control"
 								placeholder="example@mail.com"
 							/>
 							<ErrorMessage
@@ -88,7 +88,7 @@ const Login = () => {
 								type="password"
 								label="Password"
 								margin="normal"
-								className="rounded"
+								className="rounded form-control"
 							/>
 							<ErrorMessage
 								name="password"

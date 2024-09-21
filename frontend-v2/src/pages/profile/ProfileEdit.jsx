@@ -39,6 +39,7 @@ const ProfileEdit = () => {
 			formData.append("email", values.email);
 			formData.append("phone", values.phone);
 			formData.append("gender", values.gender);
+			formData.append("country", values.country);
 			if (selectedFile) {
 				formData.append("profile_picture", selectedFile);
 			}
@@ -79,6 +80,7 @@ const ProfileEdit = () => {
 							email: user_profile.email,
 							phone: user_profile.phone,
 							gender: user_profile.gender,
+							country: user_profile.country,
 							profile_picture: user_profile.profile_picture,
 						}}
 						validationSchema={profileEditSchema}
@@ -98,7 +100,7 @@ const ProfileEdit = () => {
 										</div>
 										<input
 											type="file"
-											id="profilePicture"
+											id="profile_picture"
 											style={{ display: "none" }}
 											onChange={handleFileChange}
 										/>
@@ -109,7 +111,7 @@ const ProfileEdit = () => {
 											handleClick={() =>
 												document
 													.getElementById(
-														"profilePicture"
+														"profile_picture"
 													)
 													.click()
 											}
@@ -170,16 +172,14 @@ const ProfileEdit = () => {
 								</div>
 								<div className="profile-info">
 									<div className="form-group">
-										<label className="label">
-											Profile Picture URL
-										</label>
+										<label className="label">Country</label>
 										<Field
 											type="text"
-											name="profile_picture"
+											name="country"
 											className="rounded form-control"
 										/>
 										<ErrorMessage
-											name="profile_picture"
+											name="country"
 											component="div"
 											className="err-msg"
 										/>
