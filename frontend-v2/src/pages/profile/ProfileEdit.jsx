@@ -45,9 +45,7 @@ const ProfileEdit = () => {
 
             const data = await sendApiRequest("/profile", {
 				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-				},
+				headers: {},
 				body: formData,
 			});
 			console.log(data);
