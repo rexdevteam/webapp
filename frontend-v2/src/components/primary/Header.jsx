@@ -1,6 +1,7 @@
 // src/components/Header.jsx
 import React, { useState } from "react";
 import { AppBar, Toolbar, Typography } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import bell from "../../assets/img/bell.svg"
@@ -9,39 +10,42 @@ import defProfile from "../../assets/img/avatar.jpg"
 
 import { useAuth } from "../../context/AuthContext";
 
-const Header = () => {
+const Header = ({ handleSidebarToggle }) => {
     const { user_profile } = useAuth();
     const [profilePicture, setProfilePicture] = useState(
 		user_profile.profile_picture
 	);
 
+
 	return (
 		<div className="header">
                 <div className="container flex">
-                    <div className="harmbuger-btn">
-                        <div className="ico harmbuger">
-                            <i className='bx bx-menu'></i>
+                    <div className="hamburger-btn flex flexCenter" onClick={handleSidebarToggle}>
+                        <div className="ico hamburger flex flexCenter">
+                            <MenuIcon sx={{ fontSize: 50 }} />
                         </div>
                     </div>
 
-                    <div className="header-utils">
-                        <Formik
-                            onSubmit={() => {}}
-                        >
-                            {({ isSubmitting }) => (
-                                <div className="search-wrap flex flexCenter">
-                                    <Form>
-                                        <Field
-                                            id="search-field"
-											type="text"
-											name="s"
-											className="rounded form-control search-field"
-                                            placeholder="What would you like to find?"
-										/>
-                                    </Form>
-                                </div>
-                            )}
-                        </Formik>
+                    <div className="header-utils flex">
+                        <div className="search-box">
+                            <Formik
+                                onSubmit={() => {}}
+                            >
+                                {({ isSubmitting }) => (
+                                    <div className="search-wrap flex flexCenter">
+                                        <Form>
+                                            <Field
+                                                id="search-field"
+                                                type="text"
+                                                name="s"
+                                                className="rounded form-control search-field"
+                                                placeholder="What would you like to find?"
+                                            />
+                                        </Form>
+                                    </div>
+                                )}
+                            </Formik>
+                        </div>
                     </div>
 
                     <div className="header-icons flex">
