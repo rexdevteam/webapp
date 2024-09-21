@@ -8,9 +8,12 @@ class Expense(db.Model):
     amount = db.Column(db.Numeric(10, 2), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False, default=DateTimeUtils.aware_utcnow)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False, default=DateTimeUtils.aware_utcnow)
+    
+    trip_id = db.Column(db.Integer, db.ForeignKey('trip.id'), nullable=False)
+    trip = db.relationship('Trip', backref=db.backref('expenses', lazy='dynamic'))
 
     def __repr__(self) -> str:
-        return f"<Trip {self.id}, name: {self.name}>"
+        return f"<Expense {self.id}, name: {self.name}>"
     
     def to_dict(self) -> dict:
         return {

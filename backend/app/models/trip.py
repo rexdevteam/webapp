@@ -88,6 +88,21 @@ class Itinerary(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('itinerary_category.id'), nullable=False)
     itinerary_category = db.relationship('ItineraryCategory', backref=db.backref('itineraries', lazy='dynamic'))
     
+    @classmethod
+    def add_itinerary(cls, name, amount, trip_id, category_id, **kwargs):
+        
+        itinerary = cls(name=name, amount=amount, category_id=category_id, trip_id=trip_id)
+        
+        # Set additional attributes from kwargs
+        if kwargs.items():
+            for key, value in kwargs.items():
+                setattr(itinerary, key, value)
+        
+        db.session.add(itinerary)
+        db.session.commit()
+        
+        return itinerary
+    
     def update(self, commit: bool = True, **kwargs) -> None:
         for key, value in kwargs.items():
             setattr(self, key, value)

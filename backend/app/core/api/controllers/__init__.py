@@ -1,5 +1,7 @@
 from .auth import AuthController
 from .profile import ProfileController
 from .trips import TripsController
+from .itineraries import ItineraryController
+from .itinerary_categories import ItineraryCatController
 from .expenses import ExpensesController
 from .notifications import NotificationsController

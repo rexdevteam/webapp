@@ -11,11 +11,9 @@ A Flask blueprint named 'api' is created to group these routes, and it is regist
 '''
 from flask import Blueprint, render_template
 
-from backend.app.models import notifications
-
 api_bp: Blueprint = Blueprint('api', __name__, url_prefix='/api')
 
-from . import auth, trips, expenses, profile, notifications
+from . import auth, trips, itineraries, itinerary_categories, expenses, profile, notifications
 
 
 @api_bp.route("/", methods=['GET'])

@@ -11,7 +11,7 @@ from ..controllers import ExpensesController
 
 
 @api_bp.route("/expenses", methods=["GET", "POST"])
-@roles_required("Super Admin", "Admin", "Customer")
+@jwt_required()
 def expenses():
     if request.method == "GET":
         return ExpensesController.get_expense()
@@ -21,7 +21,7 @@ def expenses():
 
 
 @api_bp.route("/expenses/<expense_id>", methods=["GET", "PUT", "DELETE"])
-@roles_required("Super Admin", "Admin", "Customer")
+@jwt_required()
 def manage_expenses(expense_id):
     if request.method == "Get":
         return ExpensesController.get_expense(expense_id)

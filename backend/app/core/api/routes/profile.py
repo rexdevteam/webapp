@@ -11,7 +11,7 @@ from ..controllers import ProfileController
 
 
 @api_bp.route("/profile", methods=["GET", "PUT"])
-@roles_required("Super Admin", "Admin", "Customer")
+@jwt_required()
 def profile():
     if request.method == "GET":
         return ProfileController.get_profile()
