@@ -44,4 +44,4 @@ def unprocessable(error):
 
 @errors_bp.app_errorhandler(500)
 def internal_server_error(error):
-    return error_response("Internal server error", 500)
+    return error_response('An unexpected error. Our developers are already looking into it.', 500)
