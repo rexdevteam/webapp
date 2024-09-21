@@ -48,18 +48,18 @@ const Trips = () => {
 	}, []);
 
 	const columns = [
-    { field: "id", headerName: "ID" },
-    { field: "destination", headerName: "Destination" },
-    { field: "date", headerName: "Flight  Date " },
-    { field: "datetoteturn", headerName: "Date of return" },
-    { field: "amount", headerName: "Amount" },
-    { field: "amount", headerName: "edit" },
-    { field: "amount", headerName: "intineries" },
-  ];
+		{ field: "id", headerName: "ID" },
+		{ field: "destination", headerName: "Destination" },
+		{ field: "date", headerName: "Start  Date " },
+		{ field: "end_date", headerName: "End Date" },
+		{ field: "amount", headerName: "Amount" },
+		{ field: "edit", headerName: "edit" },
+		{ field: "itineraries", headerName: "Itineraries" },
+	];
 
 	if (loading) return <LoadingPage />;
 	
-	const linkBtn = <LinkBtn txt={"Create New Trip"} link="/trip/new" />;
+	const linkBtn = <LinkBtn txt={"Create New Trip"} link="/trips/new" />;
 
 	return (
 		<div id="trips">

@@ -216,12 +216,16 @@ p {
 .noPad {
     padding: unset !important;
 }
+.no-margin {
+    margin: unset !important;
+}
 .hide {
     display: none;
 }
 [hidden] {
     visibility: hidden;
 }
+
 .btn {
     --btn-clr: #fff;
     --btn-radius: 0px;
@@ -243,6 +247,9 @@ p {
     transition: var(--transition);
     border-radius: var(--btn-radius);
     isolation: isolate;
+}
+.btn.del {
+    --theme-clr: var(--error);
 }
 .btn:active {
     transform: scale(0.92);

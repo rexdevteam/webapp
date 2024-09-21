@@ -128,7 +128,7 @@ function Newtrip() {
   return (
     <div id="Addtrip">
       <PageHead title="Add New Trip" />
-      <form className="form-control" onSubmit={formik.handleSubmit}>
+      <form className="forms-control" onSubmit={formik.handleSubmit}>
         <section className="form-sec">
           <div className="des-amm">
             <div>

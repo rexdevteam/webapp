@@ -36,3 +36,20 @@ export const sendApiRequest = async (endpoint, options = {}) => {
 		throw new Error(errorMessage); // Throw the API error message
 	}
 };
+
+
+export const fetchCategories = async () => {
+	try {
+		const data = await sendApiRequest("/itinerary-categories", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		return data.data;
+	} catch (error) {
+		console.error("Error fetching categories:", error);
+		throw error;
+	}
+};

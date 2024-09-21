@@ -1,0 +1,19 @@
+#trip-form {
+    --input-gap: 20px
+}
+#trip-form .form-groups {
+    padding: 0px;
+    gap: var(--input-gap) 50px;
+    margin: 0px 0px var(--input-gap);
+}
+
+.itinerary-sub-form {
+    margin: 0px 0px 20px;
+}
+
+.itinerary-sub-form .form-groups {
+    border-radius: var(--round-conners);
+    padding: 15px !important;
+    margin: 10px 0px !important;
+    background-color: var(--body-bg-clr);
+}

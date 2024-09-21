@@ -37,3 +37,10 @@ export const profileEditSchema = Yup.object().shape({
 	gender: Yup.string().required("Gender is required"),
 	profile_picture: Yup.string().url("Invalid URL").nullable(),
 });
+
+
+export const newTripSchema = Yup.object().shape({
+	destination: Yup.string()
+		.required("Destination is required"),
+	amount: Yup.number().required("Amount is required"),
+});
