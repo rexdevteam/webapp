@@ -9,120 +9,120 @@ import Schedulecal from "../../assets/img/schedule.png";
 import { useState, useEffect, useRef } from "react";
 
 function Newtrip() {
-  const backendCategories = [
-    "Transportation",
-    "Education",
-    "Rentals",
-    "Taxis",
-    "Others",
-  ];
+const backendCategories = [
+  "Transportation",
+  "Education",
+  "Rentals",
+  "Taxis",
+  "Others",
+];
 
-  const [itineraries, setItineraries] = useState([]);
-  const [editMode, setEditMode] = useState(false);
-  const [editId, setEditId] = useState(null);
-  const ItineraryIndex = useRef(0);
-  const [isOpen, setIsOpen] = useState(false);
+const [itineraries, setItineraries] = useState([]);
+const [editMode, setEditMode] = useState(false);
+const [editId, setEditId] = useState(null);
+const ItineraryIndex = useRef(0);
+const [isOpen, setIsOpen] = useState(false);
 
-  const toggleAccordion = () => {
-    setIsOpen(!isOpen);
+const toggleAccordion = () => {
+  setIsOpen(!isOpen);
+};
+
+useEffect(() => {
+  if (isOpen) {
+    console.log("Accordion is opened");
+  } else {
+    console.log("Accordion is closed");
+  }
+}, [isOpen]);
+
+useEffect(() => {
+  // Initialize itineraries from localStorage
+  const storedItineraries = JSON.parse(localStorage.getItem("itinerary")) || [];
+  setItineraries(storedItineraries);
+  ItineraryIndex.current = storedItineraries.length; // To keep the ID in sync with existing data
+  console.log("Loaded itineraries from localStorage:", storedItineraries);
+}, []);
+
+// Save to localStorage whenever itineraries change
+useEffect(() => {
+  if (itineraries.length > 0) {
+    localStorage.setItem("itinerary", JSON.stringify(itineraries));
+  } else {
+    localStorage.removeItem("itinerary");
+  }
+  console.log("Updated localStorage:", itineraries);
+}, [itineraries]);
+
+const formik = useFormik({
+  initialValues: {
+    destination: "",
+    datetogo: "",
+    datetoreturn: "",
+    budget: "",
+    itineraryName: "",
+    category: "",
+    itineraryAmount: "",
+    submittedItineraries: [], // Field to hold itineraries in Formik
+  },
+  validationSchema: Yup.object({
+    destination: Yup.string().required("Destination is required"),
+    datetogo: Yup.date().required("Departure date is required"),
+    datetoreturn: Yup.date()
+      .required("Return date is required")
+      .min(Yup.ref("datetogo"), "Return date cannot be before departure date"),
+  }),
+  onSubmit: (values) => {
+    // Add itineraries to the Formik values object before submitting
+    values.submittedItineraries = itineraries;
+
+    // Remove itineraries from localStorage
+    localStorage.removeItem("itinerary");
+
+    // Clear the itineraries state after form submission
+    setItineraries([]);
+
+    // Proceed with form submission (now values include itineraries)
+    console.log("Form submitted with values:", values);
+  },
+});
+
+const addItinerary = () => {
+  ItineraryIndex.current += 1;
+  const newItinerary = {
+    id: ItineraryIndex.current,
+    name: formik.values.itineraryName,
+    category: formik.values.category,
+    amount: formik.values.itineraryAmount,
   };
 
-  useEffect(() => {
-    if (isOpen) {
-      console.log("Accordion is opened");
-    } else {
-      console.log("Accordion is closed");
-    }
-  }, [isOpen]);
+  if (editMode) {
+    const updatedItineraries = itineraries.map((item) =>
+      item.id === editId ? { ...item, ...newItinerary } : item
+    );
+    setItineraries(updatedItineraries);
+    setEditMode(false);
+    setEditId(null);
+  } else {
+    setItineraries([...itineraries, newItinerary]);
+  }
 
-  useEffect(() => {
-    const storedItineraries =
-      JSON.parse(localStorage.getItem("itinerary")) || [];
-    setItineraries(storedItineraries);
-    ItineraryIndex.current = storedItineraries.length; // To keep the ID in sync with existing data
-  }, []);
+  formik.setFieldValue("itineraryName", "");
+  formik.setFieldValue("category", "");
+  formik.setFieldValue("itineraryAmount", "");
+};
 
-  // Save to localStorage whenever itineraries change
-  useEffect(() => {
-    if (itineraries.length > 0) {
-      localStorage.setItem("itinerary", JSON.stringify(itineraries));
-    }
-  }, [itineraries]);
+const handleDelete = (id) => {
+  setItineraries(itineraries.filter((item) => item.id !== id));
+};
 
-  const formik = useFormik({
-    initialValues: {
-      destination: "",
-      datetogo: "",
-      datetoreturn: "",
-      budget: "",
-      itineraryName: "",
-      category: "",
-      itineraryAmount: "",
-      submittedItineraries: [], // Field to hold itineraries in Formik
-    },
-    validationSchema: Yup.object({
-      destination: Yup.string().required("Destination is required"),
-      datetogo: Yup.date().required("Departure date is required"),
-      datetoreturn: Yup.date()
-        .required("Return date is required")
-        .min(
-          Yup.ref("datetogo"),
-          "Return date cannot be before departure date"
-        ),
-    }),
-    onSubmit: (values) => {
-      // Add itineraries to the Formik values object before submitting
-      values.submittedItineraries = itineraries;
-
-      // Remove itineraries from localStorage
-      localStorage.removeItem("itinerary");
-
-      // Clear the itineraries state after form submission
-      setItineraries([]);
-
-      // Proceed with form submission (now values include itineraries)
-      console.log(values);
-    },
-  });
-
-  const addItinerary = () => {
-    ItineraryIndex.current += 1;
-    const newItinerary = {
-      id: ItineraryIndex.current,
-      name: formik.values.itineraryName,
-      category: formik.values.category,
-      amount: formik.values.itineraryAmount,
-    };
-
-    if (editMode) {
-      const updatedItineraries = itineraries.map((item) =>
-        item.id === editId ? { ...item, ...newItinerary } : item
-      );
-      setItineraries(updatedItineraries);
-      setEditMode(false);
-      setEditId(null);
-    } else {
-      setItineraries([...itineraries, newItinerary]);
-    }
-
-    formik.setFieldValue("itineraryName", "");
-    formik.setFieldValue("category", "");
-    formik.setFieldValue("itineraryAmount", "");
-  };
-
-  const handleDelete = (id) => {
-    setItineraries(itineraries.filter((item) => item.id !== id));
-  };
-
-  const handleEdit = (id) => {
-    const itineraryToEdit = itineraries.find((item) => item.id === id);
-    formik.setFieldValue("itineraryName", itineraryToEdit.name);
-    formik.setFieldValue("category", itineraryToEdit.category);
-    formik.setFieldValue("itineraryAmount", itineraryToEdit.amount);
-    setEditMode(true);
-    setEditId(id);
-  };
-
+const handleEdit = (id) => {
+  const itineraryToEdit = itineraries.find((item) => item.id === id);
+  formik.setFieldValue("itineraryName", itineraryToEdit.name);
+  formik.setFieldValue("category", itineraryToEdit.category);
+  formik.setFieldValue("itineraryAmount", itineraryToEdit.amount);
+  setEditMode(true);
+  setEditId(id);
+};
 
 
   return (
@@ -285,7 +285,7 @@ function Newtrip() {
                 </div>
                 <br />
                 <button className="bx-cont" type="button"  onClick={addItinerary}>
-                  Add Intinery
+                  Add Intineries
                 </button>
               </div>
             )}

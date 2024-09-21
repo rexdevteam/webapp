@@ -1,37 +1,125 @@
-.wio{
- width:51.83px;
- height: 51.24px; 
+.wio {
+    width: 35.83px;
+    height: 35.24px;
+    margin-left: 5px;
 }
 
-.Span-spend{
+.Span-spend {
+    width: 99%;
     display: flex;
-    padding-bottom: 15px;
-    justify-content: space-between;
+    gap:100px ;
+        align-items: center;
+    justify-content: space-around;
+    border-width: 100%;
     border-bottom: 1px solid rgb(81, 79, 79);
 }
 
-.Main-chart-span{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-
-}
-
-.tot-cont{
-    padding: 16px;
-    background-color: #EAEAEA;
-    margin-left: 120px;  
-}
-
-.full-bar-chat{
-    width: 100%;
-    padding: 7px;
+.Main-chart-span {
     background-color: whitesmoke;
-    border-radius: 20px;
-    box-shadow:0 4px 6px -1px #0000001a,
+        width: 100%;
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    margin-top: 20px;
+
+}
+.ptag{
+    width: 100%;
+        border-bottom: 1px solid rgb(81, 79, 79);
 }
 
-.bar{
-    margin-top: 12px;
-    height: 300px;
+
+.tot-cont {
+    padding: 7px;
+    width: 110px;
+    background-color: #EAEAEA;
 }
+
+.pie-chart{
+    width: 300px;
+    display: block;
+    margin: auto;
+    justify-content: center;
+    height: 310px;
+    
+}
+
+.pie-chart-container {
+    width: 50%;
+    height: 440px;
+    background-color: white;
+    padding: 30px;
+border-radius: 20px;
+    box-shadow: 0 4px 6px -1px #0000001a;
+}
+
+.full-bar-chat {
+    width: 40%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px -1px #0000001a;
+}
+
+.bar {
+    margin-top: 12px;
+    height: 340px;
+}
+.full-bar-chat {
+    width: 90%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px -1px #0000001a;
+}
+
+@media (max-width: 768px) {
+    .Main-chart-span {
+            background-color: whitesmoke;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            justify-content: space-between;
+            margin-top: 20px;
+    
+        }
+
+
+                .full-bar-chat {
+                    width: 100%;
+                    padding: 20px;
+                    background-color: white;
+                    border-radius: 20px;
+                    box-shadow: 0 4px 6px -1px #0000001a;
+                }
+                .Span-spend {
+                    width: 100%;
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    justify-content: space-around;
+                    border-width: 100%;
+                    border-bottom: 1px solid rgb(81, 79, 79);
+                }
+
+                                .pie-chart {
+                                    width: 300px;
+                                    display: block;
+                                    margin: auto;
+                                    justify-content: center;
+                                    height: 310px;
+                
+                                }
+                
+                                .pie-chart-container {
+                                    width: 100%;
+                                    height: 440px;
+                                    margin-top: 20px;
+                                    background-color: white;
+                                    padding: 30px;
+                                    border-radius: 20px;
+                                    box-shadow: 0 4px 6px -1px #0000001a;
+                                }
+}
+

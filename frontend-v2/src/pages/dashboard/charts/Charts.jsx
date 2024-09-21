@@ -137,7 +137,7 @@ const Charts = () => {
   return (
     <section>
       <section className="Main-chart-span">
-        <div className="full-bar-chart">
+        <div className="full-bar-chat">
           <div className="Span-spend">
             <span>
               <h2>Monthly Spend</h2>
@@ -147,23 +147,26 @@ const Charts = () => {
                 <img className="wio" src={Dev} alt="Delivery Van" />
               </span>
             </span>
-
             <span className="tot-cont">
               <h2 style={{ textAlign: "center" }}>{totalSpend}</h2>
               <p>Total Spend</p>
             </span>
-            <br />
           </div>
-
+          <p className="ptag"></p>
           <div className="bar">
             <Bar data={barData} options={barOptions} />
           </div>
         </div>
 
         <div className="pie-chart-container">
-          <h2>Cashback Distribution</h2>
-          <Pie data={pieData} options={pieOptions} />
-          <h2>Total Cashback: {totalCashback}</h2>
+          <div className="pie-chart">
+            <h2 style={{ marginLeft: "10px" }}>Cashback Distribution</h2>
+            <Pie data={pieData} options={pieOptions} />
+            <br />
+            <h2 style={{ marginLeft: "10px" }}>
+              Total Cashback: {totalCashback}
+            </h2>
+          </div>
         </div>
       </section>
     </section>

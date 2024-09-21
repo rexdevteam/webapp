@@ -32,7 +32,7 @@
 .metrics-card .label,
 .metrics-card .stat {
     font-weight: bold;
-    font-size: 35px;
+    font-size: 40px;
 }
 .metrics-card .stat {
     font-size: 40px;
@@ -40,7 +40,7 @@
 
 .bx-plane {
     color: green;
-    font-size: 110px;
+    font-size: 100px;
     position: absolute;
     top: 38px;
     right: 10px;
@@ -50,9 +50,9 @@
 
 .bx-dolls {
     color: purple;
-font-size: 110px;
+font-size: 100px;
     position: absolute;
-    top: 38px;
+    top: 40px;
     right: 10px;
 }
 
@@ -60,7 +60,7 @@ font-size: 110px;
 
 .bx-down {
     color: orange;
-    font-size: 110px;
+    font-size: 100px;
         position: absolute;
         top: 38px;
         right: 10px;
@@ -94,4 +94,38 @@ margin-top: 20px;
 .dash-head-cont{
     background-color: white;
     padding: 6px;
+}
+
+@media (max-width: 768px) {
+    .bx-plane {
+            color: green;
+            font-size: 90px;
+            position: relative;
+            top: 40px;
+            position: absolute;
+            right: 10px;
+        }
+    
+    
+    
+        .bx-dolls {
+            color: purple;
+            font-size: 90px;
+            position: relative;
+                top: 65px;
+            position: absolute;
+            right: 11px;
+        }
+    
+    
+    
+        .bx-down {
+            color: orange;
+            font-size: 70px;
+            position: relative;
+                top: 60px;
+            position: absolute;
+            right: 10px;
+        }
+
 }
