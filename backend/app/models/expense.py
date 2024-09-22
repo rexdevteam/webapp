@@ -61,6 +61,5 @@ class Expense(db.Model):
             'id': self.id,
             'name': self.name,
             'amount': self.amount,
-            'created_at': to_gmt1_or_none(self.created_at),
         }
 

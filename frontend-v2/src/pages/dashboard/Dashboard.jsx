@@ -52,7 +52,6 @@ const Dashboard = () => {
 		{ field: "start_date", headerName: "Start Date " },
 		{ field: "end_date", headerName: "End Date" },
 		{ field: "amount", headerName: "Budget" },
-		{ field: "edit", headerName: "edit" },
 	];
 
 	return (

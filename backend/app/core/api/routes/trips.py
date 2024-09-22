@@ -6,7 +6,7 @@ from flask import request
 from flask_jwt_extended import jwt_required
 
 from . import api_bp
-from ..controllers.trips import TripsController
+from ..controllers import TripsController
 
 
 @api_bp.route("/trips", methods=["GET", "POST"])
@@ -21,7 +21,7 @@ def trips():
 @api_bp.route("/trips/<trip_id>", methods=["GET", "PUT", "DELETE"])
 @jwt_required()
 def manage_trips(trip_id):
-    if request.method == "Get":
+    if request.method == "GET":
         return TripsController.get_trip(trip_id)
     if request.method == "PUT":
         return TripsController.edit_trip(trip_id)

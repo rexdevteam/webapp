@@ -11,8 +11,10 @@ import ProfileEdit from "./pages/profile/ProfileEdit";
 import Expenses from "./pages/expenses/Expenses";
 import NewExpense from "./pages/expenses/NewExpense";
 import Trips from "./pages/trips/Trips";
+import TripDetails from "./pages/trips/TripDetails";
 import Newtrip from "./pages/tipsform/Newtrip";
 import NewTrip from "./pages/trips/NewTrip";
+import EditTrip from "./pages/trips/EditTrip";
 import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp";
 
@@ -70,12 +72,20 @@ const App = () => (
 					/>
 					<Route
 						path="/expenses/new"
-						element={<AuthenticatedRoute element={<NewExpense />} />}
+						element={
+							<AuthenticatedRoute element={<NewExpense />} />
+						}
 					/>
 
 					<Route
 						path="/trips"
 						element={<AuthenticatedRoute element={<Trips />} />}
+					/>
+					<Route
+						path="/trips/:id"
+						element={
+							<AuthenticatedRoute element={<TripDetails />} />
+						}
 					/>
 					<Route
 						path="/trips/n"
@@ -84,6 +94,10 @@ const App = () => (
 					<Route
 						path="/trips/new"
 						element={<AuthenticatedRoute element={<NewTrip />} />}
+					/>
+					<Route
+						path="/trips/:id/edit"
+						element={<AuthenticatedRoute element={<EditTrip />} />}
 					/>
 				</Routes>
 			</Router>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { CircularProgress, Typography, Pagination } from "@mui/material";
 
@@ -14,6 +15,7 @@ import "./trips.css"
 
 
 const Trips = () => {
+	const navigate = useNavigate();
 	const [trips, setTrips] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [loadingTable, setLoadingTable] = useState(false);
@@ -25,7 +27,7 @@ const Trips = () => {
 	useEffect(() => {
 		const getTrips = async () => {
 			try {
-				const data = await sendApiRequest(`/trips?page=${page}`, {
+				const data = await sendApiRequest(`/trips?page=${page}&per_page=6`, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -52,14 +54,16 @@ const Trips = () => {
 		setPage(value);
 	};
 
+	const handleViewDetails = (id) => {
+		navigate(`/trips/${id}`);
+	};
+
 	const columns = [
 		{ field: "id", headerName: "ID" },
 		{ field: "destination", headerName: "Destination" },
 		{ field: "start_date", headerName: "Start Date " },
 		{ field: "end_date", headerName: "End Date" },
 		{ field: "amount", headerName: "Budget" },
-		{ field: "edit", headerName: "edit" },
-		{ field: "itineraries", headerName: "Itineraries" },
 	];
 
 	if (loading) return <LoadingPage />;
@@ -80,6 +84,8 @@ const Trips = () => {
 						columns={columns}
 						data={trips}
 						foot={true}
+						actions={true}
+						handleViewDetails={handleViewDetails}
 						paginate={{ totalPages, page, handlePageChange }}
 					/>
 				</>

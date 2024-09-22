@@ -19,7 +19,7 @@ def notifications():
 @api_bp.route("/notifications/<notification_id>", methods=["GET", "DELETE"])
 @jwt_required()
 def manage_notifications(notification_id):
-    if request.method == "Get":
+    if request.method == "GET":
         return NotificationsController.get_notification(notification_id)
     elif request.method == "DELETE":
         return NotificationsController.delete_notification(notification_id)

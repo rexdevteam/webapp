@@ -71,3 +71,19 @@ export const fetchTrips = async () => {
 		throw error;
 	}
 };
+
+export const fetchTrip = async (id) => {
+	try {
+		const data = await sendApiRequest(`/trips/${id}`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		return data.data;
+	} catch (error) {
+		console.error("Error fetching Trip:", error);
+		throw error;
+	}
+};

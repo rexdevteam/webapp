@@ -23,7 +23,7 @@ def expenses():
 @api_bp.route("/expenses/<expense_id>", methods=["GET", "PUT", "DELETE"])
 @jwt_required()
 def manage_expenses(expense_id):
-    if request.method == "Get":
+    if request.method == "GET":
         return ExpensesController.get_expense(expense_id)
     if request.method == "PUT":
         return ExpensesController.edit_expense(expense_id)

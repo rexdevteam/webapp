@@ -13,6 +13,7 @@ import {
 	Pagination,
 } from "@mui/material";
 
+import Btn from "./Btn";
 import LoadingData from "./LoadingData";
 import "./table/table.css"
 
@@ -26,10 +27,15 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	},
 }));
 
-const Table = ({ isLoading = false, columns, data, head, foot, paginate }) => {
+const Table = ({ isLoading = false, actions=false, columns, data, head, foot, paginate, handleViewDetails }) => {
 	return (
 		<div className="table-wrapper">
-			{head && <div className="table-head"> <span className="title"> {head} </span> </div>}
+			{head && (
+				<div className="table-head">
+					{" "}
+					<span className="title"> {head} </span>{" "}
+				</div>
+			)}
 
 			<div className="table-body">
 				{isLoading ? (
@@ -44,6 +50,11 @@ const Table = ({ isLoading = false, columns, data, head, foot, paginate }) => {
 											{column.headerName}
 										</StyledTableCell>
 									))}
+									{actions && (
+										<StyledTableCell>
+											Actions
+										</StyledTableCell>
+									)}
 								</TableRow>
 							</TableHead>
 
@@ -72,6 +83,20 @@ const Table = ({ isLoading = false, columns, data, head, foot, paginate }) => {
 													: row[column.field]}
 											</TableCell>
 										))}
+
+										{handleViewDetails && (
+											<TableCell>
+												<Btn
+													txt={"View"}
+													className="ghost-rounded"
+													handleClick={() =>
+														handleViewDetails(
+															row.id
+														)
+													}
+												/>
+											</TableCell>
+										)}
 									</TableRow>
 								))}
 							</TableBody>

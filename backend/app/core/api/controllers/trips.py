@@ -1,6 +1,7 @@
 from ast import List
 from flask import request
 from datetime import datetime
+from decimal import Decimal
 from sqlalchemy.exc import ( IntegrityError, DataError, DatabaseError, InvalidRequestError, OperationalError )
 
 from ....extensions import db
@@ -130,7 +131,7 @@ class TripsController:
             
             extra_data = {"trip": trip.to_dict()}
             
-            api_response = success_response("trip fetched successfully", 200, extra_data)
+            api_response = success_response("Trip fetched successfully", 200, extra_data)
             
         except (DataError, DatabaseError) as e:
             api_response = error_response('Error connecting to the database.', 500)
@@ -156,7 +157,6 @@ class TripsController:
             start_date_data = data.get('start_date', "")
             end_date_data = data.get('end_date', "")
             
-            
             if not destination or not amount:
                 return error_response("Invalid data", 400)
             
@@ -167,13 +167,47 @@ class TripsController:
             end_date = datetime.strptime(end_date_data, '%Y-%m-%d').date()
             
             
+            itineraries = data.get('itineraries', [])
+            
+            console_log("itineraries data", itineraries)
+            
+            if len(itineraries) > 0:
+                for itinerary in itineraries:
+                    category_id = itinerary.get('category_id')
+                    name = itinerary.get('name')
+                    itinerary_amount = itinerary.get('amount')
+                    itinerary_id = itinerary.get('itinerary_id')
+                    
+                    console_log("itinerary data", itinerary)
+                    console_log("itinerary data", f"{category_id}{name}{itinerary_amount}")
+                    
+                    if not category_id or not name or not itinerary_amount:
+                        return error_response("Invalid itinerary data", 400)
+                    
+                    if itinerary_id:
+                        existing_itinerary: Itinerary = Itinerary.query.get(itinerary_id)
+                        existing_itinerary.update(
+                            name=name,
+                            amount=Decimal(itinerary_amount),
+                            category_id=category_id,
+                            trip_id=trip.id,
+                            commit=False
+                        )
+                    
+                    itinerary_item = Itinerary(
+                        name=name,
+                        amount=Decimal(itinerary_amount),
+                        category_id=category_id,
+                        trip_id=trip.id,
+                    )
+                    db.session.add(itinerary_item)
             
             # Update estate details
             trip.update(destination=destination, amount=amount, start_date=start_date, end_date=end_date)
             
             extra_data = {"trip": trip.to_dict()}
             
-            api_response = success_response("trip updated successfully", 200, extra_data)
+            api_response = success_response("Trip updated successfully", 200, extra_data)
             
         except (DataError, DatabaseError) as e:
             log_exception('Database error occurred updating a trip', e)

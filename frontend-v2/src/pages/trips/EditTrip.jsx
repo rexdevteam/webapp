@@ -1,24 +1,32 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { useNavigate, Link } from "react-router-dom";
-import { Formik, Form, Field, FieldArray, ErrorMessage } from "formik";
+import { useNavigate, useParams } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import { newTripSchema } from "../../services/validationSchemas";
-import { sendApiRequest, fetchCategories } from "../../services/api";
-import { useAuth } from "../../context/AuthContext";
+import { sendApiRequest, fetchCategories, fetchTrip } from "../../services/api";
 import { useAlert } from "../../context/AlertContext";
 
 import Btn from "../../components/ui/Btn";
 import PageHead from "../../components/page/PageHead";
 import SubItineraryForm from "./SubItineraryForm";
-import ItineraryInputs from "./ItineraryInputs";
+import LoadingPage from "../../components/ui/LoadingPage";
 
-const NewTrip = () => {
+const EditTrip = () => {
 	const navigate = useNavigate();
-	const { setAlert, persistAlert } = useAlert();
+	const { setAlert } = useAlert();
+	const { id } = useParams();
+    const [loading, setLoading] = useState(true);
 	const [categories, setCategories] = useState([]);
+	const [initialValues, setInitialValues] = useState({
+		destination: "",
+		amount: "",
+		start_date: "",
+		end_date: "",
+		itineraries: [],
+	});
 
-    useEffect(() => {
+	useEffect(() => {
 		const getCategories = async () => {
 			try {
 				const data = await fetchCategories();
@@ -28,47 +36,74 @@ const NewTrip = () => {
 			}
 		};
 
-		getCategories();
-	}, []);
+		const getTrip = async () => {
+			try {
+				const data = await fetchTrip(id);
+				setInitialValues(data.trip);
+			} catch (error) {
+				console.error("Error fetching trip:", error);
+			} finally {
+                setLoading(false);
+            }
+		};
 
-    const handleSubmit = async (values, { setSubmitting }) => {
+		getCategories();
+		getTrip();
+	}, [id]);
+
+    const formatDate = (dateString) => {
+		const date = new Date(dateString);
+		const year = date.getFullYear();
+		const month = String(date.getMonth() + 1).padStart(2, "0");
+		const day = String(date.getDate()).padStart(2, "0");
+		return `${year}-${month}-${day}`;
+	};
+
+	const handleSubmit = async (values, { setSubmitting }) => {
+        const formattedValues = {
+			...values,
+			start_date: formatDate(values.start_date),
+			end_date: formatDate(values.end_date),
+			itineraries: values.itineraries.map((itinerary) => ({
+				...itinerary,
+				itinerary_id: itinerary.id,
+			})),
+		};
+
 		try {
-			const data = await sendApiRequest("/trips", {
-				method: "POST",
+			const data = await sendApiRequest(`/trips/${id}`, {
+				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(values),
+				body: JSON.stringify(formattedValues),
 			});
 
-			persistAlert(data?.message, "success");
-			navigate("/trips");
+			setAlert(data?.message, "success");
+			navigate(`/trips/${id}`);
 		} catch (error) {
-			console.error("Error adding Trips:", error);
+			console.error("Error updating trip:", error);
 			setAlert(error?.message, "error");
 		} finally {
 			setSubmitting(false);
 		}
 	};
 
+    if (loading) return <LoadingPage />;
+
 	return (
-		<div id="new-trip">
+		<div id="edit-trip">
 			<Helmet>
-				<title>New Trip - Expense Voyage</title>
+				<title>Edit Trip - Expense Voyage</title>
 			</Helmet>
 
-			<PageHead title={"Add New Trip"} />
+			<PageHead title={"Edit Trip"} />
 
 			<div className="form-container">
 				<div id="trip-form" className="card form-wrapper">
 					<Formik
-						initialValues={{
-							destination: "",
-							amount: "",
-							start_date: "",
-							end_date: "",
-							itineraries: [],
-						}}
+						initialValues={initialValues}
+						enableReinitialize
 						validationSchema={newTripSchema}
 						onSubmit={handleSubmit}
 					>
@@ -159,4 +194,4 @@ const NewTrip = () => {
 	);
 };
 
-export default NewTrip;
+export default EditTrip;

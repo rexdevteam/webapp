@@ -9,7 +9,7 @@ const SubItineraryForm = ({ values, categories }) => {
 		<FieldArray name="itineraries">
 			{({ insert, remove, push }) => (
 				<div className="itinerary-sub-form">
-					<div className="sub-form-head flex flex-space-between">
+					<div className="sub-form-head flex">
 						<div className="title">Add Itineraries</div>
 						<Btn
 							txt={"+"}

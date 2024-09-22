@@ -17,3 +17,6 @@
     margin: 10px 0px !important;
     background-color: var(--body-bg-clr);
 }
+.sub-form-head {
+    gap: 30px;
+}

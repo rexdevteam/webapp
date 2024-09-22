@@ -17,5 +17,5 @@ def itinerary_cats():
 
 @api_bp.route("/itinerary-cats/<itinerary_cat_id>", methods=["GET"])
 def manage_itinerary_cats(itinerary_cat_id):
-    if request.method == "Get":
+    if request.method == "GET":
         return ItineraryCatController.get_itinerary_cat(itinerary_cat_id)

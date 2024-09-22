@@ -1,0 +1,28 @@
+.trip-contents>* {
+    margin: 0px 0px 40px;
+}
+
+.trip-basics {
+    grid-template-columns: auto auto;
+}
+
+.trip-contents>div .label {
+    font-weight: bold;
+    font-size: 15px;
+    margin: 0px 0px 5px;
+}
+
+.trip-contents>div span {
+    display: block;
+}
+
+.trip-info ul {
+    list-style: none;
+}
+.trip-info ul li {
+    border-radius: var(--round-conners);
+    padding: 15px !important;
+    margin: 10px 0px !important;
+    background-color: var(--body-bg-clr);
+    max-width: 100%;
+}
