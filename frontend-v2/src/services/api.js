@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const API = axios.create({
-	baseURL: "http://localhost:1900/api",
+	baseURL: "https://expense-voyage-api.onrender.com/api",
 });
 
 // Function to set the authorization token
