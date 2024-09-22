@@ -22,7 +22,7 @@ const NewTrip = () => {
 		const getCategories = async () => {
 			try {
 				const data = await fetchCategories();
-				setCategories(data.categories);
+				setCategories(data.itinerary_cats);
 			} catch (error) {
 				console.error("Error fetching categories:", error);
 			}
@@ -41,10 +41,10 @@ const NewTrip = () => {
 				body: JSON.stringify(values),
 			});
 
-			persistAlert(data?.message, "success");
+			setAlert(data?.message, "success");
 			navigate("/trips");
 		} catch (error) {
-			console.error("Error updating profile:", error);
+			console.error("Error adding Trips:", error);
 			setAlert(error?.message, "error");
 		} finally {
 			setSubmitting(false);

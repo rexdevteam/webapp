@@ -33,7 +33,7 @@ const NotificationView = ({ isVisible, onClose }) => {
 							key={index}
 							className={notification.read ? "read" : "unread"}
 						>
-							{notification.message}
+							{notification.body}
 						</li>
 					))}
 				</ul>

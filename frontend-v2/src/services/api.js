@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const API = axios.create({
-	baseURL: "https://expense-voyage-api.onrender.com/api",
+	baseURL: "http://localhost:1900/api",
 });
 
 // Function to set the authorization token
@@ -40,7 +40,25 @@ export const sendApiRequest = async (endpoint, options = {}) => {
 
 export const fetchCategories = async () => {
 	try {
-		const data = await sendApiRequest("/itinerary-categories", {
+		const data = await sendApiRequest("/itinerary-cats", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		console.log(data.data);
+
+		return data.data;
+	} catch (error) {
+		console.error("Error fetching categories:", error);
+		throw error;
+	}
+};
+
+export const fetchTrips = async () => {
+	try {
+		const data = await sendApiRequest("/trips", {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",

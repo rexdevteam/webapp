@@ -1,3 +1,8 @@
+div#dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px 0px;
+}
 
 #dashboard h1 {
     margin-bottom: 0px;
@@ -10,7 +15,6 @@
 .metrics {
     gap: 20px 30px;
     position: relative;
-   
 }
 
 

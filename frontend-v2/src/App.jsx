@@ -9,6 +9,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Profile from "./pages/profile/Profile";
 import ProfileEdit from "./pages/profile/ProfileEdit";
 import Expenses from "./pages/expenses/Expenses";
+import NewExpense from "./pages/expenses/NewExpense";
 import Trips from "./pages/trips/Trips";
 import Newtrip from "./pages/tipsform/Newtrip";
 import NewTrip from "./pages/trips/NewTrip";
@@ -69,7 +70,7 @@ const App = () => (
 					/>
 					<Route
 						path="/expenses/new"
-						element={<AuthenticatedRoute element={<Expenses />} />}
+						element={<AuthenticatedRoute element={<NewExpense />} />}
 					/>
 
 					<Route

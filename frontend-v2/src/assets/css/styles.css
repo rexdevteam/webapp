@@ -55,6 +55,7 @@ body {
     color: var(--side-title-color);
     margin: 40px 0px 10px;
     padding: 0px 10px;
+    font-family: var(--font-two);
 }
 .side-content .nav-item {
     margin: 0px 0px 5px;
@@ -184,11 +185,21 @@ button.search-btn {
 .notification-view.card {
     position: absolute;
     width: 420px;
-    right: 16%;
+    right: -50px;
     top: 45px;
     z-index: 99;
-    background-color: var(--box-bg-clr-solid);
+    font-family: var(--font-four);
+    background-color: var(--box-bg-clr);
+    backdrop-filter: blur(15px);
 }
+@media screen and (min-width: 750px) {
+    .notification-view.card {
+        width: 420px;
+        right: 16%;
+        top: 45px;
+    }
+}
+
 .close-notif {
     width: 25px;
     height: 25px;
@@ -201,6 +212,23 @@ button.search-btn {
 .close-notif:hover {
     border: 1px solid var(--outline);
     background-color: var(--outline);
+}
+
+.notification-view ul {
+    margin: 20px 0px;
+    list-style: none;
+}
+.notification-view ul li {
+    line-height: 25px;
+    margin: 0px -20px;
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--outline);
+    transition: var(--transition);
+    cursor: pointer;
+}
+.notification-view ul li.unread {
+    font-weight: bold;
+    background: var(--box-bg-clr-solid);
 }
 
 .profile-ico .profile-img {

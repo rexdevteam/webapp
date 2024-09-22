@@ -45,9 +45,9 @@ const Expense = () => {
 
 	const columns = [
 		{ field: "id", headerName: "ID" },
-		{ field: "destination", headerName: "Destination" },
-		{ field: "date", headerName: "Date" },
+		{ field: "name", headerName: "Name" },
 		{ field: "amount", headerName: "Amount" },
+		{ field: "trip", headerName: "Trip" },
 	];
 
 	if (loading) return <LoadingPage />;

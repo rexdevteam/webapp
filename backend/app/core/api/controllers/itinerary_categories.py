@@ -12,9 +12,6 @@ class ItineraryCatController:
     @staticmethod
     def get_itinerary_cats():
         try:
-            current_user = get_current_user()
-            if not current_user:
-                return error_response("Unauthorized", 401)
             
             page = request.args.get("page", 1, type=int)
             per_page = request.args.get("per_page", 5, type=int)

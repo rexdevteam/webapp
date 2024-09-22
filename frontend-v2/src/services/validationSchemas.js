@@ -51,8 +51,13 @@ export const newTripSchema = Yup.object().shape({
 	itineraries: Yup.array().of(
 		Yup.object().shape({
 			name: Yup.string().required("Name is required"),
-			category: Yup.string().required("Category is required"),
+			// category: Yup.string().required("Category is required"),
 			amount: Yup.number().required("Amount is required"),
 		})
 	),
+});
+
+export const newExpenseSchema = Yup.object().shape({
+	name: Yup.string().required("Name is required"),
+	amount: Yup.number().required("Amount is required"),
 });

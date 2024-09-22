@@ -25,7 +25,7 @@ const ItineraryInputs = ({ index, categories, actions }) => {
 				<label className="label">Category</label>
 				<Field
 					as="select"
-					name={`itineraries.${index}.category`}
+					name={`itineraries.${index}.category_id`}
 					className="rounded form-control"
 				>
 					<option value="">Select Category</option>
@@ -36,7 +36,7 @@ const ItineraryInputs = ({ index, categories, actions }) => {
 					))}
 				</Field>
 				<ErrorMessage
-					name={`itineraries.${index}.category`}
+					name={`itineraries.${index}.category_id`}
 					component="div"
 					className="err-msg"
 				/>

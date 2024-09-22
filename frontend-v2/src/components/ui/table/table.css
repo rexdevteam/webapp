@@ -1,0 +1,34 @@
+.table-wrapper {
+    gap: 30px 0px;
+    flex-direction: column;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--round-conners);
+    transition: var(--transition);
+}
+.table-head,
+.table-foot {
+    padding: 10px 20px;
+}
+.table-head {
+    border-bottom: 1px solid var(--outline);
+}
+.table-head .title {
+    font-size: 15px;
+}
+.table-foot {
+    border-top: 1px solid var(--outline);
+}
+
+.table-body {
+    min-height: 300px;
+    transition: var(--transition);
+}
+.table-body>div {
+    box-shadow: none;
+    min-height: inherit;
+}
+
+.loading-data {
+    height: 100%;
+    min-height: inherit;
+}
