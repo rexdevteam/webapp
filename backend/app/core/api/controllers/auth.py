@@ -18,7 +18,7 @@ from email_validator import validate_email, EmailNotValidError, ValidatedEmail
 
 
 from ....extensions import db
-from ....models import Role, RoleNames, AppUser, Profile
+from ....models import Role, RoleNames, AppUser, Profile, Notification, NotificationType
 from ....utils.helpers.loggers import console_log, log_exception
 from ....utils.helpers.http_response import error_response, success_response
 from ....utils.helpers.users import get_app_user
@@ -91,6 +91,14 @@ class AuthController:
                 new_user,
                 new_user_profile
             ])
+            
+            Notification.add_notification(
+                recipient_id=new_user.id,
+                notification_type=NotificationType.NOTIFICATION,
+                body="Welcome. We hope to assist you in managing your expenses",
+                title="Welcome",
+                commit=False
+            )
             
             db.session.commit()
             user_data = new_user.to_dict()

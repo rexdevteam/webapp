@@ -43,7 +43,7 @@ const Dashboard = () => {
 		getTrips();
 	}, [tripPage]);
 	
-	const linkBtn = <LinkBtn txt={"Create New Trip"} link="/trip/new" />;
+	const linkBtn = <LinkBtn txt={"Create New Trip"} link="/trips/new" />;
 
 	// Define columns and data for the Table component
 	const columns = [
