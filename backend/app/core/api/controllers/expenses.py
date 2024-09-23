@@ -22,7 +22,7 @@ class ExpensesController:
             per_page = request.args.get("per_page", 5, type=int)
             search_term = request.args.get("search")
             
-            query = Expense.query.order_by(Expense.name.desc())
+            query = Expense.query.join(Trip).filter(Trip.app_user_id == current_user.id).order_by(Expense.name.desc())
             query = Expense.add_search_filters(query, search_term)
             
             if request.args.get('export', '').lower() == "excel":
@@ -95,7 +95,11 @@ class ExpensesController:
     @staticmethod
     def get_expense(expense_id: int):
         try:
-            expense: Expense = Expense.query.get(expense_id)
+            current_user = get_current_user()
+            if not current_user:
+                return error_response("Unauthorized", 401)
+            
+            expense: Expense = Expense.query.join(Trip).filter(Trip.app_user_id == current_user.id).get(expense_id)
             if not expense:
                 return error_response("Expense not found", 404)
             
