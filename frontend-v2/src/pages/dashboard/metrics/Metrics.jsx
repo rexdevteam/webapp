@@ -46,7 +46,7 @@ const Metrics = () => {
 					isLoading={loadingStats}
 					label={"Trips"}
 					icon={<AirplanemodeActiveIcon sx={{ fontSize: 30 }} />}
-					statNum={statNumbers.total_trip || 0}
+					statNum={statNumbers.total_trips || 0}
 				/>
 				<MetricsCard
 					isLoading={loadingStats}
