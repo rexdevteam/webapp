@@ -79,7 +79,7 @@ div#dashboard {
 
 .stat{
     margin-left: 10px;
-    margin-top: 10px;
+    margin-top: 30px;
     font-size: 30px;
     font-family: var(--font-two);
 }
