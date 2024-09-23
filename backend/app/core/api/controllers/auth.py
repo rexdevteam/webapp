@@ -219,7 +219,8 @@ class AuthController:
                 'email': user.email
             }, expires_delta=expires, additional_claims={'type': 'reset-pwd', "reset": True})
             
-            reset_url = f"{current_app.config["APP_DOMAIN_NAME"]}/reset-password?reset_token={reset_token}"
+            app_domain_name = current_app.config["APP_DOMAIN_NAME"]
+            reset_url = f"{app_domain_name}/reset-password?reset_token={reset_token}"
             
             try:
                 send_url_to_email(user.email, reset_url, url_type='pwd_reset') # send reset code to user's email
