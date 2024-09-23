@@ -2,12 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet-async";
 
-// icons
-import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
-import SavingsIcon from "@mui/icons-material/Savings";
-import PriceCheckIcon from "@mui/icons-material/PriceCheck";
-import SubjectIcon from "@mui/icons-material/Subject";
-
 import "./dashboard.css";
 import { sendApiRequest } from '../../services/api';
 import Metrics from './metrics/Metrics';

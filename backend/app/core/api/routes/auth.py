@@ -14,12 +14,19 @@ from . import api_bp
 from ..controllers.auth import AuthController
 
 
-# REGISTRATION ENDPOINTS
 @api_bp.route("/signup", methods=["POST"])
 def signUp():
+
     return AuthController.signUp()
 
-# AUTHENTICATION ENDPOINTS
 @api_bp.route("/login", methods=["POST"])
 def login():
     return AuthController.login()
+
+@api_bp.route("/forgot-password", methods=["POST"])
+def forgot_password():
+    return AuthController.forgot_password()
+
+@api_bp.route("/reset-password", methods=["POST"])
+def reset_password():
+    return AuthController.reset_password()

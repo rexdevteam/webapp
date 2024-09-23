@@ -8,6 +8,8 @@ class Config:
     DEBUG = (ENV == "development")  # Enable debug mode only in development
     EMERGENCY_MODE = os.getenv("EMERGENCY_MODE") or os.environ.get("EMERGENCY_MODE") or False
     
+    APP_DOMAIN_NAME = os.environ.get("APP_DOMAIN_NAME") or "https://aptech-akwj-expense-voyage.onrender.com"
+    API_DOMAIN_NAME = os.environ.get("API_DOMAIN_NAME") or "https://expense-voyage-api.onrender.com"
     CLIENT_ORIGINS = os.getenv("CLIENT_ORIGINS") or os.environ.get("CLIENT_ORIGINS") or "http://localhost:3000,http://localhost:5173"
     CLIENT_ORIGINS = [origin.strip() for origin in CLIENT_ORIGINS.split(",")]
     

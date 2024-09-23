@@ -8,10 +8,11 @@ It includes methods for checking username, checking email, signing up, resending
 '''
 
 from datetime import timedelta
-from flask import request
+from flask import request, current_app
 from sqlalchemy.exc import ( IntegrityError, DataError, DatabaseError, InvalidRequestError, OperationalError )
+from werkzeug.security import generate_password_hash
 from werkzeug.exceptions import UnsupportedMediaType
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, decode_token
 from flask_jwt_extended.exceptions import JWTDecodeError
 from jwt import ExpiredSignatureError, DecodeError
 from email_validator import validate_email, EmailNotValidError, ValidatedEmail
@@ -19,11 +20,12 @@ from email_validator import validate_email, EmailNotValidError, ValidatedEmail
 
 from ....extensions import db
 from ....models import Role, RoleNames, AppUser, Profile, Notification, NotificationType
+from ....utils.helpers.basics import generate_random_number
 from ....utils.helpers.loggers import console_log, log_exception
 from ....utils.helpers.http_response import error_response, success_response
 from ....utils.helpers.users import get_app_user
 from ....utils.helpers.geolocation import get_currency_info
-
+from ....utils.emailing.url import send_url_to_email
 
 class AuthController:
     @staticmethod
@@ -93,7 +95,7 @@ class AuthController:
             ])
             
             Notification.add_notification(
-                recipient_id=new_user.id,
+                recipients=new_user,
                 notification_type=NotificationType.NOTIFICATION,
                 body="Welcome. We hope to assist you in managing your expenses",
                 title="Welcome",
@@ -195,3 +197,99 @@ class AuthController:
         
         return api_response
 
+    @staticmethod
+    def forgot_password():
+        
+        try:
+            data = request.get_json()
+            email_username = data.get('email_username').lower()
+            
+            # get user from db with the email/username.
+            user = get_app_user(email_username)
+            
+            if not user:
+                return error_response('Sorry, the provided email is not registered with us.', 404)
+            
+            
+            # Generate a password reset token
+            expires = timedelta(minutes=15)
+            reset_token = create_access_token(identity={
+                'user_id': user.id,
+                'username': user.username,
+                'email': user.email
+            }, expires_delta=expires, additional_claims={'type': 'reset-pwd', "reset": True})
+            
+            reset_url = f"{current_app.config["APP_DOMAIN_NAME"]}/reset-password?reset_token={reset_token}"
+            
+            try:
+                send_url_to_email(user.email, reset_url, url_type='pwd_reset') # send reset code to user's email
+            except Exception as e:
+                return error_response(f'An error sending the reset URL to provided email address', 500)
+            
+            
+            extra_data = {
+                'email': user.email,
+                "msg": "An email with instructions to reset your password has been sent"
+            }
+            api_response = success_response(f'An Email has been sent to {user.email}', 200, extra_data)
+            
+        except Exception as e:
+            log_exception(f"An exception occurred processing the request", e)
+            api_response = error_response('An unexpected error. Our developers are already looking into it.', 500)
+        finally:
+            db.session.close()
+        
+        return api_response
+
+
+    @staticmethod
+    def reset_password():
+        
+        try:
+            data = request.get_json()
+            reset_token = data.get('reset_token', '')
+            new_password = data.get('new_password')
+            hashed_pwd = generate_password_hash(new_password, "pbkdf2:sha256")
+            
+            console_log('reset token', reset_token)
+            try:
+                # Decode the JWT and extract the user's info and the reset code
+                decoded_token = decode_token(reset_token)
+                if not decoded_token:
+                    return error_response('Invalid or expired reset code', 401)
+                
+                token_data = decoded_token['sub']
+            except DecodeError as e:
+                log_exception("DecodeError", e)
+                return error_response(f"Invalid or expired reset code", 401)
+            except ExpiredSignatureError as e:
+                log_exception("ExpiredSignatureError", e)
+                return error_response("This reset code has expired. Please request a new one.", 401)
+            except Exception as e:
+                log_exception("An exception occurred decoding token", e)
+                return error_response(f"Invalid or expired reset code", 401)
+            
+            
+            # Reset token is valid, update user password
+            # get user from db with the email.
+            user = get_app_user(token_data['email'])
+            
+            user.update(password_hash=hashed_pwd)
+            
+            
+            api_response = success_response('Password changed! You can  now login with your new password.', 200)
+        except UnsupportedMediaType as e:
+            db.session.rollback()
+            log_exception("An UnsupportedMediaType exception occurred", e)
+            api_response = error_response(f"UnsupportedMediaType: {str(e)}", 415)
+        except JWTDecodeError:
+            db.session.rollback()
+            api_response = error_response(f"Invalid or expired reset Code", 401)
+        except Exception as e:
+            db.session.rollback()
+            log_exception(f"An exception occurred processing the request", e)
+            api_response = error_response('An unexpected error. Our developers are already looking into it.', 500)
+        finally:
+            db.session.close()
+        
+        return api_response

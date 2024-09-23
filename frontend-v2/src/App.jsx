@@ -17,10 +17,13 @@ import NewTrip from "./pages/trips/NewTrip";
 import EditTrip from "./pages/trips/EditTrip";
 import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp";
+import ForgotPwd from "./pages/auth/ForgotPwd";
+import ResetPwd from "./pages/auth/ResetPwd";
 
 import AuthenticatedRoute from "./components/auth/AuthenticatedRoute";
 import UnprotectedRoute from "./components/auth/UnprotectedRoute";
 import AuthLayout from "./components/primary/AuthLayout";
+import BlankLayout from "./components/primary/BlankLayout";
 
 import Alert from "./components/ui/Alert";
 
@@ -34,8 +37,7 @@ const App = () => (
 						path="/login"
 						element={
 							<AuthLayout>
-								{" "}
-								<Login />{" "}
+								<Login />
 							</AuthLayout>
 						}
 					/>
@@ -43,9 +45,24 @@ const App = () => (
 						path="/signup"
 						element={
 							<AuthLayout>
-								{" "}
-								<SignUp />{" "}
+								<SignUp />
 							</AuthLayout>
+						}
+					/>
+					<Route
+						path="/forgot-password"
+						element={
+							<BlankLayout>
+								<ForgotPwd />
+							</BlankLayout>
+						}
+					/>
+					<Route
+						path="/reset-password"
+						element={
+							<BlankLayout>
+								<ResetPwd />
+							</BlankLayout>
 						}
 					/>
 
