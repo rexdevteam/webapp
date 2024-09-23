@@ -4,8 +4,8 @@ from flask import render_template, current_app
 from flask_mail import Message
 from enum import Enum
 
-from app import mail
 from config import Config
+from ...extensions import mail
 from ..helpers.loggers import console_log, log_exception
 from ...models import AppUser
 
