@@ -33,7 +33,7 @@ const Charts = () => {
     { month: "February", amount: 1500, cashback: 300 },
     { month: "March", amount: 6000, cashback: 800 },
     { month: "April", amount: 4500, cashback: 600 },
-    { month: "May", amount: 3000, cashback: 500 },
+    { month: "May", amount: 0, cashback: 0 },
     { month: "June", amount: 5200, cashback: 400 },
   ];
 
@@ -136,7 +136,7 @@ const Charts = () => {
 
   return (
     <section>
-      <section className="Main-chart-span">
+      <section className="Main-chart-span flex">
         <div className="full-bar-chart">
           <div className="Span-spend">
             <span>

@@ -6,3 +6,4 @@ from .itinerary_categories import ItineraryCatController
 from .expenses import ExpensesController
 from .notifications import NotificationsController
 from .currencies import CurrenciesController
+from .stats import StatsController

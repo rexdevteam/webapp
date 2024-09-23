@@ -7,17 +7,23 @@ div#dashboard {
 #dashboard h1 {
     margin-bottom: 0px;
     color: #fff;
+    font-size: 1.7em;
 }
 #dashboard .btn {
     background-color: var(--box-bg-clr-solid);
-    color: #624BFF;
+    color: var(--theme-clr);
 }
+@media screen and (max-width: 750px) {
+    #dashboard .btn {
+        visibility: hidden;
+    }
+}
+
+
 .metrics {
     gap: 20px 30px;
     position: relative;
 }
-
-
 
 .metrics::before {
     content: "";
@@ -26,63 +32,67 @@ div#dashboard {
     left: 0;
     height: 400px;
     width: 100%;
-    background-color: #624BFF;
+    background-color: var(--theme-clr);
     z-index: -1;
 }
 .metrics-card {
-    min-height: 200px;
     background-color: var(--box-bg-clr-solid) !important;
 }
 .metrics-card .label,
 .metrics-card .stat {
     font-weight: bold;
-    font-size: 35px;
 }
 .metrics-card .stat {
     font-size: 40px;
 }
 
-.bx-plane {
-    color: green;
-    font-size: 110px;
-    position: absolute;
-    top: 38px;
-    right: 10px;
+.metrics-head {
+    align-items: center;
+    position: relative;
+}
+.metrics-head [class*="-ico"] {
+    --bg-color: var(--theme-clr-trans);
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    background-color: var(--bg-color);
+}
+.metrics-head [class*="trips-"] {
+    --bg-color: #c7ffc7d3;
+    color: #0c720c;
+}
+.metrics-head [class*="budget-"] {
+    --bg-color: #ffafffd3;
+    color: #6e056e;
+}
+.metrics-head [class*="expenses-"] {
+    --bg-color: #ffe6b8d3;
+    color: #a46e09;
+}
+.metrics-head [class*="itineraries-"] {
+    --bg-color: #9fe1ffd3;
+    color: #1d3c4b;
 }
 
 
-
-.bx-dolls {
-    color: purple;
-font-size: 110px;
-    position: absolute;
-    top: 38px;
-    right: 10px;
-}
-
-
-
-.bx-down {
-    color: orange;
-    font-size: 110px;
-        position: absolute;
-        top: 38px;
-        right: 10px;
-}
 
 .stat{
     margin-left: 20px;
     margin-top: 10px;
     font-size: 30px;
+    font-family: var(--font-two);
+}
+.stat .loading-data {
+    display: inline;
 }
 
 
 
 
 .dash-table{
-margin-top: 20px;
+    margin-top: 20px;
 }
-
 .dash-fieldset{
     border-radius: 12px;
     padding-top:10px; 
@@ -92,9 +102,7 @@ margin-top: 20px;
 .dash-head{
     color: black;
     margin-left: 10px;
-
 }
-
 .dash-head-cont{
     background-color: white;
     padding: 6px;

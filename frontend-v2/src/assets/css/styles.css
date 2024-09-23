@@ -184,13 +184,16 @@ button.search-btn {
 
 .notification-view.card {
     position: absolute;
-    width: 420px;
+    width: 300px;
     right: -50px;
     top: 45px;
     z-index: 99;
     font-family: var(--font-four);
     background-color: var(--box-bg-clr);
     backdrop-filter: blur(15px);
+    font-size: 1em;
+    padding: 15px;
+    overflow: hidden;
 }
 @media screen and (min-width: 750px) {
     .notification-view.card {
@@ -198,6 +201,10 @@ button.search-btn {
         right: 16%;
         top: 45px;
     }
+}
+.notif-header {
+    flex-wrap: nowrap;
+    position: relative;
 }
 
 .close-notif {
@@ -208,6 +215,8 @@ button.search-btn {
     cursor: pointer;
     text-align: center;
     transition: var(--transition);
+    position: absolute;
+    right: 0;
 }
 .close-notif:hover {
     border: 1px solid var(--outline);

@@ -2,8 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from "react-helmet-async";
 
+// icons
+import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
+import SavingsIcon from "@mui/icons-material/Savings";
+import PriceCheckIcon from "@mui/icons-material/PriceCheck";
+import SubjectIcon from "@mui/icons-material/Subject";
+
 import "./dashboard.css";
 import { sendApiRequest } from '../../services/api';
+import Metrics from './metrics/Metrics';
 import Table from '../../components/ui/Table'; // Custom Table component
 import PageHead from "../../components/page/PageHead";
 import LinkBtn from "../../components/ui/LinkBtn";
@@ -62,37 +69,7 @@ const Dashboard = () => {
 
 			<PageHead title={"Dashboard"} headBtn={linkBtn} />
 
-			<div className="metrics grid">
-				<div className="card metrics-card">
-					<div className="title flex">
-						<div className="label">Trips</div>
-					</div>
-					<div className="stat">{tripNum}</div>
-					<span>
-						<i className="bx bxs-plane-alt bx-plane"></i>
-					</span>
-				</div>
-
-				<div className="card metrics-card">
-					<div className="title flex">
-						<div className="label">Budget</div>
-					</div>
-					<div className="stat">{tripBudget}</div>
-					<span>
-						<i className="bx bx-dollar-circle bx-dolls"></i>
-					</span>
-				</div>
-
-				<div className="card metrics-card">
-					<div className="title flex">
-						<div className="label">Expenses</div>
-					</div>
-					<div className="stat">{tripExpenses}</div>
-					<span>
-						<i className="bx bx-cart-download bx-down"></i>
-					</span>
-				</div>
-			</div>
+			<Metrics />
 
 			<section>
 				<Table
@@ -102,8 +79,7 @@ const Dashboard = () => {
 					data={trips}
 				/>
 			</section>
-			
-			<br />
+
 			<Charts />
 		</div>
 	);
