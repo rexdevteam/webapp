@@ -21,6 +21,7 @@
 
 .table-body {
     min-height: 300px;
+    /* overflow-x: scroll; */
     transition: var(--transition);
 }
 .table-body>div {

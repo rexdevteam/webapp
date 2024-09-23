@@ -12,7 +12,7 @@ import "./profile.css"
 import defProfile from "../../assets/img/avatar.jpg";
 
 const Profile = () => {
-	const { user_profile, loading } = useAuth(); 
+	const { user_profile, loading } = useAuth();
 	console.log(user_profile);
 
 	const linkBtn = <LinkBtn txt={"Edit Profile"} link="/profile/edit" />;

@@ -16,15 +16,15 @@ import PageHead from "../../components/page/PageHead";
 import LinkBtn from "../../components/ui/LinkBtn";
 import Charts from './charts/Charts';
 
-const Dashboard = () => {
-	const [tripNum, setTripNum] = useState(0);
-	const [tripBudget, setTripBudget] = useState(0);
-	const [tripExpenses, setTripExpenses] = useState(0);
+import { useAuth } from '../../context/AuthContext';
 
+const Dashboard = () => {
 	const [trips, setTrips] = useState([]);
 	const [loadingTripTable, setLoadingTripTable] = useState(true);
 	const [tripPage, setTripPage] = useState(1);
 	const [tripTotalPages, setTripTotalPages] = useState(1);
+
+	const { user_profile } = useAuth();
 
 
 	useEffect(() => {
@@ -54,11 +54,15 @@ const Dashboard = () => {
 
 	// Define columns and data for the Table component
 	const columns = [
-		{ field: "id", headerName: "ID" },
-		{ field: "destination", headerName: "Destination" },
-		{ field: "start_date", headerName: "Start Date " },
-		{ field: "end_date", headerName: "End Date" },
-		{ field: "amount", headerName: "Budget" },
+		{ field: "id", headerName: "ID", minWidth: 20 },
+		{ field: "destination", headerName: "Destination", minWidth: 50 },
+		{
+			field: "amount",
+			headerName: `Budget (${user_profile.currency_symbol})`,
+			minWidth: 170,
+		},
+		{ field: "start_date", headerName: "Start Date ", minWidth: 110 },
+		{ field: "end_date", headerName: "End Date", minWidth: 110 },
 	];
 
 	return (

@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-	AppBar,
-	Toolbar,
-	IconButton,
-	Typography,
-	CssBaseline,
-	useTheme,
-	useMediaQuery,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { useTheme, useMediaQuery, } from "@mui/material";
 import Sidebar from "../sidebar/Sidebar";
 import Header from "./Header";
 

@@ -19,11 +19,12 @@ import "./table/table.css"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
-		backgroundColor: "#c7f8fc",
+		backgroundColor: "#F6F2F0",
 		color: theme.palette.common.black,
+		fontWeight: "bold",
 	},
 	[`&.${tableCellClasses.body}`]: {
-		fontSize: 14,
+		fontSize: 15,
 	},
 }));
 
@@ -42,11 +43,16 @@ const Table = ({ isLoading = false, actions=false, columns, data, head, foot, pa
 					<LoadingData />
 				) : (
 					<TableContainer component={Paper}>
-						<MuiTable>
+						<MuiTable sx={{ minWidth: 600 }}>
 							<TableHead>
 								<TableRow>
 									{columns.map((column) => (
-										<StyledTableCell key={column.field}>
+										<StyledTableCell
+											key={column.field}
+											style={{
+												minWidth: column.minWidth,
+											}}
+										>
 											{column.headerName}
 										</StyledTableCell>
 									))}

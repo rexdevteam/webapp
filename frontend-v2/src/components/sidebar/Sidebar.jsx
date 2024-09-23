@@ -24,7 +24,7 @@ const Sidebar = ({ isOpen, sidebarRef, handleSidebarToggle }) => {
 
 			<div className="sidebar-nav">
 				<ul className="side-content">
-					<SidebarItems />
+					<SidebarItems handleSidebarToggle={handleSidebarToggle} />
 				</ul>
 			</div>
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Menuitems from "./MenuItems.js";
 import { useAuth } from "../../context/AuthContext.jsx";
 
-const SidebarItems = () => {
+const SidebarItems = ({ handleSidebarToggle }) => {
 	const { logout } = useAuth();
 	const { pathname } = useLocation();
 	const pathDirect = pathname;
@@ -26,7 +26,11 @@ const SidebarItems = () => {
 				} else {
 					return (
 						<li className="nav-item" key={item.id}>
-							<Link to={item.href} className="flex">
+							<Link
+								to={item.href}
+								className="flex"
+								onClick={handleSidebarToggle} // Close sidebar after navigation
+							>
 								<span className="ico"> </span>
 								<span className="name"> {item.title} </span>
 							</Link>

@@ -45,8 +45,9 @@
     --error: #f44336;
     --success: #4caf50;
     --warning: #ff9800;
-    --theme-clr: #624BFF;
-    --theme-clr-trans: #624BFF91;
+    --old-clr: #624BFF;
+    --theme-clr: #49B4B7;
+    --theme-clr-trans: #49B4B791;
     --outline: #8585857d;
     --overlay-clr: #00000096;
     --sidebar-outline: #636568;

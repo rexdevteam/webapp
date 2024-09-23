@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { CircularProgress, Typography, Pagination } from "@mui/material";
 
 import { useAlert } from '../../context/AlertContext.jsx';
+import { useAuth } from '../../context/AuthContext.jsx';
 import { sendApiRequest } from "../../services/api.js";
 import PageHead from "../../components/page/PageHead";
 import LoadingPage from '../../components/ui/LoadingPage.jsx';
@@ -23,6 +24,7 @@ const Trips = () => {
 	const [totalPages, setTotalPages] = useState(1);
 	
 	const { setAlert } = useAlert();
+	const { user_profile } = useAuth();
 
 	useEffect(() => {
 		const getTrips = async () => {
@@ -59,11 +61,15 @@ const Trips = () => {
 	};
 
 	const columns = [
-		{ field: "id", headerName: "ID" },
-		{ field: "destination", headerName: "Destination" },
-		{ field: "start_date", headerName: "Start Date " },
-		{ field: "end_date", headerName: "End Date" },
-		{ field: "amount", headerName: "Budget" },
+		{ field: "id", headerName: "ID", minWidth: 20 },
+		{ field: "destination", headerName: "Destination", minWidth: 50 },
+		{
+			field: "amount",
+			headerName: `Budget (${user_profile.currency_symbol})`,
+			minWidth: 110,
+		},
+		{ field: "start_date", headerName: "Start Date ", minWidth: 110 },
+		{ field: "end_date", headerName: "End Date", minWidth: 110 },
 	];
 
 	if (loading) return <LoadingPage />;
