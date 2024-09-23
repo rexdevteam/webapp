@@ -23,13 +23,12 @@ const ResetPwd = () => {
     useEffect(() => {
 		const resetToken = searchParams.get("reset_token");
 
-		console.log("resetToken:", resetToken); // get new values on change
-
 		setSearchParams({ reset_token: resetToken });
 	}, [searchParams]);
 
 	const handleSubmit = async (values, { setSubmitting }) => {
 		setIsLoading(true);
+		
 		try {
             const data = await sendApiRequest("/reset-password", {
 				method: "POST",
@@ -66,6 +65,7 @@ const ResetPwd = () => {
 				initialValues={{
 					new_password: "",
 					confirmPassword: "",
+					reset_token: resetToken,
 				}}
 				validationSchema={resetPwdSchema}
 				onSubmit={handleSubmit}
@@ -73,7 +73,7 @@ const ResetPwd = () => {
 				{({ isSubmitting }) => (
 					<Form>
 						<div className="form-group">
-							<label htmlFor="password">New Password</label>
+							<label htmlFor="new_password">New Password</label>
 							<Field
 								name="new_password"
 								type="password"

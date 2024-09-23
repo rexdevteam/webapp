@@ -7,6 +7,7 @@ export const resetPwdSchema = Yup.object().shape({
 	confirmPassword: Yup.string()
 		.oneOf([Yup.ref("new_password"), null], "Passwords must match")
 		.required("Confirm Password is required"),
+	reset_token: Yup.string().required("reset token is required"),
 });
 
 export const emailSchema = Yup.object().shape({
