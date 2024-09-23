@@ -1,0 +1,108 @@
+#reviews {
+    background-image: url(../img/rectangle-bg.png);
+    color: #333d33;
+}
+#reviews .txtContain {
+    width: 100%;
+}
+#reviews .txtContain>*{
+    max-width: 430px;
+}
+#reviews .secTitle {
+    font-size: 2.1em;
+}
+#reviews .secTitle span {
+    color: var(--theme-clr);
+    font-family: var(--font-three);
+}
+
+.card.reviewCard {
+    width: 100%;
+    min-height: 100px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    border: 1px solid var(--outline);
+}
+
+.card.reviewCard .cardHead,
+.card.reviewCard .cardHead .user {
+    align-items: start;
+    margin: 0px 0px 20px;
+    gap: 10px 7px;
+}
+
+.card.reviewCard .cardHead {
+    flex-direction: column;
+}
+
+.card.reviewCard .cardHead .user {
+    margin: 0px;
+    gap: 10px;
+    align-items: center;
+}
+
+.card.reviewCard .cardHead .rating {
+    font-size: 30px;
+}
+
+.card.reviewCard .cardHead p {
+    margin: 0px;
+}
+.card.reviewCard .cardBody p {
+    margin: 0px;
+    line-height: 22px;
+}
+
+#reviews>.container .container {
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.checked {
+    color: orange;
+}
+
+#reviews .reviewAvatars {
+    align-items: start;
+    flex-direction: column;
+    gap: 15px 5px;
+}
+#reviews .avatars span.avatar {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background: #E1EEFF;
+    border-radius: 50%;
+    margin-right: -20px;
+    border: 1px solid var(--outline);
+}
+
+
+@media screen and (min-width: 860px) {
+    #reviews>.container .container {
+        flex-direction: row;
+        gap: 0px 30px;
+    }
+
+    #reviews>.container .container>div {
+        width: 50%;
+    }
+    #reviews>.container .container>div:nth-child(2) {
+        align-items: start !important;
+        align-content: start !important;
+    }
+
+    .card.reviewCard .cardHead {
+        flex-direction: row;
+    }
+    .card.reviewCard .cardHead,
+    .card.reviewCard .cardHead .user {
+        align-items: center;
+    }
+
+    #reviews .reviewAvatars {
+        align-items: center;
+        flex-direction: row;
+    }
+}

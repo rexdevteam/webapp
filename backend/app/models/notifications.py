@@ -54,7 +54,7 @@ class Notification(db.Model):
         return query
 
     @classmethod
-    def add_notification(cls, recipient_id, body, notification_type=NotificationType.NOTIFICATION, commit=True, **kwargs):
+    def add_notification(cls, recipients, body, notification_type=NotificationType.NOTIFICATION, commit=True, **kwargs):
         """
         Send a notification from an admin to multiple recipients.
 
@@ -64,7 +64,7 @@ class Notification(db.Model):
             body (str): Body of the notification message.
             notification_type (NotificationType): Type of the notification message.
         """
-        message = cls(recipient_id=recipient_id, body=body, notification_type=notification_type)
+        message = cls(recipients=recipients, body=body, notification_type=notification_type)
         db.session.add(message)
         
         # Set additional attributes from kwargs

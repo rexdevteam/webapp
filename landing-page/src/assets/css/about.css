@@ -1,0 +1,42 @@
+#about .txtContain ul {
+    padding: 0px;
+    list-style-type: none;
+}
+
+#about .txtContain .secTitle {
+    font-size: 1.9em;
+}
+
+#about .txtContain li {
+    margin-bottom: 13px;
+}
+#about .txtContain li::before {
+    content: "✓";
+    color: var(--theme-clr);
+    border-radius: 1ch;
+    margin-inline-end: 1ch;
+}
+
+#about>.container .container {
+    flex-direction: column-reverse;
+    gap: 20px;
+}
+
+
+#about .cardImg img {
+    width: 100%;
+}
+@media screen and (min-width: 860px) {
+    #about>.container .container {
+        flex-direction: row;
+        gap: 0px 30px;
+    }
+
+    #about>.container .container>div {
+        width: 50%;
+    }
+    #about>.container .container>div:nth-child(2) {
+        align-items: start !important;
+        align-content: start !important;
+    }
+}

@@ -158,8 +158,8 @@ def get_app_user(email_phone: str) -> AppUser:
     user = AppUser.query.filter(AppUser.email == email_phone).first()
     if user:
         return user
-    
-    return AppUser.query.filter(AppUser.phone == email_phone).first()
+    # return AppUser.query.filter(AppUser.phone == email_phone).first()
+    return AppUser.query.filter(AppUser.username == email_phone).first()
 
 def get_users_by_role(role_name: RoleNames):
     return AppUser.query.join(AppUser.roles).filter(Role.name == role_name).all()

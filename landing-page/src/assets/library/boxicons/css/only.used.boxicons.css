@@ -1,0 +1,135 @@
+@font-face
+{
+    font-family: 'boxicons';
+    font-weight: normal;
+    font-style: normal;
+
+    src: url('../fonts/boxicons.eot');
+    src: url('../fonts/boxicons.eot') format('embedded-opentype'),
+    url('../fonts/boxicons.woff2') format('woff2'),
+    url('../fonts/boxicons.woff') format('woff'),
+    url('../fonts/boxicons.ttf') format('truetype'),
+    url('../fonts/boxicons.svg?#boxicons') format('svg');
+}
+.bx
+{
+    font-family: 'boxicons' !important;
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+    display: inline-block;
+
+    text-transform: none;
+
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+  
+
+  .bxs-chevron-down:before {
+    content: "\ed35";
+  }
+  .bxs-chevron-down-circle:before {
+    content: "\ed36";
+  }
+  .bxs-chevron-down-square:before {
+    content: "\ed37";
+  }
+
+  .bxs-chevron-right:before {
+    content: "\ed3b";
+  }
+  .bxs-chevron-right-circle:before {
+    content: "\ed3c";
+  }
+  .bxs-chevron-right-square:before {
+    content: "\ed3d";
+  }
+
+  .bxl-facebook:before {
+    content: "\e92f";
+  }
+  .bxl-twitter:before {
+    content: "\e982";
+  }
+  .bxl-whatsapp:before {
+    content: "\e98a";
+  }
+  .bxl-telegram:before {
+    content: "\e97b";
+  }
+  .bxl-youtube:before {
+    content: "\e992";
+  }
+  .bxl-instagram:before {
+    content: "\e942";
+  }
+  .bxl-snapchat:before {
+    content: "\e972";
+  }
+  .bxl-pinterest:before {
+    content: "\e961";
+  }
+  .bxl-skype:before {
+    content: "\e96f";
+  }
+  .bxl-linkedin:before {
+    content: "\e94d";
+  }
+  .bxl-tumblr:before {
+    content: "\e97f";
+  }
+
+  .bx-menu:before {
+    content: "\eb5f";
+  }
+  .bx-menu-alt-left:before {
+    content: "\eb60";
+  }
+  .bx-menu-alt-right:before {
+    content: "\eb61";
+  }
+
+  .bx-search:before {
+    content: "\ebf7";
+  }
+  .bx-search-alt:before {
+    content: "\ebf8";
+  }
+  .bx-search-alt-2:before {
+    content: "\ebf9";
+  }
+
+  .bx-xs {
+      font-size: 1rem!important;
+  }
+  .bx-x:before {
+    content: "\ec8d";
+  }
+  .bx-x-circle:before {
+    content: "\ec8e";
+  }
+
+  .bxs-star:before {
+    content: "\eeb8";
+  }
+  .bxs-star-half:before {
+    content: "\eeb9";
+  }
+  .bx-right-arrow-alt:before {
+    content: "\ebe6";
+  }
+
+  .bxl-facebook-circle:before {
+    content: "\e930";
+  }
+  .bxl-instagram-alt:before {
+    content: "\e943";
+  }
+
+  .bxl-x-twitter:before {
+    content: "𝕏";
+  }

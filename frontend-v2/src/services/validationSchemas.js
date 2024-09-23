@@ -9,6 +9,12 @@ export const resetPwdSchema = Yup.object().shape({
 		.required("Confirm Password is required"),
 });
 
+export const emailSchema = Yup.object().shape({
+	email: Yup.string()
+		.email("Invalid email address")
+		.required("Email is required"),
+});
+
 export const loginSchema = Yup.object().shape({
 	email: Yup.string()
 		.email("Invalid email address")

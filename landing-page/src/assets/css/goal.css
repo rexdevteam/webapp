@@ -1,0 +1,40 @@
+#goal {
+    color: inherit;
+}
+
+#goal .txtContain {
+    width: 100%;
+}
+
+#goal .secTitle {
+    font-size: 2.1em;
+}
+
+#goal .secTitle span {
+    color: var(--theme-clr);
+    font-family: var(--font-three);
+}
+
+#goal .cardImg img {
+    width: 100%;
+}
+
+#goal>.container .container {
+    flex-direction: column-reverse;
+    gap: 20px;
+}
+
+@media screen and (min-width: 860px) {
+    #goal>.container .container {
+        flex-direction: row;
+        gap: 0px 30px;
+    }
+
+    #goal>.container .container>div {
+        width: 50%;
+    }
+    #goal>.container .container>div:nth-child(2) {
+        align-items: start !important;
+        align-content: start !important;
+    }
+}

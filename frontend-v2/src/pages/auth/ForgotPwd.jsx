@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import { sendApiRequest } from "../../services/api";
-import { loginSchema } from "../../services/validationSchemas";
+import { emailSchema } from "../../services/validationSchemas";
 import { useAlert } from "../../context/AlertContext";
 import { useAuth } from "../../context/AuthContext";
 
@@ -53,7 +53,7 @@ const ForgotPwd = () => {
 
 			<Formik
 				initialValues={{ email: "" }}
-				validationSchema={loginSchema}
+				validationSchema={emailSchema}
 				onSubmit={handleSubmit}
 			>
 				{({ isSubmitting }) => (

@@ -202,10 +202,10 @@ class AuthController:
         
         try:
             data = request.get_json()
-            email_username = data.get('email_username').lower()
+            email = data.get('email').lower()
             
             # get user from db with the email/username.
-            user = get_app_user(email_username)
+            user = get_app_user(email)
             
             if not user:
                 return error_response('Sorry, the provided email is not registered with us.', 404)

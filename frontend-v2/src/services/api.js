@@ -1,8 +1,10 @@
 // src/services/api.js
 import axios from "axios";
 
+const localApi = "http://localhost:5000/api";
+const APIurl = "https://expense-voyage-api.onrender.com/api";
 const API = axios.create({
-	baseURL: "https://expense-voyage-api.onrender.com/api",
+	baseURL: APIurl,
 });
 
 // Function to set the authorization token
