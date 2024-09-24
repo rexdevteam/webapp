@@ -60,16 +60,16 @@ const ItineraryInputs = ({ index, categories, actions }) => {
 				<label className="label" hidden>
 					Delete
 				</label>
-				<div className="actions flex flex-space-between">
+				<div className="actions flex">
 					<Btn
 						type="button"
-						txt={"Delete"}
+						txt={"-"}
 						className="del"
 						handleClick={() => remove(index)}
 					/>
 					<Btn
 						type="button"
-						txt={"Add New"}
+						txt={"+"}
 						handleClick={() =>
 							push({
 								name: "",

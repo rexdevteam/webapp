@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-import { sendApiRequest } from "../../services/api";
+import { sendApiRequest, fetchCountries } from "../../services/api";
 import { signupSchema } from "../../services/validationSchemas";
 import { AuthContext } from "../../context/AuthContext";
 import { useAlert } from "../../context/AlertContext";
@@ -14,7 +14,21 @@ import Btn from "../../components/ui/Btn";
 const SignUp = () => {
     const navigate = useNavigate();
 	const { setAlert, persistAlert } = useAlert();
+	const [countries, setCountries] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		const getCountries = async () => {
+			try {
+				const data = await fetchCountries();
+				setCountries(data.countries);
+			} catch (error) {
+				console.error("Error fetching countries:", error);
+			}
+		};
+
+		getCountries();
+	}, []);
 
     const handleSubmit = async (values, { setSubmitting }) => {
 		setIsLoading(true);
@@ -129,21 +143,28 @@ const SignUp = () => {
 								className="err-msg"
 							/>
 						</div>
+
 						<div className="form-group">
 							<label htmlFor="country">Country</label>
 							<Field
+								as="select"
 								name="country"
-								type="text"
-								label="Country"
-								margin="normal"
 								className="rounded form-control"
-							/>
+							>
+								<option value="">Select Country</option>
+								{countries.map((country) => (
+									<option key={country} value={country}>
+										{country}
+									</option>
+								))}
+							</Field>
 							<ErrorMessage
 								name="country"
 								component="div"
 								className="err-msg"
 							/>
 						</div>
+
 						<div className="form-group">
 							<label htmlFor="password">Password</label>
 							<Field

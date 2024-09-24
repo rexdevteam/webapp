@@ -6,6 +6,9 @@
     gap: var(--input-gap) 50px;
     margin: 0px 0px var(--input-gap);
 }
+#trip-form .form-groups .actions {
+    gap: 0px 40px;
+}
 
 .itinerary-sub-form {
     margin: 0px 0px 20px;

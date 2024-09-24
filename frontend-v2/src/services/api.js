@@ -40,6 +40,25 @@ export const sendApiRequest = async (endpoint, options = {}) => {
 };
 
 
+export const fetchCountries = async () => {
+	try {
+		const data = await sendApiRequest("/countries", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		console.log(data.data);
+
+		return data.data;
+	} catch (error) {
+		console.error("Error fetching categories:", error);
+		throw error;
+	}
+};
+
+
 export const fetchCategories = async () => {
 	try {
 		const data = await sendApiRequest("/itinerary-cats", {
