@@ -7,8 +7,8 @@
             Hello {% if user.name %} {{ user.name }} {% else %} there {% endif %},
         </p>
 
-        <div style="width: 95%; font-family: 'Inter', 'sans-serif'; margin-bottom: 40px; font-size: 16px; font-weight: 400; color: #B1B1B1;">
-            <p style="width: 90%; color: #B1B1B1;">
+        <div style="width: 95%; font-family: 'Inter', 'sans-serif'; margin-bottom: 40px; font-size: 16px; font-weight: 400; color: #3d3d3d;">
+            <p style="width: 90%; color: #3d3d3d;">
                 We are pleased to welcome you as a 
                 
                 {% for role_name in user.role_names %}
@@ -18,14 +18,14 @@
                 {% if user.venue_id %} at {{ user.assigned_venue["name"] }}. {% else %} to our platform. {% endif %}
             </p>
 
-            <p style="width: 90%; color: #B1B1B1;">
+            <p style="width: 90%; color: #3d3d3d;">
                 Your password is 
                 <b style="font-weight: bold; font-family: 'Inter', 'sans-serif'; font-size: 17px; font-weight: 700; color: #FFFFFF;">
                     "{{ password }}"
                 </b>
             </p>
 
-            <p style="width: 90%; color: #B1B1B1;">
+            <p style="width: 90%; color: #3d3d3d;">
                 Please do not share this with anyone.
             </p>
         </div>

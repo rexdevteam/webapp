@@ -7,3 +7,4 @@ from .expenses import ExpensesController
 from .notifications import NotificationsController
 from .currencies import CurrenciesController
 from .stats import StatsController
+from .location import LocationController

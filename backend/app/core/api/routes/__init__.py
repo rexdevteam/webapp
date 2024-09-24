@@ -13,7 +13,7 @@ from flask import Blueprint, render_template
 
 api_bp: Blueprint = Blueprint('api', __name__, url_prefix='/api')
 
-from . import auth, trips, itineraries, itinerary_categories, expenses, profile, notifications, stats
+from . import auth, trips, itineraries, itinerary_categories, expenses, profile, notifications, stats, location
 
 
 @api_bp.route("/", methods=['GET'])
