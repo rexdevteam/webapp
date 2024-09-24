@@ -8,6 +8,7 @@ import { sendApiRequest, fetchCategories } from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
 import { useAlert } from "../../context/AlertContext";
 
+import IcoInput from "../../components/ui/icoInput/IcoInput";
 import Btn from "../../components/ui/Btn";
 import PageHead from "../../components/page/PageHead";
 import SubItineraryForm from "./SubItineraryForm";
@@ -15,8 +16,10 @@ import ItineraryInputs from "./ItineraryInputs";
 
 const NewTrip = () => {
 	const navigate = useNavigate();
-	const { setAlert, persistAlert } = useAlert();
 	const [categories, setCategories] = useState([]);
+
+	const { setAlert, persistAlert } = useAlert();
+	const { user_profile, loading } = useAuth();
 
     useEffect(() => {
 		const getCategories = async () => {
@@ -94,6 +97,8 @@ const NewTrip = () => {
 									<div className="form-group no-margin">
 										<label className="label">Budget</label>
 										<Field
+											as={IcoInput}
+											icon={user_profile.currency_symbol}
 											type="number"
 											name="amount"
 											className="rounded form-control"

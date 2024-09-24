@@ -1,10 +1,14 @@
 import React from 'react'
 import { Field, ErrorMessage } from "formik";
+import { useAuth } from '../../context/AuthContext';
 
 import Btn from "../../components/ui/Btn";
+import IcoInput from '../../components/ui/icoInput/IcoInput';
 
 const ItineraryInputs = ({ index, categories, actions }) => {
 	const {remove, push} = actions;
+	const { user_profile, loading } = useAuth();
+
 	return (
 		<div className="form-groups grid" key={index}>
 			<div className="form-group no-margin">
@@ -45,6 +49,8 @@ const ItineraryInputs = ({ index, categories, actions }) => {
 			<div className="form-group no-margin">
 				<label className="label">Amount</label>
 				<Field
+					as={IcoInput}
+					icon={user_profile.currency_symbol}
 					type="number"
 					name={`itineraries.${index}.amount`}
 					className="rounded form-control"

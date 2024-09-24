@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 import { useAlert } from "../../context/AlertContext.jsx";
+import { useAuth } from "../../context/AuthContext";
 import { sendApiRequest } from "../../services/api.js";
 import PageHead from "../../components/page/PageHead";
 import LoadingPage from "../../components/ui/LoadingPage.jsx";
@@ -16,6 +17,7 @@ const TripDetails = () => {
 	const [trip, setTrip] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const { setAlert } = useAlert();
+	const { user_profile } = useAuth();
 
     useEffect(() => {
 		const getTripDetails = async () => {
@@ -61,7 +63,10 @@ const TripDetails = () => {
 			<div className="trip-contents">
 				<div className="trip-basics card grid">
 					<TripInfo label="Destination" value={trip.destination} />
-					<TripInfo label="Budget" value={trip.amount} />
+					<TripInfo
+						label="Budget"
+						value={`${user_profile.currency_symbol} ${trip.amount}`}
+					/>
 					<TripInfo
 						label="Start Date"
 						value={formatDate(trip.start_date)}
@@ -85,7 +90,7 @@ const TripDetails = () => {
 									/>
 									<TripInfo
 										label="Amount"
-										value={itinerary.amount}
+										value={`${user_profile.currency_symbol} ${itinerary.amount}`}
 									/>
 									<TripInfo
 										label="Category"

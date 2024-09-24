@@ -1,0 +1,21 @@
+.ico-input {
+    position: relative;
+    isolation: isolate;
+    border-radius: var(--round-conners);
+}
+
+.ico-input i.icon {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: var(--round-conners) 0px 0px var(--round-conners);
+    display: flex;
+    padding-inline-start: .875rem;
+    align-items: center;
+}
+
+.ico-input input {
+    padding-inline-start: 2.5rem;
+}

@@ -57,6 +57,10 @@ const Profile = () => {
 							value={user_profile.gender}
 						/>
 						<ProfileInfo
+							label="Country"
+							value={user_profile.country}
+						/>
+						<ProfileInfo
 							label="Date Joined"
 							value={formatDate(user_profile.date_joined)}
 						/>

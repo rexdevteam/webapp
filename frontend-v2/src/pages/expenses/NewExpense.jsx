@@ -10,11 +10,13 @@ import { useAlert } from "../../context/AlertContext";
 
 import Btn from "../../components/ui/Btn";
 import PageHead from "../../components/page/PageHead";
+import IcoInput from "../../components/ui/icoInput/IcoInput";
 
 const NewExpense = () => {
     const navigate = useNavigate();
-	const { setAlert, persistAlert } = useAlert();
 	const [trips, setTrips] = useState([]);
+	const { setAlert, persistAlert } = useAlert();
+	const { user_profile, loading } = useAuth();
 
     useEffect(() => {
 		const getTrips = async () => {
@@ -89,6 +91,8 @@ const NewExpense = () => {
 									<div className="form-group">
 										<label className="label">Amount</label>
 										<Field
+											as={IcoInput}
+											icon={user_profile.currency_symbol}
 											type="number"
 											name="amount"
 											className="rounded form-control"
