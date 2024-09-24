@@ -15,24 +15,21 @@ class LocationController:
     def get_supported_countries():
         
         try:
-            # supported_countries = fetch_supported_countries()
-            auth_headers ={
-                "Content-Type": "application/json"
-            }
-            
             # send request
-            response = requests.post(f'https://countriesnow.space/api/v0.1/countries', headers=auth_headers)
+            response = requests.get(f"https://countriesnow.space/api/v0.1/countries")
+            console_log("response", response)
             response_data = json.loads(response.text)
             response.raise_for_status()  # raise an exception if the request failed
             
             console_log("response_data", response_data)
             
-            supported_countries = response_data['data']['countries']
+            supported_countries = [
+                country["country"] for country in response_data['data']
+            ]
             
             if not supported_countries:
                 return  error_response('Failed to get fetch supported countries', 500)
             
-            supported_countries.insert(0, {"name": "All Countries", "currency_code": "all", "iso_code":"all"})
             extra_data = {
                 'countries': supported_countries,
                 'total': len(supported_countries)
@@ -58,21 +55,17 @@ class LocationController:
         if not country:
             return error_response('country name is required', 400)
             
-        # Replace 'Côte d'Ivoire' with 'Ivory Coast'
-        if country.lower() == "côte d'ivoire":
-            country = "Ivory Coast"
         
         try:
-            auth_headers ={
-                "Authorization": "Bearer {}".format(Config.PAYSTACK_SECRET_KEY),
+            headers ={
                 "Content-Type": "application/json"
             }
-            auth_data = json.dumps({
+            data = json.dumps({
                 "country": country
             })
             
             # send request
-            response = requests.post(f'https://countriesnow.space/api/v0.1/countries/states', headers=auth_headers, data=auth_data)
+            response = requests.post(f'https://countriesnow.space/api/v0.1/countries/states', headers=headers, data=data)
             response_data = json.loads(response.text)
             response.raise_for_status()  # raise an exception if the request failed
             
@@ -104,7 +97,7 @@ class LocationController:
             error = True
             msg = 'An error occurred while processing the request.'
             status_code = 500
-            logging.exception("An exception occurred getting the states of PAYSTACK supported countries.", str(e)) # Log the error details for debugging
+            log_exception("An exception occurred getting the states of countries.", e)
         
         if error:
             return error_response(msg, status_code, response_data)
@@ -122,7 +115,7 @@ class LocationController:
             error = True
             msg = 'An error occurred while processing the request.'
             status_code = 500
-            logging.exception("An exception occurred getting PAYSTACK supported countries.", str(e)) # Log the error details for debugging
+            log_exception("An exception occurred getting countries.", e)
         
         if error:
             return error_response(msg, status_code)
