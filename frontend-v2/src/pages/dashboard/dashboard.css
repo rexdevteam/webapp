@@ -3,6 +3,17 @@ div#dashboard {
     flex-direction: column;
     gap: 20px 0px;
 }
+#dashboard:before {
+    content: "";
+    position: absolute;
+    top: -110px;
+    left: 0%;
+    height: 400px;
+    width: 100%;
+    background-color: var(--theme-clr);
+    z-index: -1;
+    overflow: hidden;
+}
 
 #dashboard h1 {
     margin-bottom: 0px;
@@ -25,16 +36,6 @@ div#dashboard {
     position: relative;
 }
 
-.metrics::before {
-    content: "";
-    position: fixed;
-    top: -120px;
-    left: 0;
-    height: 400px;
-    width: 100%;
-    background-color: var(--theme-clr);
-    z-index: -1;
-}
 .metrics-card {
     background-color: var(--box-bg-clr-solid) !important;
 }

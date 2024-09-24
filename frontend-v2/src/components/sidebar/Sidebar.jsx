@@ -6,11 +6,11 @@ const Sidebar = ({ isOpen, sidebarRef, handleSidebarToggle }) => {
 	return (
 		<div ref={sidebarRef} className={`sidebar ${isOpen ? "active" : ""}`}>
 			<div
-				className="hamburger-btn flex flexCenter"
+				className="hamburger-btn flex flexCenter btn rounded"
 				onClick={handleSidebarToggle}
 			>
 				<div className="ico hamburger flex flexCenter">
-					<CloseIcon sx={{ fontSize: 50 }} />
+					<CloseIcon sx={{ fontSize: 20 }} />
 				</div>
 			</div>
 
