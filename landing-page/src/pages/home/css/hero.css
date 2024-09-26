@@ -1,0 +1,37 @@
+#hero-header {
+    background-color: #E1EEFF;
+    height: 100svh;
+    position: relative;
+    color: #030303;
+}
+
+.hero-body {
+    height: 100%;
+    gap: 30px 0px;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 999;
+}
+.hero-txt {
+    max-width: 100%;
+}
+.hero-txt span {
+    color: var(--theme-clr);
+    font-family: var(--font-three);
+}
+.hero-body h2 {
+    font-size: 55px;
+    font-weight: bolder;}
+
+.hero-illustration {
+    height: 100%;
+    pointer-events: none;
+    display: none;
+    transition: var(--transition);
+}
+@media screen and (min-width: 999px) {
+    .hero-illustration {
+        display: block;
+    }
+}

@@ -1,0 +1,4 @@
+.section-img .card-img {
+    height: auto;
+    pointer-events: none;
+}

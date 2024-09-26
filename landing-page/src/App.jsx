@@ -1,15 +1,20 @@
-import "./App.css";
-import Header from "./components/layouts/Header";
-import Wrapper from "./components/layouts/Wrapper";
-import Footer from "./components/layouts/Footer";
+import { useState } from "react";
+
+// components
+import Header from "./components/compositions/Header";
+import Wrapper from "./components/compositions/Wrapper";
+
+// styles
+import "./assets/css/zeddy_styles.css";
+import "./assets/css/styles.css";
 
 function App() {
-
+	
 	return (
 		<>
 			<Header />
 			<Wrapper />
-			<Footer />
+			{/* <Footer /> */}
 		</>
 	);
 }

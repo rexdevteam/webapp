@@ -1,0 +1,24 @@
+#features .features-list {
+    position: relative;
+    width: 100%;
+    gap: 90px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.feature:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+#features .txtContain p {
+    margin: 0px 0px 10px;
+}
+
+#features .txtContain p span {
+    color: var(--theme-clr);
+    font-weight: 400;
+}
+
+#features .secTitle {
+    font-size: 50px;
+}
