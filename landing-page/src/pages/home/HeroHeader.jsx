@@ -15,7 +15,7 @@ const HeroHeader = () => {
 					<div className="hero-cta">
 						<a
 							className="btn rounded"
-							href="https://aptech-akwj-expense-voyage.onrender.com/signup"
+							href="https://aptech-akwj-expense-voyage-app.onrender.com/signup"
 						>
 							Get Started
 						</a>
