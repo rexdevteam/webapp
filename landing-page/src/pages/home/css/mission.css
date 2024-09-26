@@ -1,0 +1,29 @@
+#mission .txtContain {
+    text-align: center;
+}
+
+#mission .txtContain p {
+    max-width: 100%;
+}
+#mission .txtContain p span {
+    color: var(--theme-clr);
+    font-weight: 400;
+}
+
+#mission .secTitle {
+    font-size: 40px;
+}
+
+#mission .card {
+    margin: 20px 0px;
+    width: 100%;
+}
+
+@media screen and (min-width: 799px) {
+    #mission .card {
+        width: 670px;
+    }
+    #mission .txtContain p {
+        max-width: 700px;
+    }
+}

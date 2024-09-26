@@ -36,9 +36,7 @@ const Header = () => {
 							<a href="#hero-header"> Home </a>
 							<a href="#features"> Features </a>
 							<a href="#about"> About </a>
-							<a href="#reviews"> Review </a>
-							<a href="#goal"> Mission </a>
-							<a href="#newsletter"> Newsletter </a>
+							<a href="#mission"> Mission </a>
 						</nav>
 					</div>
 
