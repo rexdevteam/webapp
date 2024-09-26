@@ -35,8 +35,8 @@ const Header = () => {
 						<nav>
 							<a href="#hero-header"> Home </a>
 							<a href="#features"> Features </a>
-							<a href="#about"> About </a>
 							<a href="#mission"> Mission </a>
+							{/* <a href="#about"> About </a> */}
 						</nav>
 					</div>
 
