@@ -2,16 +2,14 @@ from ast import List
 from flask import request
 from datetime import datetime
 from decimal import Decimal
-from sqlalchemy.exc import ( IntegrityError, DataError, DatabaseError, InvalidRequestError, OperationalError )
+from sqlalchemy.exc import ( DataError, DatabaseError )
 
 from ....extensions import db
-from ....models import Role, RoleNames, AppUser, Trip, Itinerary
-from ....utils.helpers.basics import generate_random_string
+from ....models import Role, RoleNames, AppUser, Trip, Itinerary, Expense
 from ....utils.helpers.loggers import console_log, log_exception
 from ....utils.helpers.http_response import error_response, success_response
 from ....utils.helpers.users import  get_current_user
 from ....utils.helpers.export_xl import export_to_excel
-from ....utils.emailing.pwd import send_password_email
 
 class TripsController:
     @staticmethod
@@ -227,11 +225,14 @@ class TripsController:
             if not trip:
                 return error_response("Trip not found", 404)
             
-            # itineraries = Itinerary.query.filter_by(trip_id=trip.id).all()
+            itineraries: list[Itinerary] = Itinerary.query.filter_by(trip_id=trip.id).all()
+            expenses: List[Expense] = Expense.query.filter_by(trip_id=trip.id).all()
             
+            [itinerary.delete() for itinerary in itineraries]
+            [expense.delete() for expense in expenses]
             trip.delete()
             
-            api_response = success_response("trip deleted successfully", 200)
+            api_response = success_response("Trip deleted successfully", 200)
             
         except (DataError, DatabaseError) as e:
             api_response = error_response('Error interacting with the database.', 500)
