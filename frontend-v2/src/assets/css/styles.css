@@ -1,3 +1,20 @@
+@font-face {
+    font-family: ARSMaquettePro;
+    src: local("ARSMaquettePro-Bold"),
+        url(../fonts/ARS-MaquettePro/ARSMaquettePro-Bold.woff2),
+        url(../fonts/ARS-MaquettePro/ARSMaquettePro-Bold.woff);
+}
+@font-face {
+    font-family: RobotoSerif;
+    src: local("RobotoSerif-Regular"),
+        url(../fonts/RobotoSerif/RobotoSerif-Regular.ttf);
+}
+@font-face {
+    font-family: Poppins;
+    src: local("Poppins"),
+        url(../fonts/Poppins/Poppins.ttf);
+}
+
 body {
     --sidebar-width: 270px;
     --header-height: 60px;

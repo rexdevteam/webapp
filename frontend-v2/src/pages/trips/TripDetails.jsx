@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useAlert } from "../../context/AlertContext.jsx";
 import { useAuth } from "../../context/AuthContext";
@@ -9,15 +9,20 @@ import PageHead from "../../components/page/PageHead";
 import LoadingPage from "../../components/ui/LoadingPage.jsx";
 import LoadingData from "../../components/ui/LoadingData.jsx";
 import LinkBtn from "../../components/ui/LinkBtn";
+import Btn from "../../components/ui/Btn";
 import TripInfo from "./TripInfo.jsx";
 import "./trip_details.css";
 
 const TripDetails = () => {
     const { id } = useParams();
+	const navigate = useNavigate();
 	const [trip, setTrip] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [idDeleting, setIsDeleting] = useState(false);
 	const { setAlert } = useAlert();
 	const { user_profile } = useAuth();
+
+	const [pageTitle, setPageTitle] = useState("Trip Details - Expense Voyage");
 
     useEffect(() => {
 		const getTripDetails = async () => {
@@ -52,10 +57,30 @@ const TripDetails = () => {
 		return new Date(dateString).toLocaleDateString(undefined, options);
 	};
 
+	const deleteTrip = async () => {
+		setIsDeleting(true);
+		try {
+			const data = await sendApiRequest(`/trips/${id}`, {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+
+			setAlert(data?.message, "success");
+			navigate(`/trips`);
+		} catch (error) {
+			console.error("Error DELETING trip:", error);
+			setAlert(error?.message, "error");
+		} finally {
+			setIsDeleting(false);
+		}
+	};
+
 	return (
 		<div id="trip-details">
 			<Helmet>
-				<title>{`Trip to ${trip.destination} - Expense Voyage`}</title>
+				<title>{`${trip.destination} - Expense Voyage`}</title>
 			</Helmet>
 
 			<PageHead title={`Trip to ${trip.destination}`} headBtn={linkBtn} />
@@ -122,6 +147,14 @@ const TripDetails = () => {
 						</ul>
 					</div>
 				)}
+
+				<Btn
+					txt={"Delete"}
+					type="button"
+					className="del"
+					isLoading={idDeleting}
+					handleClick={deleteTrip}
+				/>
 			</div>
 		</div>
 	);
