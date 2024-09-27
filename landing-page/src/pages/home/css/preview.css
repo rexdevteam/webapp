@@ -1,10 +1,17 @@
 #preview {
-    height: 60vh;
+    height: 40vh;
     background-color: var(--tertiary-clr);
     padding-bottom: 0px;
+    transition: var(--transition);
 }
 
 .preview-body {
     height: 600px;
     border-radius: 40px 40px 0px 0px;
+}
+
+@media screen and (min-width: 860px) {
+    #preview {
+        height: 60vh;
+    }
 }

@@ -3,6 +3,7 @@ import { useState } from "react";
 // components
 import Header from "./components/compositions/Header";
 import Wrapper from "./components/compositions/Wrapper";
+import Footer from "./components/compositions/Footer";
 
 // styles
 import "./assets/css/zeddy_styles.css";
@@ -14,7 +15,7 @@ function App() {
 		<>
 			<Header />
 			<Wrapper />
-			{/* <Footer /> */}
+			<Footer />
 		</>
 	);
 }

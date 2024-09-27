@@ -121,6 +121,7 @@
 
 .menu nav a {
     color: #000;
+    font-family: var(--font-four);
 }
 
 .menu nav a:hover {

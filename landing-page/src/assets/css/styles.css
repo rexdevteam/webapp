@@ -1,4 +1,56 @@
+@font-face {
+    font-family: ARSMaquettePro;
+    src: local("ARSMaquettePro-Bold"),
+        url(../fonts/ARS-MaquettePro/ARSMaquettePro-Bold.woff2),
+        url(../fonts/ARS-MaquettePro/ARSMaquettePro-Bold.woff);
+}
+@font-face {
+    font-family: RobotoSerif;
+    src: local("RobotoSerif-Regular"),
+        url(../fonts/RobotoSerif/RobotoSerif-Regular.ttf);
+}
+@font-face {
+    font-family: Poppins;
+    src: local("Poppins"),
+        url(../fonts/Poppins/Poppins.ttf);
+}
+
 .section-img .card-img {
     height: auto;
     pointer-events: none;
+}
+
+footer {
+    width: 100%;
+    min-height: 100px;
+    color: #fff;
+    background-color: var(--tertiary-clr);
+}
+
+.footer-columns {
+    padding: 60px 0;
+    display: flex;
+    gap: 50px 30px;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.footer-bottom {
+    padding: 40px 0;
+    text-align: center;
+    min-height: inherit;
+    border-top: 1px solid var(--outline);
+}
+.footer-columns .column h4 {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+.footer-columns .column h4 span {
+    color: var(--theme-clr);
+}
+
+@media screen and (min-width: 860px) {
+    .footer-columns {
+        flex-direction: row;
+    }
 }
