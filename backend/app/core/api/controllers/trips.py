@@ -169,6 +169,8 @@ class TripsController:
             
             console_log("itineraries data", itineraries)
             
+            itinerary_ids_to_keep = []
+            
             if len(itineraries) > 0:
                 for itinerary in itineraries:
                     category_id = itinerary.get('category_id')
@@ -177,28 +179,33 @@ class TripsController:
                     itinerary_id = itinerary.get('itinerary_id')
                     
                     console_log("itinerary data", itinerary)
-                    console_log("itinerary data", f"{category_id}{name}{itinerary_amount}")
+                    console_log("itinerary data", f"{category_id}, {name}, {itinerary_amount}")
                     
                     if not category_id or not name or not itinerary_amount:
                         return error_response("Invalid itinerary data", 400)
                     
                     if itinerary_id:
                         existing_itinerary: Itinerary = Itinerary.query.get(itinerary_id)
-                        existing_itinerary.update(
+                        if existing_itinerary:
+                            existing_itinerary.update(
+                                name=name,
+                                amount=Decimal(itinerary_amount),
+                                category_id=category_id,
+                                trip_id=trip.id,
+                                commit=False
+                            )
+                            itinerary_ids_to_keep.append(itinerary_id)
+                    else:
+                        itinerary_item = Itinerary(
                             name=name,
                             amount=Decimal(itinerary_amount),
                             category_id=category_id,
                             trip_id=trip.id,
-                            commit=False
                         )
-                    
-                    itinerary_item = Itinerary(
-                        name=name,
-                        amount=Decimal(itinerary_amount),
-                        category_id=category_id,
-                        trip_id=trip.id,
-                    )
-                    db.session.add(itinerary_item)
+                        db.session.add(itinerary_item)
+            
+            # Remove itineraries that are not in the list of IDs to keep
+            Itinerary.query.filter(Itinerary.trip_id == trip.id, Itinerary.id.notin_(itinerary_ids_to_keep)).delete(synchronize_session=False)
             
             # Update estate details
             trip.update(destination=destination, amount=amount, start_date=start_date, end_date=end_date)
