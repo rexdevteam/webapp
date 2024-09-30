@@ -11,6 +11,7 @@ import LoadingData from "../../components/ui/LoadingData.jsx";
 import LinkBtn from "../../components/ui/LinkBtn";
 import Btn from "../../components/ui/Btn";
 import TripInfo from "./TripInfo.jsx";
+import NoTrip from "./NoTrip.jsx";
 import "./trip_details.css";
 
 const TripDetails = () => {
@@ -50,6 +51,10 @@ const TripDetails = () => {
 
     if (loading) return <LoadingPage />;
 
+	if (trip == null) {
+		return <NoTrip />;
+	}
+	
     const linkBtn = <LinkBtn txt={"Edit"} link={`/trips/${id}/edit`} />;
 
     const formatDate = (dateString) => {
