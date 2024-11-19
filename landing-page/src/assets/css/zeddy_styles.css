@@ -60,7 +60,7 @@
     :root { --site-pad: 190px; }
 }
 @media screen and (min-width: 1920px) {
-    :root { --site-pad: 200px; }
+    :root { --site-pad: 390px; }
 }
 
 *{
